@@ -2,7 +2,7 @@
 #include <math.h>
 #include "PerlinNoise.h"
 
-const float PERLIN_STEP = 0.05;
+const float PERLIN_STEP = 0.025;
 float current = 0;
 PerlinNoise n = PerlinNoise();
 
@@ -67,10 +67,11 @@ void HeightMap::update() {
 		for (int z = 0; z < RAW_HEIGHT; ++z) {
 			int offset = (x * RAW_WIDTH) + z;
 
-			//cout << n.noise(x / 10.0 + current, z / 10.0 + current) << endl;
+			//Todo -- Make constants for magic numbers
+			float y = n.noise(x / 50.0 + current, z / 50.0) * 5000.0;
 
 			vertices[offset] = Vector3(
-				10 * x * HEIGHTMAP_X, /*data[offset] * HEIGHTMAP_Y*/ n.noise(x / 50.0 + current, z / 50.0) * 5000.0, 10 * z * HEIGHTMAP_Z);
+				10 * x * HEIGHTMAP_X, y, 10 * z * HEIGHTMAP_Z);
 
 			textureCoords[offset] = Vector2(
 				x * HEIGHTMAP_TEX_X + current, z * HEIGHTMAP_TEX_Z);
