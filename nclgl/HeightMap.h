@@ -17,5 +17,13 @@ class HeightMap : public Mesh {
 public:
 	HeightMap(std::string name);
 	~HeightMap(void) {};
+	
+	void update();
+	float perlinNoise(float x, float y);
+	void initialiseGradient();
+	float dotGridGradient(int ix, int iy, float x, float y);
+
+	int t;
+	Vector2* Gradient = new Vector2[RAW_WIDTH * RAW_HEIGHT]();
 
 };

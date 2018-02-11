@@ -13,7 +13,9 @@ public:
 	virtual void UpdateScene(float msec);
 
 protected:
-	HeightMap * heightMap;
+	HeightMap* heightMap;
 	Camera * camera;
+
+	int counter = 1;
 
 };

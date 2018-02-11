@@ -1,2 +1,6 @@
-﻿  Renderer.cpp
-  nclgl.vcxproj -> C:\Users\tomwa\source\repos\cube_adventures\Debug\nclgl.lib
+﻿  HeightMap.cpp
+c:\users\tomwa\source\repos\cube_adventures\nclgl\heightmap.cpp(5): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\tomwa\source\repos\cube_adventures\nclgl\heightmap.cpp(29): warning C4244: 'argument': conversion from 'double' to 'const float', possible loss of data
+c:\users\tomwa\source\repos\cube_adventures\nclgl\heightmap.cpp(73): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\tomwa\source\repos\cube_adventures\nclgl\heightmap.cpp(73): warning C4244: 'argument': conversion from 'double' to 'const float', possible loss of data
+  nclgl.vcxproj -> C:\Users\tomwa\Source\Repos\cube_adventures\Debug\nclgl.lib

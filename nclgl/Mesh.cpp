@@ -14,7 +14,10 @@ Mesh::Mesh(void) {
 	vertices = NULL;
 	colours = NULL;
 	type = GL_TRIANGLES;
-	}Mesh ::~Mesh(void) {
+	
+}
+
+Mesh ::~Mesh(void) {
 	glDeleteVertexArrays(1, &arrayObject);
 	glDeleteBuffers(MAX_BUFFER, bufferObject);
 	glDeleteTextures(1, &texture);
@@ -22,7 +25,10 @@ Mesh::Mesh(void) {
 	delete[] textureCoords;
 	delete[] vertices;
 	delete[] colours;
-	}Mesh * Mesh::GenerateTriangle() {
+	
+}
+
+Mesh * Mesh::GenerateTriangle() {
 	Mesh * m = new Mesh();
 	m -> numVertices = 3;
 	
@@ -34,7 +40,8 @@ Mesh::Mesh(void) {
 	m -> textureCoords = new Vector2[m -> numVertices];
 	m -> textureCoords[0] = Vector2(0.5f, 0.0f);
 	m -> textureCoords[1] = Vector2(1.0f, 1.0f);
-	m ->  textureCoords[2] = Vector2(0.0f, 1.0f);
+	m ->  textureCoords[2] = Vector2(0.0f, 1.0f);
+
 	m -> colours = new Vector4[m -> numVertices];
 	
 	m -> colours[0] = Vector4(1.0f, 0.0f, 0.0f, 1.0f);
@@ -43,7 +50,9 @@ Mesh::Mesh(void) {
 	
 	m -> BufferData();
 	return m;
-}void Mesh::BufferData() {
+}
+
+void Mesh::BufferData() {
 	glBindVertexArray(arrayObject);
 	glGenBuffers(1, &bufferObject[VERTEX_BUFFER]);
 	glBindBuffer(GL_ARRAY_BUFFER, bufferObject[VERTEX_BUFFER]);
@@ -66,7 +75,9 @@ Mesh::Mesh(void) {
 			bufferObject[INDEX_BUFFER]);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, numIndices * sizeof(GLuint),
 			indices, GL_STATIC_DRAW);
-			}
+		
+	}
+
 	if (colours) {
 		glGenBuffers(1, &bufferObject[COLOUR_BUFFER]);
 		glBindBuffer(GL_ARRAY_BUFFER, bufferObject[COLOUR_BUFFER]);
@@ -81,6 +92,7 @@ Mesh::Mesh(void) {
 }
 
 void Mesh::Draw() {
+
 	glBindTexture(GL_TEXTURE_2D, texture);
 	glBindVertexArray(arrayObject);
 	if (bufferObject[INDEX_BUFFER]) {
@@ -89,9 +101,14 @@ void Mesh::Draw() {
 	}
 	else {
 		glDrawArrays(type, 0, numVertices);
-			}
+		
+	}
+
 	glBindVertexArray(0);
-	glBindTexture(GL_TEXTURE_2D, 0);	}Mesh * Mesh::GenerateQuad() {
+	glBindTexture(GL_TEXTURE_2D, 0);	
+}
+
+Mesh * Mesh::GenerateQuad() {
 	Mesh * m = new Mesh();
 	m -> numVertices = 4;
 	m -> type = GL_TRIANGLE_STRIP;
@@ -117,4 +134,5 @@ void Mesh::Draw() {
 	
 	m -> BufferData();
 	return m;
-	}
+	
+}

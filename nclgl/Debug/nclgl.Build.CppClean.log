@@ -1,29 +1,31 @@
-c:\users\tomwa\source\repos\graphics code 2015 complete\nclgl\debug\nclgl.pdb
-c:\users\tomwa\source\repos\graphics code 2015 complete\nclgl\debug\nclgl.idb
-c:\users\tomwa\source\repos\graphics code 2015 complete\nclgl\debug\camera.obj
-c:\users\tomwa\source\repos\graphics code 2015 complete\nclgl\debug\frustum.obj
-c:\users\tomwa\source\repos\graphics code 2015 complete\nclgl\debug\gametimer.obj
-c:\users\tomwa\source\repos\graphics code 2015 complete\nclgl\debug\heightmap.obj
-c:\users\tomwa\source\repos\graphics code 2015 complete\nclgl\debug\keyboard.obj
-c:\users\tomwa\source\repos\graphics code 2015 complete\nclgl\debug\matrix4.obj
-c:\users\tomwa\source\repos\graphics code 2015 complete\nclgl\debug\md5anim.obj
-c:\users\tomwa\source\repos\graphics code 2015 complete\nclgl\debug\md5filedata.obj
-c:\users\tomwa\source\repos\graphics code 2015 complete\nclgl\debug\md5mesh.obj
-c:\users\tomwa\source\repos\graphics code 2015 complete\nclgl\debug\md5node.obj
-c:\users\tomwa\source\repos\graphics code 2015 complete\nclgl\debug\mesh.obj
-c:\users\tomwa\source\repos\graphics code 2015 complete\nclgl\debug\mouse.obj
-c:\users\tomwa\source\repos\graphics code 2015 complete\nclgl\debug\objmesh.obj
-c:\users\tomwa\source\repos\graphics code 2015 complete\nclgl\debug\oglrenderer.obj
-c:\users\tomwa\source\repos\graphics code 2015 complete\nclgl\debug\plane.obj
-c:\users\tomwa\source\repos\graphics code 2015 complete\nclgl\debug\quaternion.obj
-c:\users\tomwa\source\repos\graphics code 2015 complete\nclgl\debug\scenenode.obj
-c:\users\tomwa\source\repos\graphics code 2015 complete\nclgl\debug\shader.obj
-c:\users\tomwa\source\repos\graphics code 2015 complete\nclgl\debug\window.obj
-c:\users\tomwa\source\repos\graphics code 2015 complete\graphics for games\debug\nclgl.lib
-c:\users\tomwa\source\repos\graphics code 2015 complete\graphics for games\debug\nclgl.pdb
-c:\users\tomwa\source\repos\graphics code 2015 complete\nclgl\debug\nclgl.tlog\cl.command.1.tlog
-c:\users\tomwa\source\repos\graphics code 2015 complete\nclgl\debug\nclgl.tlog\cl.read.1.tlog
-c:\users\tomwa\source\repos\graphics code 2015 complete\nclgl\debug\nclgl.tlog\cl.write.1.tlog
-c:\users\tomwa\source\repos\graphics code 2015 complete\nclgl\debug\nclgl.tlog\lib-link.read.1.tlog
-c:\users\tomwa\source\repos\graphics code 2015 complete\nclgl\debug\nclgl.tlog\lib-link.write.1.tlog
-c:\users\tomwa\source\repos\graphics code 2015 complete\nclgl\debug\nclgl.tlog\lib.command.1.tlog
+c:\users\tomwa\source\repos\cube_adventures\nclgl\debug\nclgl.pdb
+c:\users\tomwa\source\repos\cube_adventures\nclgl\debug\nclgl.idb
+c:\users\tomwa\source\repos\cube_adventures\nclgl\debug\frustum.obj
+c:\users\tomwa\source\repos\cube_adventures\nclgl\debug\gametimer.obj
+c:\users\tomwa\source\repos\cube_adventures\nclgl\debug\heightmap.obj
+c:\users\tomwa\source\repos\cube_adventures\nclgl\debug\keyboard.obj
+c:\users\tomwa\source\repos\cube_adventures\nclgl\debug\matrix4.obj
+c:\users\tomwa\source\repos\cube_adventures\nclgl\debug\md5anim.obj
+c:\users\tomwa\source\repos\cube_adventures\nclgl\debug\md5filedata.obj
+c:\users\tomwa\source\repos\cube_adventures\nclgl\debug\md5mesh.obj
+c:\users\tomwa\source\repos\cube_adventures\nclgl\debug\md5node.obj
+c:\users\tomwa\source\repos\cube_adventures\nclgl\debug\mesh.obj
+c:\users\tomwa\source\repos\cube_adventures\nclgl\debug\mouse.obj
+c:\users\tomwa\source\repos\cube_adventures\nclgl\debug\objmesh.obj
+c:\users\tomwa\source\repos\cube_adventures\nclgl\debug\oglrenderer.obj
+c:\users\tomwa\source\repos\cube_adventures\nclgl\debug\perlinnoise.obj
+c:\users\tomwa\source\repos\cube_adventures\nclgl\debug\plane.obj
+c:\users\tomwa\source\repos\cube_adventures\nclgl\debug\quaternion.obj
+c:\users\tomwa\source\repos\cube_adventures\nclgl\debug\renderer.obj
+c:\users\tomwa\source\repos\cube_adventures\nclgl\debug\scenenode.obj
+c:\users\tomwa\source\repos\cube_adventures\nclgl\debug\shader.obj
+c:\users\tomwa\source\repos\cube_adventures\nclgl\debug\window.obj
+c:\users\tomwa\source\repos\cube_adventures\nclgl\debug\camera.obj
+c:\users\tomwa\source\repos\cube_adventures\debug\nclgl.lib
+c:\users\tomwa\source\repos\cube_adventures\debug\nclgl.pdb
+c:\users\tomwa\source\repos\cube_adventures\nclgl\debug\nclgl.tlog\cl.command.1.tlog
+c:\users\tomwa\source\repos\cube_adventures\nclgl\debug\nclgl.tlog\cl.read.1.tlog
+c:\users\tomwa\source\repos\cube_adventures\nclgl\debug\nclgl.tlog\cl.write.1.tlog
+c:\users\tomwa\source\repos\cube_adventures\nclgl\debug\nclgl.tlog\lib-link.read.1.tlog
+c:\users\tomwa\source\repos\cube_adventures\nclgl\debug\nclgl.tlog\lib-link.write.1.tlog
+c:\users\tomwa\source\repos\cube_adventures\nclgl\debug\nclgl.tlog\lib.command.1.tlog
