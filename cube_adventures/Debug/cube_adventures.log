@@ -1,3 +1,2 @@
-﻿  main.cpp
-  cube_adventures.vcxproj -> C:\Users\tomwa\source\repos\Cube_Adventures\Debug\cube_adventures.exe
-  cube_adventures.vcxproj -> C:\Users\tomwa\source\repos\Cube_Adventures\Debug\cube_adventures.pdb (Partial PDB)
+﻿main.obj : error LNK2019: unresolved external symbol "public: class Cube __thiscall CubeInput::initialiseCube(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >)" (?initialiseCube@CubeInput@@QAE?AVCube@@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@0@Z) referenced in function "public: __thiscall CubeInput::CubeInput(void)" (??0CubeInput@@QAE@XZ)
+C:\Users\tomwa\source\repos\cube_adventures\Debug\cube_adventures.exe : fatal error LNK1120: 1 unresolved externals

@@ -1,19 +1,22 @@
 #include "PerlinNoise.h"
 #include <cstdlib>
 
-const int MAX_VERTICES = 256;
-const int MAX_VERTICES_MASK = MAX_VERTICES - 1;
-
 PerlinNoise::PerlinNoise() {
 
+	//Initialise array for 1D Perlin Noise
+	for (int i = 0; i < MAX_VERTICES; i++) {
+		r1[i] = rand();
+	}
+
+	//Initialise array for 2D Perlin Noise
 	for (int i = 0; i < MAX_VERTICES; i++) {
 		for (int j = 0; j < MAX_VERTICES; j++) {
-			r[i][j][0] = rand();
-			r[i][j][1] = rand();
+			r2[i][j][0] = rand();
+			r2[i][j][1] = rand();
 
-			float magnitude = pow((pow(r[i][j][0], 2) + pow(r[i][j][1], 2)), 0.5);
-			r[i][j][0] = r[i][j][0] / magnitude;
-			r[i][j][1] = r[i][j][1] / magnitude;
+			float magnitude = pow((pow(r2[i][j][0], 2) + pow(r2[i][j][1], 2)), 0.5);
+			r2[i][j][0] = r2[i][j][0] / magnitude;
+			r2[i][j][1] = r2[i][j][1] / magnitude;
 		}
 	}
 
@@ -49,13 +52,28 @@ float PerlinNoise::dotGridGradient(int ix, int iy, float x, float y) {
 	float dy = y - (float)iy;
 
 	//Compute the dot-product
-	return (dx * r[ix % MAX_VERTICES_MASK][iy % MAX_VERTICES_MASK][0] + 
-		dy * r[ix % MAX_VERTICES_MASK][iy % MAX_VERTICES_MASK][1]);
+	return (dx * r2[ix % MAX_VERTICES_MASK][iy % MAX_VERTICES_MASK][0] + 
+		dy * r2[ix % MAX_VERTICES_MASK][iy % MAX_VERTICES_MASK][1]);
 }
 
+//Compute Perlin noise at coordinate x (1D Version)
+float PerlinNoise::noise(float x) {
 
+	int x0 = (int)x;
+	int x1 = x0 + 1;
+	float sx = x - x0;
+	float sxRemapSmoothStep = sx * sx * (3 - 2 * sx);
 
-//Compute Perlin noise at coordinates x, y
+	int xMin = x0 % MAX_VERTICES_MASK;
+	int xMax = (xMin + 1) % MAX_VERTICES_MASK;
+
+	float ix = lerp(r1[xMin], r1[xMax], sxRemapSmoothStep);
+
+	return ix;
+
+}
+
+//Compute Perlin noise at coordinates x, y (2D Version)
 float PerlinNoise::noise(float x, float y) {
 
 	int x0 = (int)x;
