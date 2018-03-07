@@ -1,7 +1,13 @@
 #include "Renderer.h"
+#include "../IO/CubeInput.h"
 
 Renderer::Renderer(Window & parent) : OGLRenderer(parent) {
-	heightMap = new HeightMap("../Textures/terrain.raw");
+
+	CubeInput cubeInput = CubeInput();
+
+	Map map = cubeInput.getCube(0).getMap(0);
+
+	renderMap = new RenderMap(0, map, "../Textures/terrain.raw");
 	camera = new Camera();
 	counter = 0;
 
@@ -13,20 +19,92 @@ Renderer::Renderer(Window & parent) : OGLRenderer(parent) {
 
 	}
 
-	heightMap->SetTexture(SOIL_load_OGL_texture(
+	renderMap->SetTexture(SOIL_load_OGL_texture(
 		"../Textures/water_texture.JPG",
 		SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS));
 
-	if (!heightMap->GetTexture()) {
+	if (!renderMap->GetTexture()) {
 		return;
 
 	}
-	SetTextureRepeating(heightMap->GetTexture(), true);	
+	SetTextureRepeating(renderMap->GetTexture(), true);	
+	SetTextureRepeating(renderMap->cobblestoneTexture, true);
 
 	projMatrix = Matrix4::Perspective(1.0f, 1000000.0f,
 		(float)width / (float)height, 45.0f);
 
-	//glEnable(GL_DEPTH_TEST);
+	dimensions = renderMap->getDimensions();
+
+	tileInfo = new float[dimensions * dimensions * 2];
+
+	for (int i = 0; i < dimensions * dimensions; i++) {
+
+		switch (renderMap->getTile(i).getType()) {
+		case TileType::COBBLESTONE:
+			tileInfo[i * 2] = 0;
+
+			if (renderMap->getTile(i).getProperties().SWIMMABLE) {
+				tileInfo[i * 2 + 1] = 1;
+			}
+			else {
+				tileInfo[i * 2 + 1] = 0;
+			}
+
+			break;
+		case TileType::LAVA:
+			tileInfo[i * 2] = 1;
+
+			if (renderMap->getTile(i).getProperties().SWIMMABLE) {
+				tileInfo[i * 2 + 1] = 1;
+			}
+			else {
+				tileInfo[i * 2 + 1] = 0;
+			}
+
+			break;
+		case TileType::WATER:
+			tileInfo[i * 2] = 2;
+
+			if (renderMap->getTile(i).getProperties().SWIMMABLE) {
+				tileInfo[i * 2 + 1] = 1;
+			}
+			else {
+				tileInfo[i * 2 + 1] = 0;
+			}
+
+			break;
+		case TileType::TERRAIN_GRASS:
+			tileInfo[i * 2] = 3;
+
+			if (renderMap->getTile(i).getProperties().SWIMMABLE) {
+				tileInfo[i * 2 + 1] = 1;
+			}
+			else {
+				tileInfo[i * 2 + 1] = 0;
+			}
+
+			break;
+		case TileType::TERRAIN_SNOW:
+			tileInfo[i * 2] = 4;
+
+			if (renderMap->getTile(i).getProperties().SWIMMABLE) {
+				tileInfo[i * 2 + 1] = 1;
+			}
+			else {
+				tileInfo[i * 2 + 1] = 0;
+			}
+
+			break;
+		}
+
+	}
+
+	for (int i = 0; i < dimensions * dimensions * 2; i++) {
+		cout << tileInfo[i];
+	}
+	cout << endl;
+
+	glEnable(GL_DEPTH_TEST);
 	//glEnable(GL_CULL_FACE);
 	//glCullFace(GL_BACK);
 
@@ -34,8 +112,9 @@ Renderer::Renderer(Window & parent) : OGLRenderer(parent) {
 
 }
 Renderer ::~Renderer(void) {
-	delete heightMap;
+	delete renderMap;
 	delete camera;
+	delete[] tileInfo;
 
 }
 
@@ -51,17 +130,28 @@ void Renderer::RenderScene() {
 	UpdateShaderMatrices();
 
 	glUniform1i(glGetUniformLocation(currentShader->GetProgram(),
-		"diffuseTex"), 0);
+		"water"), 0);
 
-	heightMap->t = counter;
-	if (counter >= 3600) counter = 0;
-	else counter++;
+	glUniform1i(glGetUniformLocation(currentShader->GetProgram(),
+		"cobblestone"), 1);
 
-	//cout << counter << endl;
-	//cout << heightMap->t << endl;
+	glUniform1f(glGetUniformLocation(currentShader->GetProgram(),
+		"current"), renderMap->getCurrent());
 
-	heightMap->update();
-	heightMap->Draw();
+	glUniform1f(glGetUniformLocation(currentShader->GetProgram(),
+		"tileLength"), renderMap->getTileLength());
+
+	glUniform1f(glGetUniformLocation(currentShader->GetProgram(),
+		"dimensions"), dimensions);
+
+	glUniform1fv(glGetUniformLocation(currentShader->GetProgram(),
+		"tileInfo"), dimensions * dimensions * 2, (const GLfloat*)tileInfo);
+
+	//glUniform3fv(glGetUniformLocation(currentShader->GetProgram(),
+	//	"tileInfo"), dimensions * dimensions * 2, (const GLfloat*)tileInfo);
+
+	renderMap->update();
+	renderMap->Draw();
 
 	glUseProgram(0);
 	SwapBuffers();

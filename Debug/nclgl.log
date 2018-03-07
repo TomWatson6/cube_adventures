@@ -1,0 +1,11 @@
+﻿  HeightMap.cpp
+h:\visual studio 2017\projects\cube_adventures\nclgl\heightmap.cpp(5): warning C4305: 'initializing': truncation from 'double' to 'float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\heightmap.cpp(30): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+h:\visual studio 2017\projects\cube_adventures\nclgl\heightmap.cpp(30): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+h:\visual studio 2017\projects\cube_adventures\nclgl\heightmap.cpp(32): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+h:\visual studio 2017\projects\cube_adventures\nclgl\heightmap.cpp(32): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+h:\visual studio 2017\projects\cube_adventures\nclgl\heightmap.cpp(80): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+h:\visual studio 2017\projects\cube_adventures\nclgl\heightmap.cpp(80): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+h:\visual studio 2017\projects\cube_adventures\nclgl\heightmap.cpp(83): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+h:\visual studio 2017\projects\cube_adventures\nclgl\heightmap.cpp(83): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  nclgl.vcxproj -> H:\Visual Studio 2017\Projects\cube_adventures\Debug\nclgl.lib

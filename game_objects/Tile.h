@@ -1,6 +1,6 @@
 #pragma once
 
-enum class TileType {COBBLESTONE, WATER, LAVA, TERRAIN_GRASS, TERRAIN_SNOW};
+enum class TileType { COBBLESTONE, LAVA, WATER, TERRAIN_GRASS, TERRAIN_SNOW };
 
 struct Properties {
 	bool WALKABLE; // Can the tile be walked on
@@ -16,11 +16,11 @@ private:
 	Properties properties;
 
 public:
-	Tile();
+	Tile() {}
 
-	Tile(TileType t, bool walkable, bool swimmable, float damageOutput, float movementDampen) {
+	Tile(TileType type, bool walkable, bool swimmable, float damageOutput, float movementDampen) {
 
-		type = t;
+		this->type = type;
 		setProperties(walkable, swimmable, damageOutput, movementDampen);
 
 	}

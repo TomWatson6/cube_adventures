@@ -2,7 +2,7 @@
 #include <string>
 #include <vector>
 #include "Input.h"
-#include "../cube_adventures/Cube.h"
+#include "../game_objects/Cube.h"
 
 using namespace std;
 

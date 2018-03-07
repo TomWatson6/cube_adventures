@@ -19,13 +19,13 @@ Cube CubeInput::initialiseCube(string path, string name) {
 		map.setIndex(i);
 		map.setDimensions(dimensions);
 
-		Tile* tiles = new Tile[dimensions * dimensions]();
+		vector<Tile> tiles;
 
 		vector<int> tileNumbers;
 
 		for (int j = 0; j < dimensions; j++) {
 			for (int k = 0; k < dimensions; k++) {
-				tileNumbers.push_back(atoi(cubeData.at(j).substr(j, 1).c_str()));
+				tileNumbers.push_back(atoi(cubeData.at(j).substr(k, 1).c_str()));
 			}
 		}
 
@@ -37,19 +37,19 @@ Cube CubeInput::initialiseCube(string path, string name) {
 
 				switch (tileNo) {
 				case 0:
-					tiles[j + k * dimensions] = Tile(TileType(TileType::COBBLESTONE), 1, 0, 0, 0); // Cobblestone
+					tiles.push_back(Tile(TileType(TileType::COBBLESTONE), 1, 0, 0, 0)); // Cobblestone
 					break;
 				case 1:
-					tiles[j + k * dimensions] = Tile(TileType(TileType::LAVA), 0, 1, 20, 0.3); // Lava
+					tiles.push_back(Tile(TileType(TileType::LAVA), 0, 1, 20, 0.3)); // Lava
 					break;
 				case 2:
-					tiles[j + k * dimensions] = Tile(TileType(TileType::WATER), 0, 1, 0, 0.6); // Water
+					tiles.push_back(Tile(TileType(TileType::WATER), 0, 1, 0, 0.6)); // Water
 					break;
 				case 3:
-					tiles[j + k * dimensions] = Tile(TileType(TileType::TERRAIN_GRASS), 1, 0, 0, 0.8); // Grass
+					tiles.push_back(Tile(TileType(TileType::TERRAIN_GRASS), 1, 0, 0, 0.8)); // Grass
 					break;
 				case 4:
-					tiles[j + k * dimensions] = Tile(TileType(TileType::TERRAIN_SNOW), 1, 0, 0, 0.5); // Snow
+					tiles.push_back(Tile(TileType(TileType::TERRAIN_SNOW), 1, 0, 0, 0.5)); // Snow
 					break;
 				}
 

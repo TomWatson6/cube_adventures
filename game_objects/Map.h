@@ -6,10 +6,10 @@ class Map {
 private:
 	int index; // What is the index of the map in the chain of 6 maps on the cube
 	int dimensions; // The amount of tiles on the width/height of the map
-	Tile* tiles; // 2 Dimensional array to store all tiles on the map
+	vector<Tile> tiles; // Vector of tiles to store all tiles on the map
 
 public:
-	Map();
+	Map() {}
 
 	Map(int index, int dimensions, Tile* tiles) {
 
@@ -28,17 +28,11 @@ public:
 
 	int getIndex() { return index; }
 	int getDimensions() { return dimensions; }
-	Tile* getTiles() { return tiles; }
-	Tile getTile(int index) { return tiles[index]; }
+	vector<Tile> getTiles() { return tiles; }
+	Tile getTile(int index) { return tiles.at(index); }
 
 	void setIndex(int index) { this->index = index; }
 	void setDimensions(int dimensions) { this->dimensions = dimensions; }
-	void setTiles(Tile* tiles) {
-
-		for (int i = 0; i < dimensions * dimensions; i++) {
-			this->tiles[i] = tiles[i];
-		}
-
-	}
+	void setTiles(vector<Tile> tiles) {	this->tiles = tiles; }
 
 };

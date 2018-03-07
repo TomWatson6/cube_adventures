@@ -3,6 +3,8 @@
 #include "../IO/CubeInput.h"
 
 #pragma comment(lib, "nclgl.lib")
+#pragma comment(lib, "IO.lib")
+#pragma comment(lib, "game_objects.lib")
 
 int main() {
 

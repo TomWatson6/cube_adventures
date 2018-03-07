@@ -1,10 +1,5 @@
 # include "HeightMap.h"
 #include <math.h>
-#include "PerlinNoise.h"
-
-const float PERLIN_STEP = 0.025;
-float current = 0;
-PerlinNoise n = PerlinNoise();
 
 HeightMap::HeightMap(std::string name) {
 	std::ifstream file(name.c_str(), ios::binary);
@@ -15,19 +10,16 @@ HeightMap::HeightMap(std::string name) {
 	numIndices = (RAW_WIDTH - 1)*(RAW_HEIGHT - 1) * 6;
 	vertices = new Vector3[numVertices];
 	textureCoords = new Vector2[numVertices];
+	colours = new Vector4[numVertices];
 	indices = new GLuint[numIndices];
 	unsigned char * data = new unsigned char[numVertices];
 
 	file.read((char *)data, numVertices * sizeof(unsigned char));
 	file.close();
 
-	float* yLocations = new float[numVertices];
-
 	for (int x = 0; x < RAW_WIDTH; ++x) {
 		for (int z = 0; z < RAW_HEIGHT; ++z) {
 			int offset = (x * RAW_WIDTH) + z;
-
-			yLocations[x * RAW_HEIGHT + z] = n.noise(x / 50.0 + current, z / 50.0) * 5000.0;
 
 			float y = n.noise(x / 50.0 + current, z / 50.0) * 5000.0;
 
@@ -36,6 +28,9 @@ HeightMap::HeightMap(std::string name) {
 
 			textureCoords[offset] = Vector2(
 				x * HEIGHTMAP_TEX_X, z * HEIGHTMAP_TEX_Z);
+
+			//Make a method to generate colours with perlin noise for lava
+			colours[offset] = Vector4(255, 255, 0, 255);
 
 		}
 
@@ -63,7 +58,7 @@ HeightMap::HeightMap(std::string name) {
 
 	}
 
-	current += PERLIN_STEP;
+	//current += PERLIN_STEP;
 
 	BufferData();
 
@@ -71,13 +66,9 @@ HeightMap::HeightMap(std::string name) {
 
 void HeightMap::update() {
 
-	float* yLocations = new float[numVertices];
-
 	for (int x = 0; x < RAW_WIDTH; ++x) {
 		for (int z = 0; z < RAW_HEIGHT; ++z) {
 			int offset = (x * RAW_WIDTH) + z;
-
-			yLocations[x * RAW_HEIGHT + z] = n.noise(x / 50.0 + current, z / 50.0) * 500.0;
 
 			//Todo -- Make constants for magic numbers
 			float y = n.noise(x / 50.0 + current, z / 50.0) * 500.0;
@@ -86,7 +77,7 @@ void HeightMap::update() {
 				10 * x * HEIGHTMAP_X, y, 10 * z * HEIGHTMAP_Z);
 
 			textureCoords[offset] = Vector2(
-				x * HEIGHTMAP_TEX_X + current, z * HEIGHTMAP_TEX_Z);
+				x * HEIGHTMAP_TEX_X /*+ current*/, z * HEIGHTMAP_TEX_Z);
 
 		}
 
@@ -96,7 +87,7 @@ void HeightMap::update() {
 
 	//glUniform3fv(*yLocations, sizeof(int) * numVertices, (const GLfloat*)yLocations);
 
-	current += PERLIN_STEP;
+	//current += PERLIN_STEP;
 
 	BufferData();
 

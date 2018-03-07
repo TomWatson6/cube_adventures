@@ -2,7 +2,7 @@
 
 # include "OGLRenderer.h"
 # include "camera.h"
-# include "HeightMap.h"
+# include "RenderMap.h"
 
 class Renderer : public OGLRenderer {
 public:
@@ -13,8 +13,11 @@ public:
 	virtual void UpdateScene(float msec);
 
 protected:
-	HeightMap* heightMap;
+	RenderMap* renderMap;
 	Camera * camera;
+
+	float dimensions;
+	float* tileInfo;
 
 	int counter = 1;
 

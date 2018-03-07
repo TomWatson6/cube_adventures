@@ -14,6 +14,9 @@ public:
 	void SetTexture(GLuint tex) { texture = tex; }
 	GLuint GetTexture() { return texture; }
 	static Mesh * GenerateQuad();
+
+	GLuint cobblestoneTexture;
+
 		
 protected:
 	void BufferData();
@@ -28,6 +31,5 @@ protected:
 	Vector4 * colours;
 	GLuint texture;
 	Vector2 * textureCoords;
-
 	
 };

@@ -14,6 +14,10 @@ Mesh::Mesh(void) {
 	vertices = NULL;
 	colours = NULL;
 	type = GL_TRIANGLES;
+
+	cobblestoneTexture = SOIL_load_OGL_texture(
+		"../Textures/cobblestone.JPG",
+		SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS);
 	
 }
 
@@ -21,6 +25,7 @@ Mesh ::~Mesh(void) {
 	glDeleteVertexArrays(1, &arrayObject);
 	glDeleteBuffers(MAX_BUFFER, bufferObject);
 	glDeleteTextures(1, &texture);
+	glDeleteTextures(1, &cobblestoneTexture);
 	delete[] indices;
 	delete[] textureCoords;
 	delete[] vertices;
@@ -40,7 +45,7 @@ Mesh * Mesh::GenerateTriangle() {
 	m -> textureCoords = new Vector2[m -> numVertices];
 	m -> textureCoords[0] = Vector2(0.5f, 0.0f);
 	m -> textureCoords[1] = Vector2(1.0f, 1.0f);
-	m ->  textureCoords[2] = Vector2(0.0f, 1.0f);
+	m -> textureCoords[2] = Vector2(0.0f, 1.0f);
 
 	m -> colours = new Vector4[m -> numVertices];
 	
@@ -93,7 +98,12 @@ void Mesh::BufferData() {
 
 void Mesh::Draw() {
 
+	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, texture);
+
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D, cobblestoneTexture);
+
 	glBindVertexArray(arrayObject);
 	if (bufferObject[INDEX_BUFFER]) {
 		glDrawElements(type, numIndices, GL_UNSIGNED_INT, 0);

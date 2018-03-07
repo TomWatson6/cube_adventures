@@ -4,22 +4,29 @@
 # include <iostream>
 # include <fstream>
 # include "mesh.h"
+# include "PerlinNoise.h"
 
-# define RAW_WIDTH 50
-# define RAW_HEIGHT 50
+# define RAW_WIDTH 250
+# define RAW_HEIGHT 250
 
 # define HEIGHTMAP_X 16.0f
 # define HEIGHTMAP_Z 16.0f
 # define HEIGHTMAP_Y 1.25f
 # define HEIGHTMAP_TEX_X 1.0f / 16.0f
 # define HEIGHTMAP_TEX_Z 1.0f / 16.0f
+
 class HeightMap : public Mesh {
 public:
 	HeightMap(std::string name);
 	~HeightMap(void) {};
 	
-	void update();
+	virtual void update();
 	int t;
 	Vector2* Gradient = new Vector2[RAW_WIDTH * RAW_HEIGHT]();
+
+protected:
+	const float PERLIN_STEP = 0.025;
+	float current = 0;
+	PerlinNoise n = PerlinNoise();
 
 };
