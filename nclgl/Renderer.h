@@ -3,6 +3,7 @@
 # include "OGLRenderer.h"
 # include "camera.h"
 # include "RenderMap.h"
+# include "MapNode.h"
 
 class Renderer : public OGLRenderer {
 public:
@@ -13,7 +14,7 @@ public:
 	virtual void UpdateScene(float msec);
 
 protected:
-	RenderMap* renderMap;
+	MapNode** cubeSides;
 	Camera * camera;
 
 	float dimensions;

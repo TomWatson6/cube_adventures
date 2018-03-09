@@ -3,6 +3,7 @@
 #include "Vector3.h"
 #include "Vector4.h"
 #include "Mesh.h"
+#include "RenderMap.h"
 #include <vector>
 
 class SceneNode {
@@ -19,7 +20,10 @@ public:
 	
 	Vector3 GetModelScale() const { return modelScale; }
 	void SetModelScale(Vector3 s) { modelScale = s; }
-	
+
+	RenderMap * GetRenderMap() const { return renderMap; }
+	void setRenderMap(RenderMap * r) { renderMap = r; }
+
 	Mesh * GetMesh() const { return mesh; }
 	void SetMesh(Mesh * m) { mesh = m; }
 	
@@ -45,9 +49,12 @@ public:
 	static bool CompareByCameraDistance(SceneNode *a, SceneNode * b) {
 		return (a -> distanceFromCamera <
 			b -> distanceFromCamera) ? true : false;
-			}
+		
+	}
+
 protected:
 	SceneNode * parent;
+	RenderMap * renderMap; // Extension of Mesh
 	Mesh * mesh;
 	Matrix4 worldTransform;
 	Matrix4 transform;
@@ -55,5 +62,7 @@ protected:
 	Vector4 colour;
 	std::vector < SceneNode * > children;
 	float distanceFromCamera;
-	float boundingRadius;
-	};
+	float boundingRadius;
+
+	
+};
