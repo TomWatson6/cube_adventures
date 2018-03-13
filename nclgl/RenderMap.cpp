@@ -11,12 +11,14 @@ void RenderMap::update() {
 			int tileX = (int)(x / tileLength);
 			int tileY = (int)(z / tileLength);
 
+			yPos = n.noise(x / 50.0 + current, z / 50.0) * 1000.0 - 333;
+
 			//Only apply perlin noise if the surface is swimmable			
 			if (map.getTile(tileX + dimensions * tileY).getProperties().SWIMMABLE) {
-				float y = n.noise(x / 50.0 + current, z / 50.0) * 3000.0 - 1000;
+				
 
 				vertices[offset] = Vector3(
-					10 * x * HEIGHTMAP_X, y, 10 * z * HEIGHTMAP_Z);
+					10 * x * HEIGHTMAP_X, yPos, 10 * z * HEIGHTMAP_Z);
 			}
 			else {
 
@@ -37,5 +39,17 @@ void RenderMap::update() {
 	current += PERLIN_STEP;
 
 	BufferData();
+
+}
+
+void RenderMap::setWalkableHeight(int startXY, int endXY, float level) {
+
+	//Todo -- IMPLEMENT
+
+}
+
+void RenderMap::setSwimmableHeight(int startXY, int endXY, float level, float variation, float offsetSpeedNoise, float offsetSpeedTexture) {
+
+	//Todo -- IMPLEMENT
 
 }

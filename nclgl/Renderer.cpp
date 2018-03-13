@@ -1,5 +1,6 @@
 #include "Renderer.h"
 #include "../IO/CubeInput.h"
+#include "PerlinNoise.h"
 
 Renderer::Renderer(Window & parent) : OGLRenderer(parent) {
 
@@ -101,10 +102,13 @@ Renderer::Renderer(Window & parent) : OGLRenderer(parent) {
 	}
 
 	for (int i = 0; i < Cube::CUBE_SIDES; i++) {
-		cubeSides[i]->SetTransform(Matrix4::Translation(Vector3(0, 0, 15 * RAW_WIDTH * HEIGHTMAP_Z)));
+		cubeSides[i]->SetTransform(Matrix4::Rotation(15 * i, Vector3(1, 0, 0)));
+		//cubeSides[i]->SetTransform(Matrix4::Scale(Vector3(i / 6.0, 1, i / 6.0)) * Matrix4::Rotation(15 * i, Vector3(1, 0, 0)));
+		//cubeSides[i]->SetTransform(Matrix4::Translation(Vector3(0, 0, 15 * RAW_WIDTH * HEIGHTMAP_Z)));
 	}
+	cubeSides[0]->SetTransform(Matrix4::Translation(Vector3(0, 0, 0.0001f)));
 
-	Matrix4 transform1 = Matrix4::Rotation(90.0f, Vector3(1, 0, 0));
+	/*Matrix4 transform1 = Matrix4::Rotation(90.0f, Vector3(1, 0, 0));
 	Matrix4 transform2 = Matrix4::Translation(Vector3(0, 0, 1));
 	Matrix4 transform3 = Matrix4::Translation(Vector3(1, 0, 0));
 	Matrix4 transform4 = Matrix4::Rotation(90.0f, Vector3(0, 0, 1));
@@ -121,7 +125,7 @@ Renderer::Renderer(Window & parent) : OGLRenderer(parent) {
 
 		cubeSides[i * 2 + 1]->SetTransform(cubeSides[i * 2 + 1]->GetWorldTransform() * modelMatrix);
 
-	}
+	}*/
 
 	/*Map map = cubeInput.getCube(0).getMap(0);
 
@@ -180,7 +184,7 @@ void Renderer::RenderScene() {
 	for (int i = 0; i < Cube::CUBE_SIDES; i++) {
 
 		glUniformMatrix4fv(glGetUniformLocation(currentShader->GetProgram(), 
-			"modelMatrix"), 1, true, (float*)&cubeSides[i]->GetTransform());
+			"modelMatrix"), 1, true, (float*)&cubeSides[i]->GetWorldTransform());
 
 		glUniform1i(glGetUniformLocation(currentShader->GetProgram(),
 			"water"), 0);

@@ -44,4 +44,6 @@ void SceneNode::Update(float msec) {
 	
 	}
 
+	renderMap->update();
+
 }
