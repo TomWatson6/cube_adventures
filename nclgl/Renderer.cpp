@@ -16,7 +16,7 @@ Renderer::Renderer(Window & parent) : OGLRenderer(parent) {
 
 		Map map = cubeInput.getCube(0).getMap(i);
 
-		RenderMap* renderMap = new RenderMap(i, map, "../Textures/terrain.raw");
+		RenderMap* renderMap = new RenderMap(i, map, MapType::WALKABLE, "../Textures/terrain.raw");
 
 		renderMap->SetTexture(texture);
 
