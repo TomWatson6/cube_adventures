@@ -6,12 +6,14 @@ void RenderMap::update() {
 		for (int z = 0; z < dimensions; z++) {
 
 			if (isSwimmable[x + dimensions * z]) {
-				setSwimmableHeight((x * tileLength) + dimensions * (z * tileLength),
-					(x * tileLength + tileLength) + dimensions * (z * tileLength + tileLength), -3.0f, 0, 0, 0);
+				setSwimmableHeight(Vector2(x * tileLength, z * tileLength),
+					Vector2(x * tileLength + tileLength, z * tileLength + tileLength), -3.0f, 0, 0, 0);
 			}
 			else {
-				setWalkableHeight((x * tileLength) + dimensions * (z * tileLength),
-					(x * tileLength + tileLength) + dimensions * (z * tileLength + tileLength), 0);
+				setWalkableHeight(Vector2(x * tileLength, z * tileLength),
+					Vector2(x * tileLength + tileLength, z * tileLength + tileLength), 0);
+				//(x * tileLength) + (z * tileLength * RAW_WIDTH)
+				//(x * tileLength + tileLength) + (z * tileLength * RAW_WIDTH + tileLength)
 			}
 
 		}
@@ -50,18 +52,18 @@ void RenderMap::update() {
 
 	//glUniform3fv(*yLocations, sizeof(int) * numVertices, (const GLfloat*)yLocations);
 
-	//current += PERLIN_STEP;
+	current += PERLIN_STEP;
 
 	BufferData();
 
 }
 
-void RenderMap::setWalkableHeight(int startXZ, int endXZ, float level) {
+void RenderMap::setWalkableHeight(Vector2 startXY, Vector2 endXY, float level) {
 
 	float tileBaseHeight = level * LEVEL_DIFFERENCE;
 
-	for (int x = startXZ; x < endXZ; x++) {
-		for (int z = startXZ; z < endXZ; z++) {
+	for (int x = startXY.x; x < endXY.x; x++) {
+		for (int z = startXY.y; z < endXY.y; z++) {
 
 			int offset = (x * RAW_WIDTH) + z;
 
@@ -76,12 +78,12 @@ void RenderMap::setWalkableHeight(int startXZ, int endXZ, float level) {
 
 }
 
-void RenderMap::setSwimmableHeight(int startXZ, int endXZ, float level, float variation, float offsetSpeedNoise, float offsetSpeedTexture) {
+void RenderMap::setSwimmableHeight(Vector2 startXY, Vector2 endXY, float level, float variation, float offsetSpeedNoise, float offsetSpeedTexture) {
 
 	float tileBaseHeight = level * LEVEL_DIFFERENCE;
 
-	for (int x = startXZ; x < endXZ; x++) {
-		for (int z = startXZ; z < endXZ; z++) {
+	for (int x = startXY.x; x < endXY.x; x++) {
+		for (int z = startXY.y; z < endXY.y; z++) {
 
 			int offset = (x * RAW_WIDTH) + z;
 

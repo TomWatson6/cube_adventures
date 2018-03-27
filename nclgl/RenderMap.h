@@ -15,7 +15,7 @@ private:
 	int index;
 	int dimensions;
 	float tileLength;
-	float yPos = 10 * HEIGHTMAP_Y;
+	//float yPos = 10 * HEIGHTMAP_Y;
 	float waterLevel = -3.0;
 
 	Map map;
@@ -23,6 +23,7 @@ private:
 
 	bool* isSwimmable;
 	float* heights = new float[RAW_WIDTH * RAW_HEIGHT];
+	//vector<float> heights;
 
 	PerlinNoise p = PerlinNoise();
 
@@ -60,7 +61,7 @@ public:
 					heights[x + RAW_WIDTH * z] = n.noise(x / 50.0 + current, z / 50.0) * 1000.0;
 				}
 				else {
-					heights[x + RAW_WIDTH * z] = yPos;
+					heights[x + RAW_WIDTH * z] = 10 * HEIGHTMAP_Y;
 				}
 
 			}
@@ -88,13 +89,13 @@ public:
 	void update();
 
 	//Methods to determine tile heights
-	void setWalkableHeight(int startXZ, // Top left corner of the tile
-						int endXZ, // Bottom right corner of the tile
+	void setWalkableHeight(Vector2 startXY, // Top left corner of the tile
+						Vector2 endXY, // Bottom right corner of the tile
 						float level); // The higher the level, the greater the height of the tile - useful for wall/walkable surface differentiation
 						
 	
-	void setSwimmableHeight(int startXZ, // Top left corner of the tile
-						int endXZ, // Bottom right corner of the tile
+	void setSwimmableHeight(Vector2 startXY, // Top left corner of the tile
+						Vector2 endXY, // Bottom right corner of the tile
 						float level, // The higher the level, the greater the height of the tile - useful for lava/water surface differentiation
 						float variation, // As this will use Perlin Noise, this will determine the min/max values it can go between
 						float offsetSpeedNoise, // This will determine how quickly the perlin noise will move

@@ -4,6 +4,20 @@
 
 Renderer::Renderer(Window & parent) : OGLRenderer(parent) {
 
+	camera = new Camera();
+	counter = 0;
+
+	currentShader = new Shader("../Shaders/TexturedVertex.glsl",
+		"../Shaders/TexturedFragment.glsl");
+
+	if (!currentShader->LinkProgram()) {
+		return;
+
+	}
+
+	projMatrix = Matrix4::Perspective(1.0f, 1000000.0f,
+		(float)width / (float)height, 45.0f);
+
 	CubeInput cubeInput = CubeInput();
 
 	cubeSides = new MapNode*[Cube::CUBE_SIDES];
@@ -97,6 +111,8 @@ Renderer::Renderer(Window & parent) : OGLRenderer(parent) {
 
 		cubeSides[i] = new MapNode(renderMap, colour);
 
+		cout << cubeSides[i]->GetRenderMap()->getIndex() << endl;
+
 		//cubeSides[i]->SetModelScale(Vector3(i / 6, i / 6, i / 6));
 
 	}
@@ -130,26 +146,13 @@ Renderer::Renderer(Window & parent) : OGLRenderer(parent) {
 	/*Map map = cubeInput.getCube(0).getMap(0);
 
 	renderMap = new RenderMap(0, map, "../Textures/terrain.raw");*/
-	camera = new Camera();
-	counter = 0;
-
-	currentShader = new Shader("../Shaders/TexturedVertex.glsl",
-		"../Shaders/TexturedFragment.glsl");
-
-	if (!currentShader->LinkProgram()) {
-		return;
-
-	}
-
-	projMatrix = Matrix4::Perspective(1.0f, 1000000.0f,
-		(float)width / (float)height, 45.0f);
 
 
 
-	for (int i = 0; i < dimensions * dimensions * 2; i++) {
+	/*for (int i = 0; i < dimensions * dimensions * 2; i++) {
 		cout << tileInfo[i];
 	}
-	cout << endl;
+	cout << endl;*/
 
 	glEnable(GL_DEPTH_TEST);
 	//glEnable(GL_CULL_FACE);
