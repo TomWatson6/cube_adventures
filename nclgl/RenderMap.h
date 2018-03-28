@@ -72,6 +72,7 @@ public:
 	~RenderMap() {
 
 		delete[] isSwimmable;
+		delete[] heights;
 
 	}
 
@@ -85,6 +86,8 @@ public:
 
 	void setIndex(int index) { this->index = index; }
 	void setDimensions(int dimensions) { this->dimensions = dimensions; this->tileLength = (float) RAW_WIDTH / dimensions; }
+
+	void updateHeights();
 
 	void update();
 

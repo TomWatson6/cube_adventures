@@ -1,16 +1,4 @@
-﻿  Frustum.cpp
-c:\users\tomwa\source\repos\cube_adventures\nclgl\heightmap.h(29): warning C4305: 'initializing': truncation from 'double' to 'const float'
-c:\users\tomwa\source\repos\cube_adventures\nclgl\rendermap.h(40): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\users\tomwa\source\repos\cube_adventures\nclgl\rendermap.h(61): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\tomwa\source\repos\cube_adventures\nclgl\rendermap.h(61): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-  Generating Code...
-  Compiling...
-  SceneNode.cpp
-c:\users\tomwa\source\repos\cube_adventures\nclgl\heightmap.h(29): warning C4305: 'initializing': truncation from 'double' to 'const float'
-c:\users\tomwa\source\repos\cube_adventures\nclgl\rendermap.h(40): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\users\tomwa\source\repos\cube_adventures\nclgl\rendermap.h(61): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\tomwa\source\repos\cube_adventures\nclgl\rendermap.h(61): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-  Renderer.cpp
+﻿  Renderer.cpp
 c:\users\tomwa\source\repos\cube_adventures\nclgl\heightmap.h(29): warning C4305: 'initializing': truncation from 'double' to 'const float'
 c:\users\tomwa\source\repos\cube_adventures\nclgl\rendermap.h(40): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 c:\users\tomwa\source\repos\cube_adventures\nclgl\rendermap.h(61): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
@@ -24,16 +12,12 @@ c:\users\tomwa\source\repos\cube_adventures\nclgl\heightmap.h(29): warning C4305
 c:\users\tomwa\source\repos\cube_adventures\nclgl\rendermap.h(40): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 c:\users\tomwa\source\repos\cube_adventures\nclgl\rendermap.h(61): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
 c:\users\tomwa\source\repos\cube_adventures\nclgl\rendermap.h(61): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\tomwa\source\repos\cube_adventures\nclgl\rendermap.cpp(65): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-c:\users\tomwa\source\repos\cube_adventures\nclgl\rendermap.cpp(66): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-c:\users\tomwa\source\repos\cube_adventures\nclgl\rendermap.cpp(85): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-c:\users\tomwa\source\repos\cube_adventures\nclgl\rendermap.cpp(86): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-c:\users\tomwa\source\repos\cube_adventures\nclgl\rendermap.cpp(90): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\tomwa\source\repos\cube_adventures\nclgl\rendermap.cpp(90): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-  MapNode.cpp
-c:\users\tomwa\source\repos\cube_adventures\nclgl\heightmap.h(29): warning C4305: 'initializing': truncation from 'double' to 'const float'
-c:\users\tomwa\source\repos\cube_adventures\nclgl\rendermap.h(40): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\users\tomwa\source\repos\cube_adventures\nclgl\rendermap.h(61): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\tomwa\source\repos\cube_adventures\nclgl\rendermap.h(61): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\tomwa\source\repos\cube_adventures\nclgl\rendermap.cpp(68): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\tomwa\source\repos\cube_adventures\nclgl\rendermap.cpp(68): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\tomwa\source\repos\cube_adventures\nclgl\rendermap.cpp(68): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\tomwa\source\repos\cube_adventures\nclgl\rendermap.cpp(78): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\tomwa\source\repos\cube_adventures\nclgl\rendermap.cpp(79): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\tomwa\source\repos\cube_adventures\nclgl\rendermap.cpp(98): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\tomwa\source\repos\cube_adventures\nclgl\rendermap.cpp(99): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
   Generating Code...
   nclgl.vcxproj -> C:\Users\tomwa\source\repos\Cube_Adventures\Debug\nclgl.lib

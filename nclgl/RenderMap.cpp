@@ -2,6 +2,8 @@
 
 void RenderMap::update() {
 
+	updateHeights();
+
 	for (int x = 0; x < dimensions; x++) {
 		for (int z = 0; z < dimensions; z++) {
 
@@ -12,8 +14,6 @@ void RenderMap::update() {
 			else {
 				setWalkableHeight(Vector2(x * tileLength, z * tileLength),
 					Vector2(x * tileLength + tileLength, z * tileLength + tileLength), 0);
-				//(x * tileLength) + (z * tileLength * RAW_WIDTH)
-				//(x * tileLength + tileLength) + (z * tileLength * RAW_WIDTH + tileLength)
 			}
 
 		}
@@ -50,11 +50,24 @@ void RenderMap::update() {
 
 	}
 
-	//glUniform3fv(*yLocations, sizeof(int) * numVertices, (const GLfloat*)yLocations);
-
 	current += PERLIN_STEP;
 
 	BufferData();
+
+}
+
+void RenderMap::updateHeights() {
+
+	//Shuffle all values down to correct places in the array (O(N - sqrt(N)))
+	for (int i = RAW_WIDTH; i < RAW_WIDTH * RAW_HEIGHT; i++) {
+		heights[i - RAW_WIDTH] = heights[i];
+	}
+
+	//Add new row at the end of the array using perlin noise function (O(sqrt(N)) * O(noise))
+	for (int i = RAW_WIDTH * RAW_HEIGHT - RAW_WIDTH; i < RAW_WIDTH * RAW_HEIGHT; i++) {
+		heights[i] = p.noise(i / 50.0 + current, RAW_HEIGHT - 1 / 50.0) * 1000.0 - 333;
+		//n.noise(i / 50.0 + current, RAW_HEIGHT - 1 / 50.0) * 1000.0 - 333
+	}
 
 }
 
@@ -87,7 +100,7 @@ void RenderMap::setSwimmableHeight(Vector2 startXY, Vector2 endXY, float level, 
 
 			int offset = (x * RAW_WIDTH) + z;
 
-			float y = n.noise(x / 50.0 + current, z / 50.0) * 1000.0 - 333;
+			//float y = n.noise(x / 50.0 + current, z / 50.0) * 1000.0 - 333;
 
 			vertices[offset] = Vector3(
 				10 * x * HEIGHTMAP_X,
