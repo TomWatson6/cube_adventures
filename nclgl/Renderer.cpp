@@ -20,7 +20,7 @@ Renderer::Renderer(Window & parent) : OGLRenderer(parent) {
 
 	CubeInput cubeInput = CubeInput();
 
-	cubeSides = new MapNode*[Cube::CUBE_SIDES];
+	cubeSides = new SceneNode[Cube::CUBE_SIDES];
 
 	GLuint texture = SOIL_load_OGL_texture(
 		"../Textures/water_texture.JPG",
@@ -109,20 +109,20 @@ Renderer::Renderer(Window & parent) : OGLRenderer(parent) {
 
 		Vector4 colour = Vector4(1, 1, 1, 1);
 
-		cubeSides[i] = new MapNode(renderMap, colour);
+		cubeSides[i] = SceneNode(renderMap, colour);
 
-		cout << cubeSides[i]->GetRenderMap()->getIndex() << endl;
+		cout << cubeSides[i].GetRenderMap()->getIndex() << endl;
 
 		//cubeSides[i]->SetModelScale(Vector3(i / 6, i / 6, i / 6));
 
 	}
 
 	for (int i = 0; i < Cube::CUBE_SIDES; i++) {
-		cubeSides[i]->SetTransform(Matrix4::Rotation(15 * i, Vector3(1, 0, 0)));
+		cubeSides[i].SetTransform(Matrix4::Rotation(15 * i, Vector3(1, 0, 0)));
 		//cubeSides[i]->SetTransform(Matrix4::Scale(Vector3(i / 6.0, 1, i / 6.0)) * Matrix4::Rotation(15 * i, Vector3(1, 0, 0)));
 		//cubeSides[i]->SetTransform(Matrix4::Translation(Vector3(0, 0, 15 * RAW_WIDTH * HEIGHTMAP_Z)));
 	}
-	cubeSides[0]->SetTransform(Matrix4::Translation(Vector3(0, 0, 0.0001f)));
+	cubeSides[0].SetTransform(Matrix4::Translation(Vector3(0, 0, 0.0001f)));
 
 	/*Matrix4 transform1 = Matrix4::Rotation(90.0f, Vector3(1, 0, 0));
 	Matrix4 transform2 = Matrix4::Translation(Vector3(0, 0, 1));
@@ -173,7 +173,7 @@ void Renderer::UpdateScene(float msec) {
 	viewMatrix = camera->BuildViewMatrix();
 
 	for (int i = 0; i < Cube::CUBE_SIDES; i++) {
-		cubeSides[i]->Update(msec);
+		cubeSides[i].Update(msec);
 	}
 
 }
@@ -187,7 +187,7 @@ void Renderer::RenderScene() {
 	for (int i = 0; i < Cube::CUBE_SIDES; i++) {
 
 		glUniformMatrix4fv(glGetUniformLocation(currentShader->GetProgram(), 
-			"modelMatrix"), 1, true, (float*)&cubeSides[i]->GetWorldTransform());
+			"modelMatrix"), 1, true, (float*)&cubeSides[i].GetWorldTransform());
 
 		glUniform1i(glGetUniformLocation(currentShader->GetProgram(),
 			"water"), 0);
@@ -196,10 +196,10 @@ void Renderer::RenderScene() {
 			"cobblestone"), 1);
 
 		glUniform1f(glGetUniformLocation(currentShader->GetProgram(),
-			"current"), cubeSides[i]->GetRenderMap()->getCurrent());
+			"current"), cubeSides[i].GetRenderMap()->getCurrent());
 
 		glUniform1f(glGetUniformLocation(currentShader->GetProgram(),
-			"tileLength"), cubeSides[i]->GetRenderMap()->getTileLength());
+			"tileLength"), cubeSides[i].GetRenderMap()->getTileLength());
 
 		glUniform1f(glGetUniformLocation(currentShader->GetProgram(),
 			"dimensions"), dimensions);
@@ -210,7 +210,7 @@ void Renderer::RenderScene() {
 		//glUniform3fv(glGetUniformLocation(currentShader->GetProgram(),
 		//	"tileInfo"), dimensions * dimensions * 2, (const GLfloat*)tileInfo);
 
-		cubeSides[i]->Draw(*this);
+		cubeSides[i].Draw(*this);
 
 	}
 

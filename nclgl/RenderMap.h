@@ -33,6 +33,8 @@ private:
 
 public:
 
+	RenderMap() {};
+
 	RenderMap(int index, Map map, MapType mapType, string name) : HeightMap(name) {
 
 		this->index = index;
@@ -92,8 +94,8 @@ public:
 	void update();
 
 	//Methods to determine tile heights
-	void setWalkableHeight(Vector2 startXY, // Top left corner of the tile
-						Vector2 endXY, // Bottom right corner of the tile
+	void setWalkableHeight(Vector2 &startXY, // Top left corner of the tile
+						Vector2 &endXY, // Bottom right corner of the tile
 						float level); // The higher the level, the greater the height of the tile - useful for wall/walkable surface differentiation
 						
 	

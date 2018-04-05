@@ -58,6 +58,12 @@ void RenderMap::update() {
 
 void RenderMap::updateHeights() {
 
+	//Delete a row of heights
+	for (int i = 0; i < RAW_WIDTH; i++) {
+		//delete &heights[i];
+		//heights[i] = NULL;
+	}
+
 	//Shuffle all values down to correct places in the array (O(N - sqrt(N)))
 	for (int i = RAW_WIDTH; i < RAW_WIDTH * RAW_HEIGHT; i++) {
 		heights[i - RAW_WIDTH] = heights[i];
@@ -71,7 +77,7 @@ void RenderMap::updateHeights() {
 
 }
 
-void RenderMap::setWalkableHeight(Vector2 startXY, Vector2 endXY, float level) {
+void RenderMap::setWalkableHeight(Vector2 &startXY, Vector2 &endXY, float level) {
 
 	float tileBaseHeight = level * LEVEL_DIFFERENCE;
 
@@ -99,8 +105,6 @@ void RenderMap::setSwimmableHeight(Vector2 startXY, Vector2 endXY, float level, 
 		for (int z = startXY.y; z < endXY.y; z++) {
 
 			int offset = (x * RAW_WIDTH) + z;
-
-			//float y = n.noise(x / 50.0 + current, z / 50.0) * 1000.0 - 333;
 
 			vertices[offset] = Vector3(
 				10 * x * HEIGHTMAP_X,

@@ -58,6 +58,11 @@ int main() {
 		renderer.UpdateScene(w.GetTimer()->GetTimedMS());
 		renderer.RenderScene();
 	}
+
+	delete &renderer;
+	delete &w;
+	delete &cubeInput;
+
 	return 0;
 
 }
