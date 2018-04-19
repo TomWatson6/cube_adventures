@@ -1,5 +1,3 @@
-﻿  CubeInput.cpp
-c:\users\tomwa\source\repos\cube_adventures\io\cubeinput.cpp(43): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\users\tomwa\source\repos\cube_adventures\io\cubeinput.cpp(46): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\users\tomwa\source\repos\cube_adventures\io\cubeinput.cpp(49): warning C4305: 'argument': truncation from 'double' to 'float'
+﻿  Skipping... (no relevant changes detected)
+  CubeInput.cpp
   IO.vcxproj -> C:\Users\tomwa\source\repos\Cube_Adventures\Debug\IO.lib

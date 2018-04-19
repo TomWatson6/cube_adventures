@@ -52,7 +52,7 @@ void RenderMap::update() {
 
 	current += PERLIN_STEP;
 
-	BufferData();
+	RebufferData();
 
 }
 
@@ -86,9 +86,11 @@ void RenderMap::setWalkableHeight(Vector2 &startXY, Vector2 &endXY, float level)
 
 			int offset = (x * RAW_WIDTH) + z;
 
+			float xPos = 10 * x * HEIGHTMAP_X;
+
 			vertices[offset] = Vector3(
-				10 * x * HEIGHTMAP_X,
-				10 * HEIGHTMAP_Y + tileBaseHeight,
+				xPos,
+				tileBaseHeight,
 				10 * z * HEIGHTMAP_Z
 			);
 
@@ -104,10 +106,12 @@ void RenderMap::setSwimmableHeight(Vector2 startXY, Vector2 endXY, float level, 
 	for (int x = startXY.x; x < endXY.x; x++) {
 		for (int z = startXY.y; z < endXY.y; z++) {
 
+			float xPos = 10 * x * HEIGHTMAP_X;
+
 			int offset = (x * RAW_WIDTH) + z;
 
 			vertices[offset] = Vector3(
-				10 * x * HEIGHTMAP_X,
+				xPos,
 				heights[x + RAW_WIDTH * z] + tileBaseHeight,
 				10 * z * HEIGHTMAP_Z
 			);

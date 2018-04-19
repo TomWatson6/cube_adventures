@@ -1,3 +1,9 @@
-﻿glew32.lib(glew.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'glew32.lib(glew.obj)' or at 'C:\Users\tomwa\source\repos\Cube_Adventures\Debug\vc120.pdb'; linking object as if no debug info
-  cube_adventures.vcxproj -> C:\Users\tomwa\source\repos\Cube_Adventures\Debug\cube_adventures.exe
-  cube_adventures.vcxproj -> C:\Users\tomwa\source\repos\Cube_Adventures\Debug\cube_adventures.pdb (Partial PDB)
+﻿  main.cpp
+c:\users\tomwa\source\repos\cube_adventures\nclgl\heightmap.h(30): warning C4305: 'initializing': truncation from 'double' to 'const float'
+c:\users\tomwa\source\repos\cube_adventures\nclgl\rendermap.h(45): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\tomwa\source\repos\cube_adventures\nclgl\rendermap.h(66): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\tomwa\source\repos\cube_adventures\nclgl\rendermap.h(66): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\tomwa\source\repos\cube_adventures\nclgl\renderer.h(20): warning C4244: 'argument': conversion from 'double' to 'const float', possible loss of data
+c:\users\tomwa\source\repos\cube_adventures\nclgl\renderer.h(21): warning C4244: 'argument': conversion from 'double' to 'const float', possible loss of data
+  cube_adventures.vcxproj -> C:\Users\tomwa\Source\Repos\cube_adventures\Debug\cube_adventures.exe
+  cube_adventures.vcxproj -> C:\Users\tomwa\Source\Repos\cube_adventures\Debug\cube_adventures.pdb (Partial PDB)

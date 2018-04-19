@@ -10,32 +10,32 @@ class SceneNode {
 public:
 	SceneNode(Mesh * m = NULL, Vector4 colour = Vector4(1, 1, 1, 1));
 	~SceneNode(void);
-	
+
 	void SetTransform(const Matrix4 & matrix) { transform = matrix; }
 	const Matrix4 & GetTransform() const { return transform; }
 	Matrix4 GetWorldTransform() const { return worldTransform; }
-	
+
 	Vector4 GetColour() const { return colour; }
 	void SetColour(Vector4 c) { colour = c; }
-	
+
 	Vector3 GetModelScale() const { return modelScale; }
 	void SetModelScale(Vector3 s) { modelScale = s; }
 
 	RenderMap * GetRenderMap() const { return renderMap; }
-	void setRenderMap(RenderMap * r) { renderMap = r; }
+	void setRenderMap(RenderMap * r) { renderMap = r; hasRenderMap = true; }
 
 	Mesh * GetMesh() const { return mesh; }
 	void SetMesh(Mesh * m) { mesh = m; }
-	
+
 	void AddChild(SceneNode * s);
-	
+
 	virtual void Update(float msec);
 	virtual void Draw(const OGLRenderer & r);
-	
+
 	std::vector < SceneNode * >::const_iterator GetChildIteratorStart() {
 		return children.begin();
 	}
-	
+
 	std::vector < SceneNode * >::const_iterator GetChildIteratorEnd() {
 		return children.end();
 	}
@@ -45,16 +45,17 @@ public:
 
 	float GetCameraDistance() const { return distanceFromCamera; }
 	void SetCameraDistance(float f) { distanceFromCamera = f; }
-	
+
 	static bool CompareByCameraDistance(SceneNode *a, SceneNode * b) {
-		return (a -> distanceFromCamera <
-			b -> distanceFromCamera) ? true : false;
-		
+		return (a->distanceFromCamera <
+			b->distanceFromCamera) ? true : false;
+
 	}
 
 protected:
 	SceneNode * parent;
 	RenderMap * renderMap; // Extension of Mesh
+	bool hasRenderMap = false;
 	Mesh * mesh;
 	Matrix4 worldTransform;
 	Matrix4 transform;
@@ -64,5 +65,5 @@ protected:
 	float distanceFromCamera;
 	float boundingRadius;
 
-	
+
 };

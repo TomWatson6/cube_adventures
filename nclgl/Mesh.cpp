@@ -96,6 +96,54 @@ void Mesh::BufferData() {
 	
 }
 
+void Mesh::RebufferData() {
+
+	//int offset = numVertices * sizeof(Vector3);
+
+	//glBindVertexArray(arrayObject);
+	//glGenBuffers(1, &bufferObject[VERTEX_BUFFER]);
+	glBindBuffer(GL_ARRAY_BUFFER, bufferObject[VERTEX_BUFFER]);
+	
+	glBufferSubData(GL_ARRAY_BUFFER, 0, numVertices * sizeof(Vector3),
+		vertices);
+	//glVertexAttribPointer(VERTEX_BUFFER, 3, GL_FLOAT, GL_FALSE, 0, 0);
+	//glEnableVertexAttribArray(VERTEX_BUFFER);
+	if (textureCoords) { // This bit is new !
+		//glGenBuffers(1, &bufferObject[TEXTURE_BUFFER]);
+		glBindBuffer(GL_ARRAY_BUFFER, bufferObject[TEXTURE_BUFFER]);
+		glBufferSubData(GL_ARRAY_BUFFER, 0, numVertices * sizeof(Vector2),
+			textureCoords);
+		//glVertexAttribPointer(TEXTURE_BUFFER, 2, GL_FLOAT, GL_FALSE, 0, 0);
+		//glEnableVertexAttribArray(TEXTURE_BUFFER);
+
+		//offset += numVertices * sizeof(Vector2);
+
+	}
+	if (indices) {
+
+		//glGenBuffers(1, &bufferObject[INDEX_BUFFER]);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,
+			bufferObject[INDEX_BUFFER]);
+		glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, 0, numIndices * sizeof(GLuint),
+			indices);
+
+		//offset += numIndices * sizeof(GLuint);
+
+	}
+
+	if (colours) {
+		//glGenBuffers(1, &bufferObject[COLOUR_BUFFER]);
+		glBindBuffer(GL_ARRAY_BUFFER, bufferObject[COLOUR_BUFFER]);
+		glBufferSubData(GL_ARRAY_BUFFER, 0, numVertices * sizeof(Vector4),
+			colours);
+		//glVertexAttribPointer(COLOUR_BUFFER, 4, GL_FLOAT, GL_FALSE, 0, 0);
+		//glEnableVertexAttribArray(COLOUR_BUFFER);
+
+	}
+	//glBindVertexArray(0);
+
+}
+
 void Mesh::Draw() {
 
 	glActiveTexture(GL_TEXTURE0);

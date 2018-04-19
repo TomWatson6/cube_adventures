@@ -20,6 +20,7 @@ public:
 		
 protected:
 	void BufferData();
+	void RebufferData();
 	GLuint numIndices;
 	unsigned int * indices;
 

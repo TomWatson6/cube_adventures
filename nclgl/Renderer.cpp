@@ -117,12 +117,48 @@ Renderer::Renderer(Window & parent) : OGLRenderer(parent) {
 
 	}
 
+	root = new SceneNode();
+
 	for (int i = 0; i < Cube::CUBE_SIDES; i++) {
-		cubeSides[i].SetTransform(Matrix4::Rotation(15 * i, Vector3(1, 0, 0)));
-		//cubeSides[i]->SetTransform(Matrix4::Scale(Vector3(i / 6.0, 1, i / 6.0)) * Matrix4::Rotation(15 * i, Vector3(1, 0, 0)));
-		//cubeSides[i]->SetTransform(Matrix4::Translation(Vector3(0, 0, 15 * RAW_WIDTH * HEIGHTMAP_Z)));
+		root->AddChild(&cubeSides[i]);
 	}
-	cubeSides[0].SetTransform(Matrix4::Translation(Vector3(0, 0, 0.0001f)));
+
+	Matrix4 transformation;
+
+	root->SetTransform(Matrix4::Translation(cubePosition));
+
+	transformation = Matrix4::Translation(Vector3(halfSideLength, halfSideLength, halfSideLength));
+	transformation = transformation * Matrix4::Rotation(90.0f, Vector3(1, 0, 0));
+	transformation = transformation * Matrix4::Rotation(-90.0f, Vector3(0, 1, 0));
+
+	cubeSides[0].SetTransform(transformation);
+
+	transformation = Matrix4::Translation(Vector3(halfSideLength, halfSideLength, -halfSideLength));
+	transformation = transformation * Matrix4::Rotation(-90.0f, Vector3(0, 1, 0));
+
+	cubeSides[1].SetTransform(transformation);
+
+	transformation = Matrix4::Translation(Vector3(halfSideLength, -halfSideLength, -halfSideLength));
+	transformation = transformation * Matrix4::Rotation(-90.0f, Vector3(0, 1, 0));
+	transformation = transformation * Matrix4::Rotation(-90.0f, Vector3(1, 0, 0));
+
+	cubeSides[2].SetTransform(transformation);
+
+	transformation = Matrix4::Translation(Vector3(-halfSideLength, -halfSideLength, -halfSideLength));
+	transformation = transformation * Matrix4::Rotation(-90.0f, Vector3(1, 0, 0));
+
+	cubeSides[3].SetTransform(transformation);
+
+	transformation = Matrix4::Translation(Vector3(-halfSideLength, -halfSideLength, halfSideLength));
+	transformation = transformation * Matrix4::Rotation(180.0f, Vector3(1, 0, 0));
+
+	cubeSides[4].SetTransform(transformation);
+
+	transformation = Matrix4::Translation(Vector3(-halfSideLength, halfSideLength, halfSideLength));
+	transformation = transformation * Matrix4::Rotation(180.0f, Vector3(0, 1, 0));
+	transformation = transformation * Matrix4::Rotation(-90.0f, Vector3(0, 0, 1));
+
+	cubeSides[5].SetTransform(transformation);
 
 	/*Matrix4 transform1 = Matrix4::Rotation(90.0f, Vector3(1, 0, 0));
 	Matrix4 transform2 = Matrix4::Translation(Vector3(0, 0, 1));
@@ -133,13 +169,13 @@ Renderer::Renderer(Window & parent) : OGLRenderer(parent) {
 
 	for (int i = 0; i < Cube::CUBE_SIDES / 2; i++) {
 
-		modelMatrix = transform1 * transform2;
+	modelMatrix = transform1 * transform2;
 
-		cubeSides[i * 2]->SetTransform(cubeSides[i * 2]->GetWorldTransform() * modelMatrix);
+	cubeSides[i * 2]->SetTransform(cubeSides[i * 2]->GetWorldTransform() * modelMatrix);
 
-		modelMatrix = modelMatrix * transform3 * transform4;
+	modelMatrix = modelMatrix * transform3 * transform4;
 
-		cubeSides[i * 2 + 1]->SetTransform(cubeSides[i * 2 + 1]->GetWorldTransform() * modelMatrix);
+	cubeSides[i * 2 + 1]->SetTransform(cubeSides[i * 2 + 1]->GetWorldTransform() * modelMatrix);
 
 	}*/
 
@@ -150,7 +186,7 @@ Renderer::Renderer(Window & parent) : OGLRenderer(parent) {
 
 
 	/*for (int i = 0; i < dimensions * dimensions * 2; i++) {
-		cout << tileInfo[i];
+	cout << tileInfo[i];
 	}
 	cout << endl;*/
 
@@ -162,9 +198,10 @@ Renderer::Renderer(Window & parent) : OGLRenderer(parent) {
 
 }
 Renderer ::~Renderer(void) {
-	delete cubeSides;
 	delete camera;
 	delete[] tileInfo;
+	delete[] cubeSides;
+	//delete root;
 
 }
 
@@ -172,9 +209,11 @@ void Renderer::UpdateScene(float msec) {
 	camera->UpdateCamera(msec);
 	viewMatrix = camera->BuildViewMatrix();
 
-	for (int i = 0; i < Cube::CUBE_SIDES; i++) {
-		cubeSides[i].Update(msec);
-	}
+	root->Update(msec);
+
+	/*for (int i = 0; i < Cube::CUBE_SIDES; i++) {
+	cubeSides[i].Update(msec);
+	}*/
 
 }
 
@@ -184,10 +223,10 @@ void Renderer::RenderScene() {
 	glUseProgram(currentShader->GetProgram());
 	UpdateShaderMatrices();
 
-	for (int i = 0; i < Cube::CUBE_SIDES; i++) {
+	for (int i = 0; i < Cube::CUBE_SIDES; i++) {
 
-		glUniformMatrix4fv(glGetUniformLocation(currentShader->GetProgram(), 
-			"modelMatrix"), 1, true, (float*)&cubeSides[i].GetWorldTransform());
+		glUniformMatrix4fv(glGetUniformLocation(currentShader->GetProgram(),
+			"modelMatrix"), 1, false, (float*)&cubeSides[i].GetWorldTransform());
 
 		glUniform1i(glGetUniformLocation(currentShader->GetProgram(),
 			"water"), 0);

@@ -12,6 +12,9 @@ private:
 	const float MINIMUM_LEVEL = -5.0;
 	const float LEVEL_DIFFERENCE = 100.0;
 
+	bool increase = false;
+	float extra = 0;
+
 	int index;
 	int dimensions;
 	float tileLength;
@@ -87,7 +90,7 @@ public:
 	Tile getTile(int index) { return map.getTile(index); }
 
 	void setIndex(int index) { this->index = index; }
-	void setDimensions(int dimensions) { this->dimensions = dimensions; this->tileLength = (float) RAW_WIDTH / dimensions; }
+	void setDimensions(int dimensions) { this->dimensions = dimensions; this->tileLength = (float)RAW_WIDTH / dimensions; }
 
 	void updateHeights();
 
@@ -95,16 +98,16 @@ public:
 
 	//Methods to determine tile heights
 	void setWalkableHeight(Vector2 &startXY, // Top left corner of the tile
-						Vector2 &endXY, // Bottom right corner of the tile
-						float level); // The higher the level, the greater the height of the tile - useful for wall/walkable surface differentiation
-						
-	
+		Vector2 &endXY, // Bottom right corner of the tile
+		float level); // The higher the level, the greater the height of the tile - useful for wall/walkable surface differentiation
+
+
 	void setSwimmableHeight(Vector2 startXY, // Top left corner of the tile
-						Vector2 endXY, // Bottom right corner of the tile
-						float level, // The higher the level, the greater the height of the tile - useful for lava/water surface differentiation
-						float variation, // As this will use Perlin Noise, this will determine the min/max values it can go between
-						float offsetSpeedNoise, // This will determine how quickly the perlin noise will move
-						float offsetSpeedTexture); //This will determine how quickly the texture will move
-						
+		Vector2 endXY, // Bottom right corner of the tile
+		float level, // The higher the level, the greater the height of the tile - useful for lava/water surface differentiation
+		float variation, // As this will use Perlin Noise, this will determine the min/max values it can go between
+		float offsetSpeedNoise, // This will determine how quickly the perlin noise will move
+		float offsetSpeedTexture); //This will determine how quickly the texture will move
+
 
 };

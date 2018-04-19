@@ -2,51 +2,53 @@
 #include "SceneNode.h"
 
 SceneNode::SceneNode(Mesh * mesh, Vector4 colour) {
-	
-	if (RenderMap* r = dynamic_cast<RenderMap*>(mesh))
+
+	if (RenderMap* r = dynamic_cast<RenderMap*>(mesh)) {
 		renderMap = r;
+		hasRenderMap = true;
+	}
 	else
 		this->mesh = mesh;
 
-	this -> colour = colour;
+	this->colour = colour;
 	boundingRadius = 1.0f;
 	distanceFromCamera = 0.0f;
 	parent = NULL;
 	modelScale = Vector3(1, 1, 1);
-	
+
 }
 
 SceneNode::~SceneNode(void) {
 	for (unsigned int i = 0; i < children.size(); ++i) {
 		delete children[i];
-		
+
 	}
-	
+
 }
 
 void SceneNode::AddChild(SceneNode * s) {
 	children.push_back(s);
-	s -> parent = this;
-	
+	s->parent = this;
+
 }
 void SceneNode::Draw(const OGLRenderer & r) {
 	//if (mesh) { mesh->Draw(); }
 	if (renderMap) { renderMap->Draw(); }
-	
+
 }
 
 void SceneNode::Update(float msec) {
 	if (parent) { // This node has a parent ...
-		worldTransform = parent -> worldTransform * transform;
+		worldTransform = parent->worldTransform * transform;
 	}
 	else { // Root node , world transform is local transform !
 		worldTransform = transform;
 	}
 	for (vector < SceneNode * >::iterator i = children.begin();
 		i != children.end(); ++i) {
-		(*i) -> Update(msec);
+		(*i)->Update(msec);
 	}
 
-	if (renderMap) { renderMap->update(); }
+	if (hasRenderMap) { renderMap->update(); }
 
 }
