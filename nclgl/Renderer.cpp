@@ -48,60 +48,25 @@ Renderer::Renderer(Window & parent) : OGLRenderer(parent) {
 		for (int j = 0; j < dimensions * dimensions; j++) {
 
 			switch (renderMap->getTile(j).getType()) {
-			case TileType::COBBLESTONE:
+			case TileType::LAND:
 				tileInfo[j * 2] = 0;
-
-				if (renderMap->getTile(j).getProperties().SWIMMABLE) {
-					tileInfo[j * 2 + 1] = 1;
-				}
-				else {
-					tileInfo[j * 2 + 1] = 0;
-				}
-
-				break;
-			case TileType::LAVA:
-				tileInfo[j * 2] = 1;
-
-				if (renderMap->getTile(j).getProperties().SWIMMABLE) {
-					tileInfo[j * 2 + 1] = 1;
-				}
-				else {
-					tileInfo[j * 2 + 1] = 0;
-				}
-
+				tileInfo[j * 2 + 1] = 0;
 				break;
 			case TileType::WATER:
+				tileInfo[j * 2] = 1;
+				tileInfo[j * 2 + 1] = 1;
+				break;
+			case TileType::INTERACTIVE:
 				tileInfo[j * 2] = 2;
-
-				if (renderMap->getTile(j).getProperties().SWIMMABLE) {
-					tileInfo[j * 2 + 1] = 1;
-				}
-				else {
-					tileInfo[j * 2 + 1] = 0;
-				}
-
+				tileInfo[j * 2 + 1] = 0;
 				break;
-			case TileType::TERRAIN_GRASS:
+			case TileType::START:
 				tileInfo[j * 2] = 3;
-
-				if (renderMap->getTile(j).getProperties().SWIMMABLE) {
-					tileInfo[j * 2 + 1] = 1;
-				}
-				else {
-					tileInfo[j * 2 + 1] = 0;
-				}
-
+				tileInfo[j * 2 + 1] = 0;
 				break;
-			case TileType::TERRAIN_SNOW:
+			case TileType::FINISH:
 				tileInfo[j * 2] = 4;
-
-				if (renderMap->getTile(j).getProperties().SWIMMABLE) {
-					tileInfo[j * 2 + 1] = 1;
-				}
-				else {
-					tileInfo[j * 2 + 1] = 0;
-				}
-
+				tileInfo[j * 2 + 1] = 0;
 				break;
 			}
 
@@ -122,6 +87,11 @@ Renderer::Renderer(Window & parent) : OGLRenderer(parent) {
 	for (int i = 0; i < Cube::CUBE_SIDES; i++) {
 		root->AddChild(&cubeSides[i]);
 	}
+
+	player = new SceneNode();
+	player->SetMesh(Mesh::LoadMeshFile("../Meshes/cube.asciimesh"));
+
+	root->AddChild(player);
 
 	Matrix4 transformation;
 
@@ -205,11 +175,36 @@ Renderer ::~Renderer(void) {
 
 }
 
+void Renderer::updatePlayer(float posx, float posy, float posz, float sideLength, float progress, Direction dir) {
+
+	//Matrix4 translation = root->GetWorldTransform();
+	Matrix4 translation = Matrix4::Translation(Vector3(posx, posy, posz));
+	Matrix4 scale = Matrix4::Scale(Vector3(sideLength / 2, sideLength / 2, sideLength / 2));
+	Matrix4 rotation;
+
+	if (dir == Direction::LEFT) {
+		rotation = Matrix4::Rotation(-progress, Vector3(0, 1, 0));
+	}
+	else if (dir == Direction::RIGHT) {
+		rotation = Matrix4::Rotation(progress, Vector3(0, 1, 0));
+	}
+	else if (dir == Direction::UP) {
+		rotation = Matrix4::Rotation(-progress, Vector3(1, 0, 0));
+	}
+	else if (dir == Direction::DOWN) {
+		rotation = Matrix4::Rotation(progress, Vector3(1, 0, 0));
+	}
+
+	player->SetTransform(translation * scale * rotation);
+
+}
+
 void Renderer::UpdateScene(float msec) {
 	camera->UpdateCamera(msec);
 	viewMatrix = camera->BuildViewMatrix();
 
 	root->Update(msec);
+	player->Update(msec);
 
 	/*for (int i = 0; i < Cube::CUBE_SIDES; i++) {
 	cubeSides[i].Update(msec);
@@ -223,7 +218,8 @@ void Renderer::RenderScene() {
 	glUseProgram(currentShader->GetProgram());
 	UpdateShaderMatrices();
 
-	for (int i = 0; i < Cube::CUBE_SIDES; i++) {
+	for (int i = 0; i < Cube::CUBE_SIDES; i++) {
+
 
 		glUniformMatrix4fv(glGetUniformLocation(currentShader->GetProgram(),
 			"modelMatrix"), 1, false, (float*)&cubeSides[i].GetWorldTransform());
@@ -252,6 +248,11 @@ void Renderer::RenderScene() {
 		cubeSides[i].Draw(*this);
 
 	}
+
+	glUniformMatrix4fv(glGetUniformLocation(currentShader->GetProgram(),
+		"modelMatrix"), 1, false, (float*)&player->GetWorldTransform());
+
+	player->Draw(*this);
 
 	glUseProgram(0);
 	SwapBuffers();

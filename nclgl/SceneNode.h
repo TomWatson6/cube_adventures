@@ -56,6 +56,7 @@ protected:
 	SceneNode * parent;
 	RenderMap * renderMap; // Extension of Mesh
 	bool hasRenderMap = false;
+	bool hasMesh = false;
 	Mesh * mesh;
 	Matrix4 worldTransform;
 	Matrix4 transform;

@@ -1,6 +1,10 @@
 # pragma once
 #include "OGLRenderer.h"
 
+//#include <string>
+
+using std::string;
+
 enum MeshBuffer {
 	VERTEX_BUFFER, COLOUR_BUFFER, TEXTURE_BUFFER, INDEX_BUFFER, MAX_BUFFER
 	
@@ -11,6 +15,7 @@ public:
 	~Mesh(void);
 	virtual void Draw();
 	static Mesh * GenerateTriangle();
+	static Mesh* LoadMeshFile(const string &filename);
 	void SetTexture(GLuint tex) { texture = tex; }
 	GLuint GetTexture() { return texture; }
 	static Mesh * GenerateQuad();

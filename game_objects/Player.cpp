@@ -13,17 +13,17 @@ void Player::update() {
 
 	if (isMoving && progress != 90) {
 
-		switch (dirMoving) {
-		case Direction::LEFT:
-			//negative x
+		//switch (dirMoving) {
+		//case Direction::LEFT:
+		//	//negative x
 
-		case Direction::RIGHT:
-			//positive x
-		case Direction::UP:
-			//positive y
-		case Direction::DOWN:
-			//negative y
-		}
+		//case Direction::RIGHT:
+		//	//positive x
+		//case Direction::UP:
+		//	//positive y
+		//case Direction::DOWN:
+		//	//negative y
+		//}
 
 	}
 

@@ -7,8 +7,10 @@ SceneNode::SceneNode(Mesh * mesh, Vector4 colour) {
 		renderMap = r;
 		hasRenderMap = true;
 	}
-	else
+	else {
 		this->mesh = mesh;
+		hasMesh = true;
+	}
 
 	this->colour = colour;
 	boundingRadius = 1.0f;
@@ -32,8 +34,8 @@ void SceneNode::AddChild(SceneNode * s) {
 
 }
 void SceneNode::Draw(const OGLRenderer & r) {
-	//if (mesh) { mesh->Draw(); }
-	if (renderMap) { renderMap->Draw(); }
+	if (hasMesh) { mesh->Draw(); }
+	if (hasRenderMap) { renderMap->Draw(); }
 
 }
 

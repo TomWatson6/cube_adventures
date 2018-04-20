@@ -24,7 +24,7 @@ private:
 	Map map;
 	MapType mapType;
 
-	bool* isSwimmable;
+	bool* isWater;
 	float* heights = new float[RAW_WIDTH * RAW_HEIGHT];
 	//vector<float> heights;
 
@@ -46,11 +46,11 @@ public:
 		this->map = map;
 		this->mapType = mapType;
 
-		isSwimmable = new bool[dimensions * dimensions];
+		isWater = new bool[dimensions * dimensions];
 
 		for (int i = 0; i < dimensions; i++) {
 			for (int j = 0; j < dimensions; j++) {
-				isSwimmable[i + dimensions * j] = map.getTile(i + dimensions * j).getProperties().SWIMMABLE;
+				isWater[i + dimensions * j] = map.getTile(i + dimensions * j).getType() == TileType::WATER;
 			}
 		}
 
@@ -62,7 +62,7 @@ public:
 				int tileZ = (int)(z / tileLength);
 
 				//Only apply perlin noise if the surcace is swimmable
-				if (isSwimmable[tileX + dimensions * tileZ]) {
+				if (isWater[tileX + dimensions * tileZ]) {
 					heights[x + RAW_WIDTH * z] = n.noise(x / 50.0 + current, z / 50.0) * 1000.0;
 				}
 				else {
@@ -76,7 +76,7 @@ public:
 
 	~RenderMap() {
 
-		delete[] isSwimmable;
+		delete[] isWater;
 		delete[] heights;
 
 	}

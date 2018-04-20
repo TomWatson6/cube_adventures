@@ -4,6 +4,7 @@
 # include "camera.h"
 # include "RenderMap.h"
 # include "SceneNode.h"
+# include "../Entities/Player.h"
 
 class Renderer : public OGLRenderer {
 public:
@@ -12,6 +13,10 @@ public:
 
 	virtual void RenderScene();
 	virtual void UpdateScene(float msec);
+
+	float getGroundLevel() { return groundLevel.z; }
+
+	void updatePlayer(float posx, float posy, float posz, float sideLength, float progress, Direction dir);
 
 protected:
 
@@ -22,6 +27,7 @@ protected:
 
 	SceneNode* root;
 	SceneNode* cubeSides;
+	SceneNode* player;
 	Camera * camera;
 
 	float dimensions;

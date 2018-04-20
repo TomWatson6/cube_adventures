@@ -23,7 +23,7 @@ private:
 	float pivotz;
 
 	bool isMoving;
-	Direction dirMoving;
+	Direction dirMoving = Direction::RIGHT;
 
 	//Shows the current degrees of progress of the 90 degree rotation whilst the player is moving
 	float progress = 0;
@@ -54,8 +54,9 @@ public:
 	float getPosy() { return posy; }
 	float getPosz() { return posz; }
 
+	bool getIsMoving() { return isMoving; }
 	int getCurrentTile() { return currentTile; }
-
+	Direction getDirection() { return dirMoving; }
 	int getProgress() { return progress; }
 
 	//Appear somewhere, given a tile

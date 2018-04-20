@@ -7,7 +7,7 @@ void RenderMap::update() {
 	for (int x = 0; x < dimensions; x++) {
 		for (int z = 0; z < dimensions; z++) {
 
-			if (isSwimmable[x + dimensions * z]) {
+			if (isWater[x + dimensions * z]) {
 				setSwimmableHeight(Vector2(x * tileLength, z * tileLength),
 					Vector2(x * tileLength + tileLength, z * tileLength + tileLength), -3.0f, 0, 0, 0);
 			}
