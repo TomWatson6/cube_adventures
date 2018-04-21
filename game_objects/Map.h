@@ -15,19 +15,22 @@ private:
 public:
 	Map() {}
 
-	Map(int index, int dimensions, Tile* tiles) {
+	Map(int index, int dimensions, vector<Tile> tiles) {
 
 		this->index = index;
 		this->dimensions = dimensions;
+		this->tiles = tiles;
 
-		//tiles = new Tile[dimensions * dimensions];
-
-		for (int i = 0; i < dimensions; i++) {
+		/*for (int i = 0; i < dimensions; i++) {
 			for (int j = 0; j < dimensions; j++) {
-				this->tiles.push_back(tiles[i + j * dimensions]);
-				if (this->tiles.at(i + j * dimensions).getType() == TileType::START)
-					startTile = i + j * dimensions;
+				if (this->tiles.at(i * dimensions + j).getType() == TileType::START)
+					startTile = i * dimensions + j;
 			}
+		}*/
+
+		for (int i = 0; i < dimensions * dimensions; i++) {
+			if (this->tiles.at(i).getType() == TileType::START)
+				startTile = i;
 		}
 
 	}

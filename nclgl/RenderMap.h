@@ -50,7 +50,7 @@ public:
 
 		for (int i = 0; i < dimensions; i++) {
 			for (int j = 0; j < dimensions; j++) {
-				isWater[i + dimensions * j] = map.getTile(i + dimensions * j).getType() == TileType::WATER;
+				isWater[i * dimensions + j] = map.getTile(i * dimensions + j).getType() == TileType::WATER;
 			}
 		}
 
@@ -62,11 +62,11 @@ public:
 				int tileZ = (int)(z / tileLength);
 
 				//Only apply perlin noise if the surcace is swimmable
-				if (isWater[tileX + dimensions * tileZ]) {
-					heights[x + RAW_WIDTH * z] = n.noise(x / 50.0 + current, z / 50.0) * 1000.0;
+				if (isWater[tileX * dimensions + tileZ]) {
+					heights[x * RAW_WIDTH + z] = n.noise(x / 50.0 + current, z / 50.0) * 1000.0;
 				}
 				else {
-					heights[x + RAW_WIDTH * z] = 10 * HEIGHTMAP_Y;
+					heights[x * RAW_WIDTH + z] = 10 * HEIGHTMAP_Y;
 				}
 
 			}

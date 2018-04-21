@@ -7,7 +7,7 @@ void RenderMap::update() {
 	for (int x = 0; x < dimensions; x++) {
 		for (int z = 0; z < dimensions; z++) {
 
-			if (isWater[x + dimensions * z]) {
+			if (isWater[x * dimensions + z]) {
 				setSwimmableHeight(Vector2(x * tileLength, z * tileLength),
 					Vector2(x * tileLength + tileLength, z * tileLength + tileLength), -3.0f, 0, 0, 0);
 			}
@@ -51,6 +51,7 @@ void RenderMap::update() {
 	}
 
 	current += PERLIN_STEP;
+	//current = 0;
 
 	RebufferData();
 
@@ -112,7 +113,7 @@ void RenderMap::setSwimmableHeight(Vector2 startXY, Vector2 endXY, float level, 
 
 			vertices[offset] = Vector3(
 				xPos,
-				heights[x + RAW_WIDTH * z] + tileBaseHeight,
+				heights[x * RAW_WIDTH + z] + tileBaseHeight,
 				10 * z * HEIGHTMAP_Z
 			);
 

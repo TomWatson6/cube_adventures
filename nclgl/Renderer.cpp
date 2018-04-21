@@ -1,6 +1,7 @@
 #include "Renderer.h"
-#include "../IO/CubeInput.h"
-#include "PerlinNoise.h"
+#include <iostream>
+
+using namespace std;
 
 Renderer::Renderer(Window & parent) : OGLRenderer(parent) {
 
@@ -26,6 +27,10 @@ Renderer::Renderer(Window & parent) : OGLRenderer(parent) {
 		"../Textures/water_texture.JPG",
 		SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS);
 
+	
+	//currentTileInfo = new float[dimensions * dimensions * 2];
+	//tileInfo = new float[Cube::CUBE_SIDES * dimensions * dimensions * 2];
+
 	for (int i = 0; i < Cube::CUBE_SIDES; i++) {
 
 		Map map = cubeInput.getCube(0).getMap(i);
@@ -47,30 +52,39 @@ Renderer::Renderer(Window & parent) : OGLRenderer(parent) {
 
 		for (int j = 0; j < dimensions * dimensions; j++) {
 
+			//int index = i * dimensions * dimensions * 2 + j * 2;
+			int index = j * 2;
+
 			switch (renderMap->getTile(j).getType()) {
 			case TileType::LAND:
-				tileInfo[j * 2] = 0;
-				tileInfo[j * 2 + 1] = 0;
+				tileInfo[index] = 0;
+				cout << tileInfo[index];
+				tileInfo[index + 1] = 0;
 				break;
 			case TileType::WATER:
-				tileInfo[j * 2] = 1;
-				tileInfo[j * 2 + 1] = 1;
+				tileInfo[index] = 1;
+				tileInfo[index + 1] = 1;
 				break;
 			case TileType::INTERACTIVE:
-				tileInfo[j * 2] = 2;
-				tileInfo[j * 2 + 1] = 0;
+				tileInfo[index] = 2;
+				tileInfo[index + 1] = 0;
 				break;
 			case TileType::START:
-				tileInfo[j * 2] = 3;
-				tileInfo[j * 2 + 1] = 0;
+				tileInfo[index] = 3;
+				tileInfo[index + 1] = 0;
 				break;
 			case TileType::FINISH:
-				tileInfo[j * 2] = 4;
-				tileInfo[j * 2 + 1] = 0;
+				tileInfo[index] = 4;
+				tileInfo[index + 1] = 0;
 				break;
 			}
 
 		}
+
+		/*for (int i = 0; i < dimensions * dimensions * 2; i++) {
+			cout << tileInfo[i];
+		}
+		cout << endl;*/
 
 		Vector4 colour = Vector4(1, 1, 1, 1);
 
@@ -168,6 +182,7 @@ Renderer::Renderer(Window & parent) : OGLRenderer(parent) {
 
 }
 Renderer ::~Renderer(void) {
+
 	delete camera;
 	delete[] tileInfo;
 	delete[] cubeSides;
@@ -195,12 +210,12 @@ void Renderer::updatePlayer(float posx, float posy, float posz, float sideLength
 		rotation = Matrix4::Rotation(progress, Vector3(1, 0, 0));
 	}
 
-	player->SetTransform(translation * scale * rotation);
+	player->SetTransform(translation * rotation *  scale);
 
 }
 
 void Renderer::UpdateScene(float msec) {
-	camera->UpdateCamera(msec);
+	//camera->UpdateCamera(msec);
 	viewMatrix = camera->BuildViewMatrix();
 
 	root->Update(msec);
@@ -220,6 +235,11 @@ void Renderer::RenderScene() {
 
 	for (int i = 0; i < Cube::CUBE_SIDES; i++) {
 
+		/*for (int j = 0; j < dimensions * dimensions; j++) {
+			int index = i * dimensions * dimensions * 2 + j * 2;
+			currentTileInfo[j * 2] = tileInfo[index];
+			currentTileInfo[j * 2 + 1] = tileInfo[index + 1];
+		}*/
 
 		glUniformMatrix4fv(glGetUniformLocation(currentShader->GetProgram(),
 			"modelMatrix"), 1, false, (float*)&cubeSides[i].GetWorldTransform());
@@ -242,8 +262,8 @@ void Renderer::RenderScene() {
 		glUniform1fv(glGetUniformLocation(currentShader->GetProgram(),
 			"tileInfo"), dimensions * dimensions * 2, (const GLfloat*)tileInfo);
 
-		//glUniform3fv(glGetUniformLocation(currentShader->GetProgram(),
-		//	"tileInfo"), dimensions * dimensions * 2, (const GLfloat*)tileInfo);
+		/*glUniform3fv(glGetUniformLocation(currentShader->GetProgram(),
+			"tileInfo"), dimensions * dimensions * 2, (const GLfloat*)tileInfo);*/
 
 		cubeSides[i].Draw(*this);
 

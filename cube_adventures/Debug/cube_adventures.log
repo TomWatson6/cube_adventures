@@ -1,15 +1,16 @@
 ﻿  main.cpp
-h:\visual studio 2017\projects\cube_adventures\nclgl\heightmap.h(30): warning C4305: 'initializing': truncation from 'double' to 'const float'
-h:\visual studio 2017\projects\cube_adventures\nclgl\rendermap.h(45): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-h:\visual studio 2017\projects\cube_adventures\nclgl\rendermap.h(66): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-h:\visual studio 2017\projects\cube_adventures\nclgl\rendermap.h(66): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-h:\visual studio 2017\projects\cube_adventures\entities\player.h(40): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-h:\visual studio 2017\projects\cube_adventures\entities\player.h(60): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-h:\visual studio 2017\projects\cube_adventures\nclgl\renderer.h(25): warning C4244: 'argument': conversion from 'double' to 'const float', possible loss of data
-h:\visual studio 2017\projects\cube_adventures\nclgl\renderer.h(26): warning C4244: 'argument': conversion from 'double' to 'const float', possible loss of data
-h:\visual studio 2017\projects\cube_adventures\cube_adventures\main.cpp(26): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-h:\visual studio 2017\projects\cube_adventures\cube_adventures\main.cpp(27): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-h:\visual studio 2017\projects\cube_adventures\cube_adventures\main.cpp(28): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-h:\visual studio 2017\projects\cube_adventures\cube_adventures\main.cpp(120): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  cube_adventures.vcxproj -> H:\Visual Studio 2017\Projects\cube_adventures\Debug\cube_adventures.exe
-  cube_adventures.vcxproj -> H:\Visual Studio 2017\Projects\cube_adventures\Debug\cube_adventures.pdb (Partial PDB)
+c:\users\tomwa\source\repos\cube_adventures\nclgl\heightmap.h(30): warning C4305: 'initializing': truncation from 'double' to 'const float'
+c:\users\tomwa\source\repos\cube_adventures\nclgl\rendermap.h(45): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\tomwa\source\repos\cube_adventures\nclgl\rendermap.h(66): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\tomwa\source\repos\cube_adventures\nclgl\rendermap.h(66): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\tomwa\source\repos\cube_adventures\entities\player.h(40): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\tomwa\source\repos\cube_adventures\entities\player.h(60): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+c:\users\tomwa\source\repos\cube_adventures\nclgl\renderer.h(27): warning C4244: 'argument': conversion from 'double' to 'const float', possible loss of data
+c:\users\tomwa\source\repos\cube_adventures\nclgl\renderer.h(28): warning C4244: 'argument': conversion from 'double' to 'const float', possible loss of data
+c:\users\tomwa\source\repos\cube_adventures\cube_adventures\main.cpp(28): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\tomwa\source\repos\cube_adventures\cube_adventures\main.cpp(29): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\tomwa\source\repos\cube_adventures\cube_adventures\main.cpp(32): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\tomwa\source\repos\cube_adventures\cube_adventures\main.cpp(91): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\tomwa\source\repos\cube_adventures\cube_adventures\main.cpp(134): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  cube_adventures.vcxproj -> C:\Users\tomwa\source\repos\Cube_Adventures\Debug\cube_adventures.exe
+  cube_adventures.vcxproj -> C:\Users\tomwa\source\repos\Cube_Adventures\Debug\cube_adventures.pdb (Partial PDB)

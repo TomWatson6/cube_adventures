@@ -4,10 +4,12 @@
 SceneNode::SceneNode(Mesh * mesh, Vector4 colour) {
 
 	if (RenderMap* r = dynamic_cast<RenderMap*>(mesh)) {
+		cout << "Render Map" << endl;
 		renderMap = r;
 		hasRenderMap = true;
 	}
 	else {
+		cout << "Cube" << endl;
 		this->mesh = mesh;
 		hasMesh = true;
 	}

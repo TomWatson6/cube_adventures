@@ -38,6 +38,7 @@ void main(void) {
 	bool b = false;
 
 	if(tileInfo[currentTile * 2 + 1] == 1) {
+	//if(pos.y < -20) {
 		//if(pos.x - 1 >= 0) {
 		//	int adjacentTile = (int((pos.x - 1) / tileLength)) + (int(int(pos.y / tileLength) * dimensions));
 		//	if(tileInfo[adjacentTile * 2] != tileInfo[currentTile * 2]) {

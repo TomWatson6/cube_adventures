@@ -3,7 +3,7 @@
 
 enum class Direction { LEFT, RIGHT, UP, DOWN };
 
-static const float ROTARY_STEP = 1.0f;
+static const float ROTARY_STEP = 2.0f;
 
 class Player {
 
@@ -22,7 +22,7 @@ private:
 	float pivoty;
 	float pivotz;
 
-	bool isMoving;
+	bool isMoving = false;
 	Direction dirMoving = Direction::RIGHT;
 
 	//Shows the current degrees of progress of the 90 degree rotation whilst the player is moving
@@ -62,7 +62,7 @@ public:
 	//Appear somewhere, given a tile
 	//Fade out
 
-	void move(Direction dir);
+	void move(Direction dir, int dimensions);
 
 	void update();
 

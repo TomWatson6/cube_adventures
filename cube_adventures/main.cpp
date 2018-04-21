@@ -23,12 +23,18 @@ Player initialisePlayer(Map m, float groundLevel, float sideLength, int startTil
 	//cubes.at(currentCube).getMap(currentMap).getStartingTile() -- going to have to adapt IO for this to happen - make manual for testing
 	//);
 
-	float xPos = (m.getStartTile() % m.getDimensions()) * sideLength + 0.5 * sideLength - 5 * RAW_WIDTH * HEIGHTMAP_X;
-	float yPos = (m.getStartTile() / m.getDimensions()) * sideLength - 0.5 * sideLength + 5 * RAW_HEIGHT * HEIGHTMAP_Z;
-	float zPos = 5 * RAW_HEIGHT * HEIGHTMAP_Z + 0.5 * sideLength;
+	float cubeLength = (RAW_WIDTH - 1) * HEIGHTMAP_X * 10;
+
+	float xPos = ((m.getStartTile() % m.getDimensions()) * sideLength) - (0.5 * cubeLength) + (0.5 * sideLength);
+	float yPos = 0.5 * cubeLength - 0.5 * sideLength - (m.getStartTile() / m.getDimensions()) * sideLength;
+	//float xPos = (m.getStartTile() % m.getDimensions()) * sideLength + 0.5 * sideLength - (5 * RAW_WIDTH * HEIGHTMAP_X - 5 * HEIGHTMAP_X);
+	//float yPos = (5 * RAW_HEIGHT * HEIGHTMAP_Z - 5 * HEIGHTMAP_Z) - ((m.getStartTile() / m.getDimensions()) * sideLength - 0.5 * sideLength);
+	float zPos = 0.5 * cubeLength + 0.5 * sideLength;
 
 	cout << xPos << endl;
 	cout << m.getStartTile() << endl;
+	cout << m.getDimensions() << endl;
+	cout << sideLength << endl;
 
 	return Player(xPos, yPos, zPos, sideLength, startTile);
 
@@ -82,7 +88,7 @@ int main() {
 		return -1;
 	}
 
-	float sideLength = (10 * HEIGHTMAP_X * RAW_WIDTH) / cubes.at(currentCube).getMap(currentMap).getDimensions();
+	float sideLength = 10.0 * (RAW_WIDTH - 1) * HEIGHTMAP_X / cubes.at(currentCube).getMap(currentMap).getDimensions();
 
 	Player player = initialisePlayer(cubes.at(currentCube).getMap(currentMap), renderer.getGroundLevel(), sideLength, cubes.at(currentCube).getMap(currentMap).getStartTile());
 
@@ -102,17 +108,25 @@ int main() {
 		//KeyboardInput::CheckForInput();
 
 		if (!player.getIsMoving()) {
-			if (!Window::GetKeyboard()->KeyDown(KEYBOARD_W)) {
-				if (physics.validMove(player, cubes.at(currentCube).getMap(currentMap), Direction::UP)) { player.move(Direction::UP); }
+			if (Window::GetKeyboard()->KeyDown(KEYBOARD_W)) {
+				if (physics.validMove(player, cubes.at(currentCube).getMap(currentMap), Direction::UP)) { 
+					player.move(Direction::UP, cubes.at(currentCube).getMap(currentMap).getDimensions()); 
+				}
 			}
-			else if (!Window::GetKeyboard()->KeyDown(KEYBOARD_A)) {
-				if (physics.validMove(player, cubes.at(currentCube).getMap(currentMap), Direction::LEFT)) { player.move(Direction::LEFT); }
+			else if (Window::GetKeyboard()->KeyDown(KEYBOARD_A)) {
+				if (physics.validMove(player, cubes.at(currentCube).getMap(currentMap), Direction::LEFT)) { 
+					player.move(Direction::LEFT, cubes.at(currentCube).getMap(currentMap).getDimensions()); 
+				}
 			}
-			else if (!Window::GetKeyboard()->KeyDown(KEYBOARD_S)) {
-				if (physics.validMove(player, cubes.at(currentCube).getMap(currentMap), Direction::DOWN)) { player.move(Direction::DOWN); }
+			else if (Window::GetKeyboard()->KeyDown(KEYBOARD_S)) {
+				if (physics.validMove(player, cubes.at(currentCube).getMap(currentMap), Direction::DOWN)) { 
+					player.move(Direction::DOWN, cubes.at(currentCube).getMap(currentMap).getDimensions()); 
+				}
 			}
-			else if (!Window::GetKeyboard()->KeyDown(KEYBOARD_D)) {
-				if (physics.validMove(player, cubes.at(currentCube).getMap(currentMap), Direction::RIGHT)) { player.move(Direction::RIGHT); }
+			else if (Window::GetKeyboard()->KeyDown(KEYBOARD_D)) {
+				if (physics.validMove(player, cubes.at(currentCube).getMap(currentMap), Direction::RIGHT)) { 
+					player.move(Direction::RIGHT, cubes.at(currentCube).getMap(currentMap).getDimensions()); 
+				}
 			}
 		}
 

@@ -5,6 +5,8 @@
 # include "RenderMap.h"
 # include "SceneNode.h"
 # include "../Entities/Player.h"
+# include "../IO/CubeInput.h"
+# include "PerlinNoise.h"
 
 class Renderer : public OGLRenderer {
 public:
@@ -20,7 +22,7 @@ public:
 
 protected:
 
-	float halfSideLength = (10 * RAW_WIDTH * HEIGHTMAP_X - 10 * HEIGHTMAP_X) / 2;
+	float halfSideLength = (10 * (RAW_WIDTH - 1) * HEIGHTMAP_X) / 2;
 
 	Vector3 cubePosition = Vector3(0, 0, -3.5 * halfSideLength);
 	Vector3 groundLevel = Vector3(0, 0, -2.5 * halfSideLength);
@@ -32,6 +34,7 @@ protected:
 
 	float dimensions;
 	float* tileInfo;
+	float* currentTileInfo;
 
 	int counter = 1;
 
