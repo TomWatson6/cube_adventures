@@ -22,7 +22,7 @@ public:
 
 protected:
 
-	float halfSideLength = (10 * (RAW_WIDTH - 1) * HEIGHTMAP_X) / 2;
+	float halfSideLength = (10 * (RAW_WIDTH - 1) * HEIGHTMAP_X) / 2.0;
 
 	Vector3 cubePosition = Vector3(0, 0, -3.5 * halfSideLength);
 	Vector3 groundLevel = Vector3(0, 0, -2.5 * halfSideLength);

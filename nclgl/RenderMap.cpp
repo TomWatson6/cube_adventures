@@ -9,11 +9,11 @@ void RenderMap::update() {
 
 			if (isWater[x * dimensions + z]) {
 				setSwimmableHeight(Vector2(x * tileLength, z * tileLength),
-					Vector2(x * tileLength + tileLength, z * tileLength + tileLength), -3.0f, 0, 0, 0);
+					Vector2(x * tileLength + tileLength, z * tileLength + tileLength), -3.0f, 0, 0, 0, x * dimensions + z);
 			}
 			else {
 				setWalkableHeight(Vector2(x * tileLength, z * tileLength),
-					Vector2(x * tileLength + tileLength, z * tileLength + tileLength), 0);
+					Vector2(x * tileLength + tileLength, z * tileLength + tileLength), 0, x * dimensions + z);
 			}
 
 		}
@@ -78,7 +78,7 @@ void RenderMap::updateHeights() {
 
 }
 
-void RenderMap::setWalkableHeight(Vector2 &startXY, Vector2 &endXY, float level) {
+void RenderMap::setWalkableHeight(Vector2 &startXY, Vector2 &endXY, float level, int currentTile) {
 
 	float tileBaseHeight = level * LEVEL_DIFFERENCE;
 
@@ -95,12 +95,23 @@ void RenderMap::setWalkableHeight(Vector2 &startXY, Vector2 &endXY, float level)
 				10 * z * HEIGHTMAP_Z
 			);
 
+			if (map.getTile(currentTile).getType() == TileType::LAND) {
+				colours[offset] = Vector4(0.3, 0.3, 0.3, 255);
+			}
+			else {
+				
+
+
+			}
+
+			//colours[offset] = Vector4(0.3, 0.3, 0.3, 255);
+
 		}
 	}
 
 }
 
-void RenderMap::setSwimmableHeight(Vector2 startXY, Vector2 endXY, float level, float variation, float offsetSpeedNoise, float offsetSpeedTexture) {
+void RenderMap::setSwimmableHeight(Vector2 startXY, Vector2 endXY, float level, float variation, float offsetSpeedNoise, float offsetSpeedTexture, int currentTile) {
 
 	float tileBaseHeight = level * LEVEL_DIFFERENCE;
 
@@ -116,6 +127,8 @@ void RenderMap::setSwimmableHeight(Vector2 startXY, Vector2 endXY, float level, 
 				heights[x * RAW_WIDTH + z] + tileBaseHeight,
 				10 * z * HEIGHTMAP_Z
 			);
+
+			colours[offset] = Vector4(0, 0, 1, 1);
 
 		}
 	}

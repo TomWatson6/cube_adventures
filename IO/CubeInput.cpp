@@ -26,9 +26,10 @@ Cube CubeInput::initialiseCube(string path, string name) {
 			}
 		}
 
+
 		for (int j = 0; j < dimensions; j++) {
 
-			for (int k = 0; k < dimensions; k++) {
+			for (int k = dimensions - 1; k >= 0; k--) {
 
 				int tileNo = tileNumbers.at(j * dimensions + k);
 
@@ -42,16 +43,29 @@ Cube CubeInput::initialiseCube(string path, string name) {
 					tiles.push_back(Tile(TileType::WATER)); // Water
 					break;
 				case 2:
-					tiles.push_back(Tile(TileType::INTERACTIVE)); // Interactive
-					break;
-				case 3:
 					tiles.push_back(Tile(TileType::START)); // Start
 					break;
-				case 4:
+				case 3:
 					tiles.push_back(Tile(TileType::FINISH)); // Finish
+					break;
+				case 4:
+					tiles.push_back(Tile(TileType::INACTIVE)); // Inactive
+					break;
+				case 5:
+					tiles.push_back(Tile(TileType::ACTIVE)); // Active
+					break;
+				case 6:
+					tiles.push_back(Tile(TileType::CONFIRM)); // Confirm
+					break;
+				case 7:
+					tiles.push_back(Tile(TileType::SWAP)); // Swap
 				}
 
+				cout << tileNo;
+
 			}
+
+			cout << endl;
 
 		}
 

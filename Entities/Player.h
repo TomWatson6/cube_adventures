@@ -3,7 +3,7 @@
 
 enum class Direction { LEFT, RIGHT, UP, DOWN };
 
-static const float ROTARY_STEP = 2.0f;
+static const float ROTARY_STEP = 4.0f;
 
 class Player {
 

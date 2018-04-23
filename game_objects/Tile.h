@@ -1,7 +1,7 @@
 #pragma once
 
 //enum class TileType { COBBLESTONE, LAVA, WATER, TERRAIN_GRASS, TERRAIN_SNOW };
-enum class TileType { LAND, WATER, INTERACTIVE, START, FINISH };
+enum class TileType { LAND, WATER, START, FINISH, INACTIVE, ACTIVE, CONFIRM, SWAP };
 
 //struct Properties {
 //	bool WALKABLE; // Can the tile be walked on

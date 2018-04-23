@@ -43,40 +43,39 @@ Renderer::Renderer(Window & parent) : OGLRenderer(parent) {
 			return;
 		}
 
-		SetTextureRepeating(renderMap->GetTexture(), true);
-		SetTextureRepeating(renderMap->cobblestoneTexture, true);
+		//SetTextureRepeating(renderMap->GetTexture(), true);
+		//SetTextureRepeating(renderMap->cobblestoneTexture, true);
 
 		dimensions = renderMap->getDimensions();
 
-		tileInfo = new float[dimensions * dimensions * 2];
+		tileInfo = new float[dimensions * dimensions];
 
 		for (int j = 0; j < dimensions * dimensions; j++) {
 
-			//int index = i * dimensions * dimensions * 2 + j * 2;
-			int index = j * 2;
-
 			switch (renderMap->getTile(j).getType()) {
 			case TileType::LAND:
-				tileInfo[index] = 0;
-				cout << tileInfo[index];
-				tileInfo[index + 1] = 0;
+				tileInfo[j] = 0;
 				break;
 			case TileType::WATER:
-				tileInfo[index] = 1;
-				tileInfo[index + 1] = 1;
-				break;
-			case TileType::INTERACTIVE:
-				tileInfo[index] = 2;
-				tileInfo[index + 1] = 0;
+				tileInfo[j] = 1;
 				break;
 			case TileType::START:
-				tileInfo[index] = 3;
-				tileInfo[index + 1] = 0;
+				tileInfo[j] = 2;
 				break;
 			case TileType::FINISH:
-				tileInfo[index] = 4;
-				tileInfo[index + 1] = 0;
+				tileInfo[j] = 3;
 				break;
+			case TileType::INACTIVE:
+				tileInfo[j] = 4;
+				break;
+			case TileType::ACTIVE:
+				tileInfo[j] = 5;
+				break;
+			case TileType::CONFIRM:
+				tileInfo[j] = 6;
+				break;
+			case TileType::SWAP:
+				tileInfo[j] = 7;
 			}
 
 		}
@@ -244,14 +243,17 @@ void Renderer::RenderScene() {
 		glUniformMatrix4fv(glGetUniformLocation(currentShader->GetProgram(),
 			"modelMatrix"), 1, false, (float*)&cubeSides[i].GetWorldTransform());
 
-		glUniform1i(glGetUniformLocation(currentShader->GetProgram(),
+		/*glUniform1i(glGetUniformLocation(currentShader->GetProgram(),
 			"water"), 0);
 
 		glUniform1i(glGetUniformLocation(currentShader->GetProgram(),
 			"cobblestone"), 1);
 
 		glUniform1f(glGetUniformLocation(currentShader->GetProgram(),
-			"current"), cubeSides[i].GetRenderMap()->getCurrent());
+			"current"), cubeSides[i].GetRenderMap()->getCurrent());*/
+
+		glUniform1f(glGetUniformLocation(currentShader->GetProgram(),
+			"currentMap"), i);
 
 		glUniform1f(glGetUniformLocation(currentShader->GetProgram(),
 			"tileLength"), cubeSides[i].GetRenderMap()->getTileLength());
@@ -260,7 +262,7 @@ void Renderer::RenderScene() {
 			"dimensions"), dimensions);
 
 		glUniform1fv(glGetUniformLocation(currentShader->GetProgram(),
-			"tileInfo"), dimensions * dimensions * 2, (const GLfloat*)tileInfo);
+			"tileInfo"), dimensions * dimensions, (const GLfloat*)tileInfo);
 
 		/*glUniform3fv(glGetUniformLocation(currentShader->GetProgram(),
 			"tileInfo"), dimensions * dimensions * 2, (const GLfloat*)tileInfo);*/

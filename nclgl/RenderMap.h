@@ -99,7 +99,8 @@ public:
 	//Methods to determine tile heights
 	void setWalkableHeight(Vector2 &startXY, // Top left corner of the tile
 		Vector2 &endXY, // Bottom right corner of the tile
-		float level); // The higher the level, the greater the height of the tile - useful for wall/walkable surface differentiation
+		float level,
+		int currentTile); // The higher the level, the greater the height of the tile - useful for wall/walkable surface differentiation
 
 
 	void setSwimmableHeight(Vector2 startXY, // Top left corner of the tile
@@ -107,7 +108,8 @@ public:
 		float level, // The higher the level, the greater the height of the tile - useful for lava/water surface differentiation
 		float variation, // As this will use Perlin Noise, this will determine the min/max values it can go between
 		float offsetSpeedNoise, // This will determine how quickly the perlin noise will move
-		float offsetSpeedTexture); //This will determine how quickly the texture will move
+		float offsetSpeedTexture,
+		int currentTile); //This will determine how quickly the texture will move
 
 
 };

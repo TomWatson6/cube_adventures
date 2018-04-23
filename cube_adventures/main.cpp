@@ -29,7 +29,7 @@ Player initialisePlayer(Map m, float groundLevel, float sideLength, int startTil
 	float yPos = 0.5 * cubeLength - 0.5 * sideLength - (m.getStartTile() / m.getDimensions()) * sideLength;
 	//float xPos = (m.getStartTile() % m.getDimensions()) * sideLength + 0.5 * sideLength - (5 * RAW_WIDTH * HEIGHTMAP_X - 5 * HEIGHTMAP_X);
 	//float yPos = (5 * RAW_HEIGHT * HEIGHTMAP_Z - 5 * HEIGHTMAP_Z) - ((m.getStartTile() / m.getDimensions()) * sideLength - 0.5 * sideLength);
-	float zPos = 0.5 * cubeLength + 0.5 * sideLength;
+	float zPos = 0.5 * cubeLength;
 
 	cout << xPos << endl;
 	cout << m.getStartTile() << endl;
@@ -57,7 +57,7 @@ int main() {
 
 	vector<Cube> cubes = cubeInput.getCubes();
 
-	for (Cube cube : cubes) {
+	/*for (Cube cube : cubes) {
 		for (Map map : cube.getMaps()) {
 			for (int i = 0; i < map.getDimensions(); i++) {
 				for (int j = 0; j < map.getDimensions(); j++) {
@@ -79,7 +79,7 @@ int main() {
 				}
 			}
 		}
-	}
+	}*/
 
 	
 
@@ -88,7 +88,7 @@ int main() {
 		return -1;
 	}
 
-	float sideLength = 10.0 * (RAW_WIDTH - 1) * HEIGHTMAP_X / cubes.at(currentCube).getMap(currentMap).getDimensions();
+	float sideLength = 10.0 * (RAW_WIDTH - 1.0) * HEIGHTMAP_X / (float) cubes.at(currentCube).getMap(currentMap).getDimensions();
 
 	Player player = initialisePlayer(cubes.at(currentCube).getMap(currentMap), renderer.getGroundLevel(), sideLength, cubes.at(currentCube).getMap(currentMap).getStartTile());
 
