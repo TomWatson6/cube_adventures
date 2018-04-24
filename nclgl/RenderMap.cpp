@@ -72,7 +72,7 @@ void RenderMap::updateHeights() {
 
 	//Add new row at the end of the array using perlin noise function (O(sqrt(N)) * O(noise))
 	for (int i = RAW_WIDTH * RAW_HEIGHT - RAW_WIDTH; i < RAW_WIDTH * RAW_HEIGHT; i++) {
-		heights[i] = p.noise(i / 50.0 + current, RAW_HEIGHT - 1 / 50.0) * 1000.0 - 333;
+		heights[i] = -p.noise(i / 50.0 + current, RAW_HEIGHT - 1 / 50.0) * 1000.0 + 500;
 		//n.noise(i / 50.0 + current, RAW_HEIGHT - 1 / 50.0) * 1000.0 - 333
 	}
 
@@ -98,8 +98,28 @@ void RenderMap::setWalkableHeight(Vector2 &startXY, Vector2 &endXY, float level,
 			if (map.getTile(currentTile).getType() == TileType::LAND) {
 				colours[offset] = Vector4(0.3, 0.3, 0.3, 255);
 			}
-			else {
+			else if(map.getTile(currentTile).getType() == TileType::INACTIVE) {
 				
+
+
+			}
+			else if (map.getTile(currentTile).getType() == TileType::ACTIVE) {
+
+
+
+			}
+			else if (map.getTile(currentTile).getType() == TileType::SWAP) {
+
+
+
+			}
+			else if (map.getTile(currentTile).getType() == TileType::CONFIRM) {
+			
+
+
+			}
+			else if (map.getTile(currentTile).getType() == TileType::RESET) {
+
 
 
 			}

@@ -46,6 +46,7 @@ public:
 		this->map = map;
 		this->mapType = mapType;
 
+
 		isWater = new bool[dimensions * dimensions];
 
 		for (int i = 0; i < dimensions; i++) {

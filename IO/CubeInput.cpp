@@ -29,7 +29,7 @@ Cube CubeInput::initialiseCube(string path, string name) {
 
 		for (int j = 0; j < dimensions; j++) {
 
-			for (int k = dimensions - 1; k >= 0; k--) {
+			for (int k = 0; k < dimensions; k++) {
 
 				int tileNo = tileNumbers.at(j * dimensions + k);
 
@@ -59,6 +59,9 @@ Cube CubeInput::initialiseCube(string path, string name) {
 					break;
 				case 7:
 					tiles.push_back(Tile(TileType::SWAP)); // Swap
+					break;
+				case 8:
+					tiles.push_back(Tile(TileType::RESET)); // Reset
 				}
 
 				cout << tileNo;

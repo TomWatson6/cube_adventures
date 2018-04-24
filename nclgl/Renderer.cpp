@@ -110,35 +110,36 @@ Renderer::Renderer(Window & parent) : OGLRenderer(parent) {
 
 	root->SetTransform(Matrix4::Translation(cubePosition));
 
-	transformation = Matrix4::Translation(Vector3(halfSideLength, halfSideLength, halfSideLength));
-	transformation = transformation * Matrix4::Rotation(90.0f, Vector3(1, 0, 0));
-	transformation = transformation * Matrix4::Rotation(-90.0f, Vector3(0, 1, 0));
+	transformation = Matrix4::Translation(Vector3(-halfSideLength, halfSideLength, halfSideLength));
+	transformation = transformation * Matrix4::Rotation(-90.0f, Vector3(0, 0, 1));
+	transformation = transformation * Matrix4::Rotation(-90.0f, Vector3(1, 0, 0));
 
 	cubeSides[0].SetTransform(transformation);
 
-	transformation = Matrix4::Translation(Vector3(halfSideLength, halfSideLength, -halfSideLength));
+	transformation = Matrix4::Translation(Vector3(-halfSideLength, halfSideLength, -halfSideLength));
 	transformation = transformation * Matrix4::Rotation(-90.0f, Vector3(0, 1, 0));
+	transformation = transformation * Matrix4::Rotation(180.0f, Vector3(1, 0, 0));
 
 	cubeSides[1].SetTransform(transformation);
 
-	transformation = Matrix4::Translation(Vector3(halfSideLength, -halfSideLength, -halfSideLength));
+	transformation = Matrix4::Translation(Vector3(halfSideLength, halfSideLength, -halfSideLength));
 	transformation = transformation * Matrix4::Rotation(-90.0f, Vector3(0, 1, 0));
-	transformation = transformation * Matrix4::Rotation(-90.0f, Vector3(1, 0, 0));
+	transformation = transformation * Matrix4::Rotation(90.0f, Vector3(1, 0, 0));
 
 	cubeSides[2].SetTransform(transformation);
 
-	transformation = Matrix4::Translation(Vector3(-halfSideLength, -halfSideLength, -halfSideLength));
-	transformation = transformation * Matrix4::Rotation(-90.0f, Vector3(1, 0, 0));
+	transformation = Matrix4::Translation(Vector3(-halfSideLength, halfSideLength, -halfSideLength));
+	transformation = transformation * Matrix4::Rotation(90.0f, Vector3(1, 0, 0));
 
 	cubeSides[3].SetTransform(transformation);
 
-	transformation = Matrix4::Translation(Vector3(-halfSideLength, -halfSideLength, halfSideLength));
-	transformation = transformation * Matrix4::Rotation(180.0f, Vector3(1, 0, 0));
+	transformation = Matrix4::Translation(Vector3(-halfSideLength, -halfSideLength, -halfSideLength));
+	//transformation = transformation * Matrix4::Rotation(180.0f, Vector3(1, 0, 0));
 
 	cubeSides[4].SetTransform(transformation);
 
-	transformation = Matrix4::Translation(Vector3(-halfSideLength, halfSideLength, halfSideLength));
-	transformation = transformation * Matrix4::Rotation(180.0f, Vector3(0, 1, 0));
+	transformation = Matrix4::Translation(Vector3(-halfSideLength, halfSideLength, -halfSideLength));
+	//transformation = transformation * Matrix4::Rotation(180.0f, Vector3(0, 1, 0));
 	transformation = transformation * Matrix4::Rotation(-90.0f, Vector3(0, 0, 1));
 
 	cubeSides[5].SetTransform(transformation);
@@ -214,7 +215,7 @@ void Renderer::updatePlayer(float posx, float posy, float posz, float sideLength
 }
 
 void Renderer::UpdateScene(float msec) {
-	//camera->UpdateCamera(msec);
+	camera->UpdateCamera(msec);
 	viewMatrix = camera->BuildViewMatrix();
 
 	root->Update(msec);
