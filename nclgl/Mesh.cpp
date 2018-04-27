@@ -57,6 +57,14 @@ Mesh * Mesh::GenerateTriangle() {
 	return m;
 }
 
+void Mesh::setColour(Vector4 colour) {
+
+	for (int i = 0; i < numVertices; i++) {
+		colours[i] = colour;
+	}
+
+}
+
 Mesh* Mesh::LoadMeshFile(const string &filename) {
 	ifstream f(filename);
 

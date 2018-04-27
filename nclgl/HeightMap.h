@@ -6,8 +6,8 @@
 # include "mesh.h"
 # include "PerlinNoise.h"
 
-# define RAW_WIDTH 100
-# define RAW_HEIGHT 100
+# define RAW_WIDTH 90
+# define RAW_HEIGHT 90
 
 # define HEIGHTMAP_X 16.0f
 # define HEIGHTMAP_Z 16.0f

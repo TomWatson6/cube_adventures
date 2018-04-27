@@ -1,5 +1,6 @@
 #pragma once
 #include <math.h>
+#include "../Sound/Sound.h"
 
 enum class Direction { LEFT, RIGHT, UP, DOWN };
 
@@ -12,6 +13,8 @@ private:
 	float posy;
 	float posz;
 
+	bool triggerPulse = false;
+
 	int currentTile;
 
 	float sideLength;
@@ -21,6 +24,10 @@ private:
 	float pivotx;
 	float pivoty;
 	float pivotz;
+
+	//Sound sound = Sound();
+
+	int tileFrom;
 
 	bool isMoving = false;
 	Direction dirMoving = Direction::RIGHT;
@@ -37,6 +44,7 @@ public:
 		this->pivotz = posz;
 		this->sideLength = sideLength;
 		this->currentTile = currentTile;
+		this->tileFrom = currentTile;
 		this->radius = sqrt(0.5 * sideLength * sideLength);
 	}
 
@@ -54,16 +62,20 @@ public:
 	float getPosy() { return posy; }
 	float getPosz() { return posz; }
 
+	bool getTriggerPulse() { return triggerPulse; }
 	bool getIsMoving() { return isMoving; }
 	int getCurrentTile() { return currentTile; }
 	Direction getDirection() { return dirMoving; }
 	int getProgress() { return progress; }
+	int getTileFrom() { return tileFrom; }
+
+	void setTriggerPulse(bool triggerPulse) { this->triggerPulse = triggerPulse; }
 
 	//Appear somewhere, given a tile
 	//Fade out
 
 	void move(Direction dir, int dimensions);
 
-	void update();
+	void update(Sound sound);
 
 };

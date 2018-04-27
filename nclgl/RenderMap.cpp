@@ -78,6 +78,36 @@ void RenderMap::updateHeights() {
 
 }
 
+Vector4 RenderMap::colourInteractiveTile(int currentTile,
+	int offset, Vector3 innerColour, Vector3 outerColour) {
+
+	float tileWidth = (10 * HEIGHTMAP_X * (RAW_WIDTH - 1)) / dimensions;
+
+	float xPos = ((currentTile % dimensions) + 0.5) * tileWidth;
+	float yPos = ((currentTile / dimensions) + 0.5) * tileWidth;
+
+	float offsetX = (offset % RAW_WIDTH) * (10 * HEIGHTMAP_X);
+	float offsetY = (offset / RAW_WIDTH) * (10 * HEIGHTMAP_X);
+
+	float xDiff = abs(xPos - offsetX);
+	float yDiff = abs(yPos - offsetY);
+
+	float dist = sqrt(xDiff * xDiff + yDiff * yDiff);
+	float maxDist = sqrt(0.5 * tileWidth * 0.5 * tileWidth * 2.0);
+
+	Vector3 interpolationVector = outerColour - innerColour;
+
+	interpolationVector = interpolationVector * dist / maxDist;
+
+	interpolationVector += outerColour;
+
+	Vector4 toReturn = Vector4(interpolationVector.x, interpolationVector.y,
+		interpolationVector.z, 1);
+
+	return toReturn;
+
+}
+
 void RenderMap::setWalkableHeight(Vector2 &startXY, Vector2 &endXY, float level, int currentTile) {
 
 	float tileBaseHeight = level * LEVEL_DIFFERENCE;
@@ -95,36 +125,28 @@ void RenderMap::setWalkableHeight(Vector2 &startXY, Vector2 &endXY, float level,
 				10 * z * HEIGHTMAP_Z
 			);
 
-			if (map.getTile(currentTile).getType() == TileType::LAND) {
-				colours[offset] = Vector4(0.3, 0.3, 0.3, 255);
+			Vector3 vectorA = Vector3(colours[offset].x, colours[offset].y, colours[offset].z);
+			Vector3 vectorB = Vector3(baseColours[offset].x, baseColours[offset].y, baseColours[offset].z);
+
+			/*if (vectorA != vectorB) {
+				if (colours[offset].x > 0) {
+					colours[offset].x -= PULSE_UPDATE;
+				} else if (colours[offset].y > 0) {
+					colours[offset].y -= PULSE_UPDATE;
+				} else if (colours[offset].z > 0) {
+					colours[offset].z -= PULSE_UPDATE;
+				}
+			}*/
+
+			if (colours[offset].x > baseColours[offset].x) {
+				colours[offset].x -= PULSE_UPDATE;
 			}
-			else if(map.getTile(currentTile).getType() == TileType::INACTIVE) {
-				
-
-
+			if (colours[offset].y > baseColours[offset].y) {
+				colours[offset].y -= PULSE_UPDATE;
 			}
-			else if (map.getTile(currentTile).getType() == TileType::ACTIVE) {
-
-
-
+			if (colours[offset].z > baseColours[offset].z) {
+				colours[offset].z -= PULSE_UPDATE;
 			}
-			else if (map.getTile(currentTile).getType() == TileType::SWAP) {
-
-
-
-			}
-			else if (map.getTile(currentTile).getType() == TileType::CONFIRM) {
-			
-
-
-			}
-			else if (map.getTile(currentTile).getType() == TileType::RESET) {
-
-
-
-			}
-
-			//colours[offset] = Vector4(0.3, 0.3, 0.3, 255);
 
 		}
 	}
@@ -149,6 +171,146 @@ void RenderMap::setSwimmableHeight(Vector2 startXY, Vector2 endXY, float level, 
 			);
 
 			colours[offset] = Vector4(0, 0, 1, 1);
+			
+		}
+	}
+
+}
+
+void RenderMap::pulse(int tileIndex, float magnitude) {
+
+	Vector3 pulseColour = Vector3(magnitude, magnitude, magnitude);
+
+	int startX = (tileIndex % dimensions) * tileLength;
+	int endX = (tileIndex % dimensions) * tileLength + tileLength;
+
+	int startY = (tileIndex / dimensions) * tileLength;
+	int endY = (tileIndex / dimensions) * tileLength + tileLength;
+
+
+	for (int i = startX; i < endX; i++) {
+		for (int j = startY; j < endY; j++) {
+			int offset = j * RAW_WIDTH + i;
+			Vector3 currentColour = Vector3(colours[offset].x, colours[offset].y, colours[offset].z);
+			currentColour += pulseColour;
+			colours[offset] = Vector4(currentColour.x, currentColour.y, currentColour.z, 1);
+		}
+	}
+
+}
+
+void RenderMap::reduceBaseColours() {
+
+	Vector3 reductionColour = Vector3(COMPLETE_COLOUR, COMPLETE_COLOUR, COMPLETE_COLOUR);
+
+	for (int i = 0; i < dimensions * dimensions; i++) {
+
+		TileType type = map.getTile(i).getType();
+
+			if (type == TileType::INACTIVE || type == TileType::ACTIVE || type == TileType::SWAP) {
+
+				int startX = (i % dimensions) * RAW_WIDTH / dimensions;
+				int endX = (i % dimensions) * RAW_WIDTH / dimensions + RAW_WIDTH / dimensions;
+
+				int startY = (i / dimensions) * RAW_WIDTH / dimensions;
+				int endY = (i / dimensions) * RAW_WIDTH / dimensions + RAW_WIDTH / dimensions;
+
+
+				for (int j = startX; j < endX; j++) {
+					for (int k = startY; k < endY; k++) {
+						int offset = k * RAW_WIDTH + j;
+						Vector3 currentColour = Vector3(baseColours[offset].x, baseColours[offset].y, baseColours[offset].z);
+						currentColour -= reductionColour;
+						baseColours[offset] = Vector4(currentColour.x, currentColour.y, currentColour.z, 1);
+					}
+				}
+
+			}
+
+	}
+
+}
+
+void RenderMap::negateTile(int tileIndex) {
+
+	int startX = (tileIndex % dimensions) * RAW_WIDTH / dimensions;
+	int endX = (tileIndex % dimensions) * RAW_WIDTH / dimensions + RAW_WIDTH / dimensions;
+
+	int startY = (tileIndex / dimensions) * RAW_WIDTH / dimensions;
+	int endY = (tileIndex / dimensions) * RAW_WIDTH / dimensions + RAW_WIDTH / dimensions;
+
+	if (map.getTile(tileIndex).getType() == TileType::INACTIVE) {
+		map.setTile(tileIndex, Tile(TileType::ACTIVE));
+
+		for (int i = startX; i < endX; i++) {
+			for (int j = startY; j < endY; j++) {
+				
+				int offset = j * RAW_WIDTH + i;
+
+				baseColours[offset] = colourInteractiveTile(tileIndex, offset,
+					Vector3(0, 180.0 / 255.0, 0),
+					Vector3(0, 120.0 / 255.0, 0));
+
+				colours[offset] = colourInteractiveTile(tileIndex, offset,
+					Vector3(0, 180.0 / 255.0, 0),
+					Vector3(0, 120.0 / 255.0, 0));
+
+			}
+		}
+
+	}
+	else {
+		map.setTile(tileIndex, Tile(TileType::INACTIVE));
+
+		for (int i = startX; i < endX; i++) {
+			for (int j = startY; j < endY; j++) {
+
+				int offset = j * RAW_WIDTH + i;
+
+				baseColours[offset] = colourInteractiveTile(tileIndex, offset,
+					Vector3(180.0 / 255.0, 0, 0),
+					Vector3(120.0 / 255.0, 0, 0));
+
+				colours[offset] = colourInteractiveTile(tileIndex, offset,
+					Vector3(180.0 / 255.0, 0, 0),
+					Vector3(120.0 / 255.0, 0, 0));
+
+			}
+		}
+
+	}
+
+}
+
+void RenderMap::colourFinishTile() {
+
+	int tileIndex;
+
+	for (int i = 0; i < dimensions * dimensions; i++) {
+		if (map.getTile(i).getType() == TileType::FINISH) {
+			tileIndex = i;
+			break;
+		}
+	}
+
+	int startX = (tileIndex % dimensions) * RAW_WIDTH / dimensions;
+	int endX = (tileIndex % dimensions) * RAW_WIDTH / dimensions + RAW_WIDTH / dimensions;
+
+	int startY = (tileIndex / dimensions) * RAW_WIDTH / dimensions;
+	int endY = (tileIndex / dimensions) * RAW_WIDTH / dimensions + RAW_WIDTH / dimensions;
+
+	for (int x = startX; x < endX; x++) {
+		for (int y = startY; y < endY; y++) {
+
+			int offset = x + RAW_WIDTH * y;
+
+			colours[offset] = colourInteractiveTile(tileIndex, offset,
+				Vector3(0, 227.0 / 255.0, 252.0 / 255.0),
+				Vector3(0, 156.0 / 255.0, 173.0 / 255.0));
+
+			baseColours[offset] = colourInteractiveTile(tileIndex, offset,
+				Vector3(0, 227.0 / 255.0, 252.0 / 255.0),
+				Vector3(0, 156.0 / 255.0, 173.0 / 255.0));
 
 		}
 	}

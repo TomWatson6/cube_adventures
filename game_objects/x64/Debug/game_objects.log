@@ -1,2 +1,2 @@
 ﻿  Player.cpp
-h:\visual studio 2017\projects\cube_adventures\game_objects\player.cpp(26): error C2059: syntax error: '}'
+LINK : fatal error LNK1561: entry point must be defined

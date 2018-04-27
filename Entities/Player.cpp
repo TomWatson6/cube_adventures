@@ -37,7 +37,7 @@ void Player::move(Direction dir, int dimensions) {
 
 }
 
-void Player::update() {
+void Player::update(Sound sound) {
 
 	if (isMoving && progress < 90) {
 
@@ -76,9 +76,15 @@ void Player::update() {
 		}
 
 	}
-	else {
-		isMoving = false;
+	else if (progress >= 90 && isMoving) {
+		triggerPulse = true; //Create this bool in player -- to tell main loop to pulse
 		progress = 0;
+		isMoving = false;
+		tileFrom = currentTile;
+		sound.playPlayerMoveSound();
+	}
+	else {
+		triggerPulse = false;
 	}
 
 }

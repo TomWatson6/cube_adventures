@@ -1,0 +1,9 @@
+﻿  Player.cpp
+c:\users\tomwa\source\repos\cube_adventures\entities\player.h(48): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\tomwa\source\repos\cube_adventures\entities\player.h(69): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+c:\users\tomwa\source\repos\cube_adventures\entities\player.cpp(15): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\tomwa\source\repos\cube_adventures\entities\player.cpp(20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\tomwa\source\repos\cube_adventures\entities\player.cpp(25): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\tomwa\source\repos\cube_adventures\entities\player.cpp(30): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\tomwa\source\repos\cube_adventures\entities\player.cpp(46): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+LINK : fatal error LNK1561: entry point must be defined

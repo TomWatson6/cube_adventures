@@ -19,6 +19,7 @@ public:
 	void SetTexture(GLuint tex) { texture = tex; }
 	GLuint GetTexture() { return texture; }
 	static Mesh * GenerateQuad();
+	void setColour(Vector4 colour);
 
 	GLuint cobblestoneTexture;
 

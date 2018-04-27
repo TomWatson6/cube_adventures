@@ -62,6 +62,9 @@ Cube CubeInput::initialiseCube(string path, string name) {
 					break;
 				case 8:
 					tiles.push_back(Tile(TileType::RESET)); // Reset
+					break;
+				case 9:
+					tiles.push_back(Tile(TileType::ILLEGAL)); // Illegal
 				}
 
 				cout << tileNo;

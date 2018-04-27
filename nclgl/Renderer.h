@@ -17,6 +17,9 @@ public:
 	virtual void UpdateScene(float msec);
 
 	float getGroundLevel() { return groundLevel.z; }
+	Map getMap(int index) { return cubeSides[index].GetRenderMap()->getMap(); }
+	RenderMap* getRenderMap(int index) { return cubeSides[index].GetRenderMap(); }
+	SceneNode* getPlayer() { return player; }
 
 	void updatePlayer(float posx, float posy, float posz, float sideLength, float progress, Direction dir);
 

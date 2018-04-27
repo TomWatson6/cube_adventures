@@ -215,7 +215,7 @@ void Renderer::updatePlayer(float posx, float posy, float posz, float sideLength
 }
 
 void Renderer::UpdateScene(float msec) {
-	camera->UpdateCamera(msec);
+	//camera->UpdateCamera(msec);
 	viewMatrix = camera->BuildViewMatrix();
 
 	root->Update(msec);

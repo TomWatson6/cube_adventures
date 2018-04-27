@@ -1,7 +1,7 @@
 #pragma once
 
 //enum class TileType { COBBLESTONE, LAVA, WATER, TERRAIN_GRASS, TERRAIN_SNOW };
-enum class TileType { LAND, WATER, START, FINISH, INACTIVE, ACTIVE, CONFIRM, SWAP, RESET };
+enum TileType { LAND, WATER, START, FINISH, INACTIVE, ACTIVE, CONFIRM, SWAP, RESET, ILLEGAL };
 
 //struct Properties {
 //	bool WALKABLE; // Can the tile be walked on
@@ -29,7 +29,14 @@ public:
 	TileType getType() { return type; }
 	//Properties getProperties() { return properties; }
 
-	void setType(TileType type) { this->type = type; }
+	void setType(TileType type) { 
+		if (type == TileType::INACTIVE) {
+			this->type = static_cast<TileType>(this->type + 1);
+		}
+		else if (type == TileType::ACTIVE) {
+			this->type = static_cast<TileType>(this->type - 1);
+		}
+	}
 	/*void setProperties(bool walkable, bool swimmable, float damageOutput, float movementDampen) {
 		Properties props = Properties();
 

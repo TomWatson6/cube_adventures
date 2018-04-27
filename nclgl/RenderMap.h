@@ -5,6 +5,9 @@
 
 enum class MapType { WALKABLE, WATER, LAVA };
 
+static const float PULSE_UPDATE = 2.0 / 255.0;
+static const float COMPLETE_COLOUR = 50.0 / 255.0;
+
 class RenderMap : public HeightMap {
 
 private:
@@ -14,6 +17,8 @@ private:
 
 	bool increase = false;
 	float extra = 0;
+
+	Vector4 * baseColours;
 
 	int index;
 	int dimensions;
@@ -55,12 +60,52 @@ public:
 			}
 		}
 
+		baseColours = new Vector4[RAW_WIDTH * RAW_HEIGHT];
+
 		for (int x = 0; x < RAW_WIDTH; x++) {
 			for (int z = 0; z < RAW_HEIGHT; z++) {
+
+				int offset = x * RAW_WIDTH + z;
 
 				//Calculate which tile is currently being iterated through
 				int tileX = (int)(x / tileLength);
 				int tileZ = (int)(z / tileLength);
+
+				int currentTile = tileX * dimensions + tileZ;
+
+				if (map.getTile(currentTile).getType() == TileType::INACTIVE) {
+					colours[offset] = colourInteractiveTile(currentTile, offset,
+						Vector3(180.0 / 255.0, 0, 0),
+						Vector3(120.0 / 255.0, 0, 0));
+				}
+				else if (map.getTile(currentTile).getType() == TileType::ACTIVE) {
+					colours[offset] = colourInteractiveTile(currentTile, offset,
+						Vector3(0, 180.0 / 255.0, 0),
+						Vector3(0, 120.0 / 255.0, 0));
+				}
+				else if (map.getTile(currentTile).getType() == TileType::SWAP) {
+					colours[offset] = colourInteractiveTile(currentTile, offset,
+						Vector3(0, 0, 180.0 / 255.0),
+						Vector3(0, 0, 120.0 / 255.0));
+				}
+				else if (map.getTile(currentTile).getType() == TileType::RESET) {
+					colours[offset] = colourInteractiveTile(currentTile, offset,
+						Vector3(152.0 / 255.0, 0, 1),
+						Vector3(96.0 / 255.0, 0, 160.0 / 255.0));
+				}
+				else if (map.getTile(currentTile).getType() == TileType::CONFIRM) {
+					colours[offset] = colourInteractiveTile(currentTile, offset,
+						Vector3(1, 153.0 / 255.0, 0),
+						Vector3(204.0 / 255.0, 122.0 / 255.0, 0));
+				}
+				else if (map.getTile(currentTile).getType() == TileType::ILLEGAL) {
+					colours[offset] = Vector4(0.1, 0.1, 0.1, 1);
+				}
+				else {
+					colours[offset] = Vector4(0.3, 0.3, 0.3, 1);
+				}
+
+				baseColours[offset] = colours[offset];
 
 				//Only apply perlin noise if the surcace is swimmable
 				if (isWater[tileX * dimensions + tileZ]) {
@@ -86,12 +131,16 @@ public:
 	int getIndex() { return index; }
 	int getDimensions() { return dimensions; }
 	float getTileLength() { return tileLength; }
-	Map getMap(int index) { return map; }
+	Map getMap() { return map; }
 	vector<Tile> getTiles() { return map.getTiles(); }
 	Tile getTile(int index) { return map.getTile(index); }
+	Vector4 colourInteractiveTile(int currentTile, int offset, Vector3 innerColour, Vector3 outerColour);
+	void setColour(int offset, Vector4 colour) { colours[offset] = colour; }
 
 	void setIndex(int index) { this->index = index; }
 	void setDimensions(int dimensions) { this->dimensions = dimensions; this->tileLength = (float)RAW_WIDTH / dimensions; }
+
+	void reduceBaseColours();
 
 	void updateHeights();
 
@@ -112,5 +161,10 @@ public:
 		float offsetSpeedTexture,
 		int currentTile); //This will determine how quickly the texture will move
 
+	void pulse(int tileIndex, float magnitude);
+
+	void negateTile(int tileIndex);
+
+	void colourFinishTile();
 
 };
