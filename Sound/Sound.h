@@ -19,7 +19,12 @@ public:
 
 	FMOD_RESULT result;
 	FMOD::System *system;
-	FMOD::Sound *sound;
 	FMOD::Channel *channel = NULL;
+
+protected:
+	FMOD::Sound *confirmSound;
+	FMOD::Sound *swapSound;
+	FMOD::Sound *interactiveTileSound;
+	FMOD::Sound *playerMoveSound;
 
 };
