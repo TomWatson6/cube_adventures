@@ -20,12 +20,16 @@ public:
 	Map getMap(int index) { return cubeSides[index].GetRenderMap()->getMap(); }
 	RenderMap* getRenderMap(int index) { return cubeSides[index].GetRenderMap(); }
 	SceneNode* getPlayer() { return player; }
+	SceneNode* getRoot() { return root; }
+	void setRootRotation(int currentMap);
 
 	void updatePlayer(float posx, float posy, float posz, float sideLength, float progress, Direction dir);
 
 protected:
 
 	float halfSideLength = (10 * (RAW_WIDTH - 1) * HEIGHTMAP_X) / 2.0;
+
+	Matrix4 mapRotations[Cube::CUBE_SIDES];
 
 	Vector3 cubePosition = Vector3(0, 0, -3.5 * halfSideLength);
 	Vector3 groundLevel = Vector3(0, 0, -2.5 * halfSideLength);

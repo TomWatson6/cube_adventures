@@ -4,6 +4,7 @@
 #include "../Entities/Player.h"
 #include "../Physics/Physics.h"
 #include "../Sound/Sound.h"
+#include "../nclgl/SceneNode.h"
 
 #pragma comment(lib, "nclgl.lib")
 #pragma comment(lib, "IO.lib")
@@ -13,6 +14,9 @@
 #pragma comment(lib, "Sound.lib")
 
 static const float PULSE_MAGNITUDE = 120.0 / 255.0;
+static const float ALPHA_STEP = 0.5;
+static const float PROGRESS_MAX = 90;
+static const float PROGRESS_MULT = 60;
 
 Player initialisePlayer(Map m, float groundLevel, float sideLength, int startTile) {
 
@@ -52,6 +56,9 @@ int main() {
 	bool fadingIn = false;
 
 	float progress = 0;
+
+	bool mapTransition = false;
+	bool cubeTransition = false;
 
 	int currentCube = 0;
 	int currentMap = 0;
@@ -179,7 +186,7 @@ int main() {
 				}
 				
 			}
-			else if (type == TileType::SWAP || type == TileType::RESET || type == TileType::CONFIRM) {
+			else if (type == TileType::SWAP || type == TileType::RESET || type == TileType::CONFIRM || type == TileType::FINISH) {
 
 				if (type == TileType::SWAP) {
 					sound.playSwapSound();
@@ -236,87 +243,104 @@ int main() {
 
 					}
 
+				}			
+
+			}
+
+		}
+
+		if (renderer.getMap(currentMap).getTile(player.getCurrentTile()).getType() == TileType::FINISH && complete) {
+
+			complete = false;
+			mapTransition = true;
+			fadingOut = true;
+			//isMoving = true;
+
+		}
+
+		if (fadingOut) {
+			renderer.getPlayer()->GetMesh()->updateAlpha(-ALPHA_STEP * currentTime / 1000.0);
+			cout << renderer.getPlayer()->GetMesh()->getAlpha() << endl;
+		}
+		if (renderer.getPlayer()->GetMesh()->getAlpha() <= 0 && fadingOut) {
+			renderer.getPlayer()->GetMesh()->setAlpha(0);
+			fadingOut = false;
+			player = initialisePlayer(cubes.at(currentCube).getMap(currentMap), renderer.getGroundLevel(), sideLength, cubes.at(currentCube).getMap(currentMap).getStartTile());
+			renderer.updatePlayer(player.getPosx(), player.getPosy(), player.getPosz(), sideLength, player.getProgress(), player.getDirection());
+
+			if (mapTransition) {
+				if (currentMap == Cube::CUBE_SIDES - 1) {
+					cubeTransition = true;
+					mapTransition = false;
+					currentMap = 0;
+					currentCube++;
 				}
-
-				if (fadingOut) {
-					renderer.getPlayer()->GetMesh()->updateAlpha(-ALPHA_STEP * currentTime / 1000.0);
-				}
-				if (renderer.getPlayer()->GetMesh()->getAlpha() <= 0 && fadingOut) {
-					renderer.getPlayer()->GetMesh()->setAlpha(0);
-					fadingOut = false;
-					if (mapTransition) {
-						if (currentMap == Cube::CUBE_SIDES - 1) {
-							cubeTransition = true;
-							mapTransition = false;
-							currentMap = 0;
-							currentCube++;
-						}
-						else {
-							currentMap++;
-						}
-
-					}
-					else {
-						fadingIn = true;
-					}
-				}
-
-				//Todo -- Set Cube transform to needed one before the rotation is carried out (currentMap - 1) if mapTransition
-				// (currentMap) if cubeTransition
-
-				if (mapTransition || cubeTransition) {
-
-					if (cubeTransition) {
-						//work out some algorithm to make the cube transition look cool
-						if (progress == PROGRESS_MAX) {
-							cubeTransition = false;
-
-							player = initialisePlayer(cubes.at(currentCube).getMap(currentMap), renderer.getGroundLevel(), sideLength, cubes.at(currentCube).getMap(currentMap).getStartTile());
-							renderer.updatePlayer(player.getPosx(), player.getPosy(), player.getPosz(), sideLength, player.getProgress(), player.getDirection());
-							// ??? fadingIn = true;
-						}
-					}
-					else if (mapTransition) {
-						switch (currentMap) {
-						case 0:
-							renderer.getRoot().setTransform(renderer.getRoot().getWorldTransform() *
-								Matrix4::Rotation(progress, Vector3(1, 0, 0)));
-							break;
-						case 1:
-							renderer.getRoot().setTransform(renderer.getRoot().getWorldTransform() *
-								Matrix4::Rotation(progress, Vector3(0, 0, 1)));
-							break;
-						case 2:
-							renderer.getRoot().setTransform(renderer.getRoot().getWorldTransform() *
-								Matrix4::Rotation(-progress, Vector3(0, 1, 0)));
-							break;
-						case 3:
-							renderer.getRoot().setTransform(renderer.getRoot().getWorldTransform() *
-								Matrix4::Rotation(progress, Vector3(1, 0, 0)));
-							break;
-						case 4:
-							renderer.getRoot().setTransform(renderer.getRoot().getWorldTransform() *
-								Matrix4::Rotation(progress, Vector3(0, 0, 1)));
-						}
-						progress++;
-						if (progress >= PROGRESS_MAX) {
-							progress = 0;
-							mapTransition = false;
-
-							//renderer.getRoot().setTransform() -- Set to correct rotation for current map
-						}
-					}
-
-				}
-				if (fadingIn) {
-					renderer.getPlayer()->GetMesh()->updateAlpha(ALPHA_STEP * currentTime / 1000.0);
-				}
-				if (renderer.getPlayer()->GetMesh()->getAlpha() >= 1) {
-					renderer.getPlayer()->GetMesh()->setAlpha(1);
-					fadingIn = false;
+				else {
+					currentMap++;
 				}
 
 			}
+			else {
+				fadingIn = true;
+			}
+		}
+
+		//Todo -- Set Cube transform to needed one before the rotation is carried out (currentMap - 1) if mapTransition
+		// (currentMap) if cubeTransition
+
+		if (mapTransition || cubeTransition) {
+
+			if (cubeTransition) {
+				//work out some algorithm to make the cube transition look cool
+				if (progress == PROGRESS_MAX) {
+					cubeTransition = false;
+
+					player = initialisePlayer(cubes.at(currentCube).getMap(currentMap), renderer.getGroundLevel(), sideLength, cubes.at(currentCube).getMap(currentMap).getStartTile());
+					renderer.updatePlayer(player.getPosx(), player.getPosy(), player.getPosz(), sideLength, player.getProgress(), player.getDirection());
+					fadingIn = true;
+				}
+			}
+			else if (mapTransition) {
+				switch (currentMap) {
+				case 1:
+					renderer.getRoot()->SetTransform(renderer.getRoot()->GetWorldTransform() *
+						Matrix4::Rotation(progress, Vector3(1, 0, 0)));
+					break;
+				case 2:
+					renderer.getRoot()->SetTransform(renderer.getRoot()->GetWorldTransform() *
+						Matrix4::Rotation(progress, Vector3(0, 0, 1)));
+					break;
+				case 3:
+					renderer.getRoot()->SetTransform(renderer.getRoot()->GetWorldTransform() *
+						Matrix4::Rotation(-progress, Vector3(0, 1, 0)));
+					break;
+				case 4:
+					renderer.getRoot()->SetTransform(renderer.getRoot()->GetWorldTransform() *
+						Matrix4::Rotation(progress, Vector3(1, 0, 0)));
+					break;
+				case 5:
+					renderer.getRoot()->SetTransform(renderer.getRoot()->GetWorldTransform() *
+						Matrix4::Rotation(progress, Vector3(0, 0, 1)));
+				}
+				progress += PROGRESS_MULT * currentTime / 1000.0;
+				if (progress >= PROGRESS_MAX) {
+					progress = 0;
+					mapTransition = false;
+					fadingIn = true;
+					//renderer.getRoot().setTransform() -- Set to correct rotation for current map
+				}
+			}
+
+		}
+		else {
+			renderer.setRootRotation(currentMap);
+		}
+		if (fadingIn) {
+			renderer.getPlayer()->GetMesh()->updateAlpha(ALPHA_STEP * currentTime / 1000.0);
+		}
+		if (renderer.getPlayer()->GetMesh()->getAlpha() >= 1) {
+			renderer.getPlayer()->GetMesh()->setAlpha(1);
+			fadingIn = false;
 		}
 
 		//Update player in the renderer
@@ -335,7 +359,7 @@ int main() {
 		
 		currentTime = w.GetTimer()->GetTimedMS();
 
-		if (currentTime < secondsPassed * 1000.0f) {
+		/*if (currentTime < secondsPassed * 1000.0f) {
 			frameCount++;
 			cout << 1000.0f / currentTime << endl;
 		}
@@ -343,7 +367,7 @@ int main() {
 			cout << "Frames Per Second: " << frameCount << endl;
 			frameCount = 0;
 			secondsPassed++;
-		}
+		}*/
 
 	}
 

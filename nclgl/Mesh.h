@@ -20,6 +20,9 @@ public:
 	GLuint GetTexture() { return texture; }
 	static Mesh * GenerateQuad();
 	void setColour(Vector4 colour);
+	void updateAlpha(float alpha);
+	void setAlpha(float alpha);
+	float getAlpha();
 
 	GLuint cobblestoneTexture;
 

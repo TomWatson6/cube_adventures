@@ -33,6 +33,28 @@ Mesh ::~Mesh(void) {
 	
 }
 
+void Mesh::updateAlpha(float alpha) {
+
+	for (int i = 0; i < numVertices; i++) {
+		colours[i].w = colours[i].w + alpha;
+	}
+
+}
+
+void Mesh::setAlpha(float alpha) {
+
+	for (int i = 0; i < numVertices; i++) {
+		colours[i].w = alpha;
+	}
+
+}
+
+float Mesh::getAlpha() {
+
+	return colours[0].w;
+
+}
+
 Mesh * Mesh::GenerateTriangle() {
 	Mesh * m = new Mesh();
 	m -> numVertices = 3;

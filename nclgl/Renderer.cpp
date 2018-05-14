@@ -5,6 +5,16 @@ using namespace std;
 
 Renderer::Renderer(Window & parent) : OGLRenderer(parent) {
 
+	//Initialise map rotations
+	mapRotations[0] = Matrix4::Translation(cubePosition);
+	mapRotations[1] = mapRotations[0] * Matrix4::Rotation(90.0f, Vector3(1, 0, 0));
+	mapRotations[2] = mapRotations[1] * Matrix4::Rotation(90.0f, Vector3(0, 0, 1));
+	mapRotations[3] = mapRotations[2] * Matrix4::Rotation(-90.0f, Vector3(0, 1, 0));
+	mapRotations[4] = mapRotations[3] * Matrix4::Rotation(90.0f, Vector3(1, 0, 0));
+	mapRotations[5] = mapRotations[4] * Matrix4::Rotation(90.0f, Vector3(0, 0, 1));
+
+	
+
 	camera = new Camera();
 	counter = 0;
 
@@ -175,6 +185,8 @@ Renderer::Renderer(Window & parent) : OGLRenderer(parent) {
 	cout << endl;*/
 
 	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	//glEnable(GL_CULL_FACE);
 	//glCullFace(GL_BACK);
 
@@ -187,6 +199,12 @@ Renderer ::~Renderer(void) {
 	delete[] tileInfo;
 	delete[] cubeSides;
 	//delete root;
+
+}
+
+void Renderer::setRootRotation(int currentMap) {
+
+	root->SetTransform(mapRotations[currentMap]);
 
 }
 
