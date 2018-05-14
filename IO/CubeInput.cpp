@@ -18,11 +18,11 @@ Cube CubeInput::initialiseCube(string path, string name) {
 		vector<Tile> tiles;
 		//Map map = Map();
 
-		vector<int> tileNumbers;
+		vector<char> tileNumbers;
 
 		for (int j = 0; j < dimensions; j++) {
 			for (int k = 0; k < dimensions; k++) {
-				tileNumbers.push_back(atoi(cubeData.at(j).substr(k, 1).c_str()));
+				tileNumbers.push_back(*cubeData.at(i * dimensions + j).substr(k, 1).c_str());
 			}
 		}
 
@@ -31,40 +31,43 @@ Cube CubeInput::initialiseCube(string path, string name) {
 
 			for (int k = 0; k < dimensions; k++) {
 
-				int tileNo = tileNumbers.at(j * dimensions + k);
+				char tileNo = tileNumbers.at(j * dimensions + k);
 
 				cout << tileNo;
 
 				switch (tileNo) {
-				case 0:
+				case '0':
 					tiles.push_back(Tile(TileType::LAND)); // Land
 					break;
-				case 1:
+				case '1':
 					tiles.push_back(Tile(TileType::WATER)); // Water
 					break;
-				case 2:
+				case '2':
 					tiles.push_back(Tile(TileType::START)); // Start
 					break;
-				case 3:
+				case '3':
 					tiles.push_back(Tile(TileType::FINISH)); // Finish
 					break;
-				case 4:
+				case '4':
 					tiles.push_back(Tile(TileType::INACTIVE)); // Inactive
 					break;
-				case 5:
+				case '5':
 					tiles.push_back(Tile(TileType::ACTIVE)); // Active
 					break;
-				case 6:
+				case '6':
 					tiles.push_back(Tile(TileType::CONFIRM)); // Confirm
 					break;
-				case 7:
+				case '7':
 					tiles.push_back(Tile(TileType::SWAP)); // Swap
 					break;
-				case 8:
+				case '8':
 					tiles.push_back(Tile(TileType::RESET)); // Reset
 					break;
-				case 9:
+				case '9':
 					tiles.push_back(Tile(TileType::ILLEGAL)); // Illegal
+					break;
+				case 'A':
+					tiles.push_back(Tile(TileType::TELEPORT)); // Teleport
 				}
 
 				cout << tileNo;

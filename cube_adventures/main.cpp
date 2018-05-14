@@ -48,6 +48,11 @@ int main() {
 
 	Physics physics = Physics();
 
+	bool fadingOut = false;
+	bool fadingIn = false;
+
+	float progress = 0;
+
 	int currentCube = 0;
 	int currentMap = 0;
 	bool complete = false;
@@ -159,12 +164,20 @@ int main() {
 				sound.playInteractiveTileSound();
 				if (type == TileType::INACTIVE) {
 					renderMap->negateTile(player.getCurrentTile());
+					renderer.getRenderMap(currentMap)->pulse(player.getCurrentTile(), PULSE_MAGNITUDE);
 				}
 				else if (type == TileType::ACTIVE) {
-					renderMap->negateTile(player.getCurrentTile());
+					//renderMap->negateTile(player.getCurrentTile());
+					//Reset all tiles
+					for (int i = 0; i < dimensions * dimensions; i++) {
+						if (renderMap->getTile(i).getType() == TileType::ACTIVE) {
+							renderMap->negateTile(i);
+							renderMap->pulse(i, PULSE_MAGNITUDE);
+						}
+					}
+					fadingOut = true;
 				}
-
-				renderer.getRenderMap(currentMap)->pulse(player.getCurrentTile(), PULSE_MAGNITUDE);
+				
 			}
 			else if (type == TileType::SWAP || type == TileType::RESET || type == TileType::CONFIRM) {
 
@@ -225,6 +238,84 @@ int main() {
 
 				}
 
+				if (fadingOut) {
+					renderer.getPlayer()->GetMesh()->updateAlpha(-ALPHA_STEP * currentTime / 1000.0);
+				}
+				if (renderer.getPlayer()->GetMesh()->getAlpha() <= 0 && fadingOut) {
+					renderer.getPlayer()->GetMesh()->setAlpha(0);
+					fadingOut = false;
+					if (mapTransition) {
+						if (currentMap == Cube::CUBE_SIDES - 1) {
+							cubeTransition = true;
+							mapTransition = false;
+							currentMap = 0;
+							currentCube++;
+						}
+						else {
+							currentMap++;
+						}
+
+					}
+					else {
+						fadingIn = true;
+					}
+				}
+
+				//Todo -- Set Cube transform to needed one before the rotation is carried out (currentMap - 1) if mapTransition
+				// (currentMap) if cubeTransition
+
+				if (mapTransition || cubeTransition) {
+
+					if (cubeTransition) {
+						//work out some algorithm to make the cube transition look cool
+						if (progress == PROGRESS_MAX) {
+							cubeTransition = false;
+
+							player = initialisePlayer(cubes.at(currentCube).getMap(currentMap), renderer.getGroundLevel(), sideLength, cubes.at(currentCube).getMap(currentMap).getStartTile());
+							renderer.updatePlayer(player.getPosx(), player.getPosy(), player.getPosz(), sideLength, player.getProgress(), player.getDirection());
+							// ??? fadingIn = true;
+						}
+					}
+					else if (mapTransition) {
+						switch (currentMap) {
+						case 0:
+							renderer.getRoot().setTransform(renderer.getRoot().getWorldTransform() *
+								Matrix4::Rotation(progress, Vector3(1, 0, 0)));
+							break;
+						case 1:
+							renderer.getRoot().setTransform(renderer.getRoot().getWorldTransform() *
+								Matrix4::Rotation(progress, Vector3(0, 0, 1)));
+							break;
+						case 2:
+							renderer.getRoot().setTransform(renderer.getRoot().getWorldTransform() *
+								Matrix4::Rotation(-progress, Vector3(0, 1, 0)));
+							break;
+						case 3:
+							renderer.getRoot().setTransform(renderer.getRoot().getWorldTransform() *
+								Matrix4::Rotation(progress, Vector3(1, 0, 0)));
+							break;
+						case 4:
+							renderer.getRoot().setTransform(renderer.getRoot().getWorldTransform() *
+								Matrix4::Rotation(progress, Vector3(0, 0, 1)));
+						}
+						progress++;
+						if (progress >= PROGRESS_MAX) {
+							progress = 0;
+							mapTransition = false;
+
+							//renderer.getRoot().setTransform() -- Set to correct rotation for current map
+						}
+					}
+
+				}
+				if (fadingIn) {
+					renderer.getPlayer()->GetMesh()->updateAlpha(ALPHA_STEP * currentTime / 1000.0);
+				}
+				if (renderer.getPlayer()->GetMesh()->getAlpha() >= 1) {
+					renderer.getPlayer()->GetMesh()->setAlpha(1);
+					fadingIn = false;
+				}
+
 			}
 		}
 
@@ -239,10 +330,9 @@ int main() {
 
 		//Note -- positive y is up and tile array goes across and down, change logic accordingly (validMove() is one to change)
 
-
-		renderer.UpdateScene(w.GetTimer()->GetTimedMS());
+		renderer.UpdateScene(currentTime);
 		renderer.RenderScene();
-
+		
 		currentTime = w.GetTimer()->GetTimedMS();
 
 		if (currentTime < secondsPassed * 1000.0f) {

@@ -15,7 +15,8 @@ bool Physics::validMove(Player p, Map m, Direction dir) {
 			//Make sure an index out of bounds error isn't thrown
 			if (p.getCurrentTile() - 1 >= 0) {
 				//If the tile to the left of it is walkable
-				if (m.getTile(p.getCurrentTile() - 1).getType() != TileType::WATER) {
+				if (m.getTile(p.getCurrentTile() - 1).getType() != TileType::WATER &&
+					m.getTile(p.getCurrentTile() - 1).getType() != TileType::ILLEGAL) {
 					return true;
 				}
 			}
@@ -27,7 +28,8 @@ bool Physics::validMove(Player p, Map m, Direction dir) {
 			//Make sure an index out of bounds error isn't thrown
 			if (p.getCurrentTile() + 1 < m.getDimensions() * m.getDimensions()) {
 				//If the tile to the right of it is walkable
-				if (m.getTile(p.getCurrentTile() + 1).getType() != TileType::WATER) {
+				if (m.getTile(p.getCurrentTile() + 1).getType() != TileType::WATER &&
+					m.getTile(p.getCurrentTile() + 1).getType() != TileType::ILLEGAL) {
 					return true;
 				}
 			}
@@ -37,7 +39,8 @@ bool Physics::validMove(Player p, Map m, Direction dir) {
 		//If not at the top of the map
 		if (p.getCurrentTile() >= m.getDimensions()) {
 			//If the tile above the player is walkable
-			if (m.getTile(p.getCurrentTile() - m.getDimensions()).getType() != TileType::WATER) {
+			if (m.getTile(p.getCurrentTile() - m.getDimensions()).getType() != TileType::WATER &&
+				m.getTile(p.getCurrentTile() - m.getDimensions()).getType() != TileType::ILLEGAL) {
 				return true;
 			}
 		}
@@ -46,7 +49,8 @@ bool Physics::validMove(Player p, Map m, Direction dir) {
 		//If not at the bottom of the map
 		if (p.getCurrentTile() < m.getDimensions() * m.getDimensions() - m.getDimensions()) {
 			//If the tile below the player is walkable
-			if (m.getTile(p.getCurrentTile() + m.getDimensions()).getType() != TileType::WATER) {
+			if (m.getTile(p.getCurrentTile() + m.getDimensions()).getType() != TileType::WATER &&
+				m.getTile(p.getCurrentTile() + m.getDimensions()).getType() != TileType::ILLEGAL) {
 				return true;
 			}
 		}
