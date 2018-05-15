@@ -125,19 +125,6 @@ void RenderMap::setWalkableHeight(Vector2 &startXY, Vector2 &endXY, float level,
 				10 * z * HEIGHTMAP_Z
 			);
 
-			Vector3 vectorA = Vector3(colours[offset].x, colours[offset].y, colours[offset].z);
-			Vector3 vectorB = Vector3(baseColours[offset].x, baseColours[offset].y, baseColours[offset].z);
-
-			/*if (vectorA != vectorB) {
-				if (colours[offset].x > 0) {
-					colours[offset].x -= PULSE_UPDATE;
-				} else if (colours[offset].y > 0) {
-					colours[offset].y -= PULSE_UPDATE;
-				} else if (colours[offset].z > 0) {
-					colours[offset].z -= PULSE_UPDATE;
-				}
-			}*/
-
 			if (colours[offset].x > baseColours[offset].x) {
 				colours[offset].x -= PULSE_UPDATE;
 			}
@@ -169,8 +156,6 @@ void RenderMap::setSwimmableHeight(Vector2 startXY, Vector2 endXY, float level, 
 				heights[x * RAW_WIDTH + z] + tileBaseHeight,
 				10 * z * HEIGHTMAP_Z
 			);
-
-			colours[offset] = Vector4(0, 0, 1, 1);
 			
 		}
 	}
@@ -186,7 +171,6 @@ void RenderMap::pulse(int tileIndex, float magnitude) {
 
 	int startY = (tileIndex / dimensions) * tileLength;
 	int endY = (tileIndex / dimensions) * tileLength + tileLength;
-
 
 	for (int i = startX; i < endX; i++) {
 		for (int j = startY; j < endY; j++) {

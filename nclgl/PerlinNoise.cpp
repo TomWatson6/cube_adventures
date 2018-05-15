@@ -22,20 +22,6 @@ PerlinNoise::PerlinNoise() {
 
 }
 
-//void PerlinNoise::initialiseGradient() {
-//
-//	for (int i = 0; i < numVertices; i++) {
-//		Vector2 v = Vector2(rand(), rand());
-//
-//		float magnitude = pow((pow(v.x, 2) + pow(v.y, 2)), 0.5);
-//		v.x = v.x / magnitude;
-//		v.y = v.y / magnitude;
-//
-//		Gradient[i] = v;
-//	}
-//
-//}
-
 //Function to lineraly interpolate between a0 and a1
 //Weight w should be in the range [0.0, 1.0]
 float PerlinNoise::lerp(float a, float b, float t) {
@@ -44,8 +30,6 @@ float PerlinNoise::lerp(float a, float b, float t) {
 
 //Computers the dot product of the distance and gradient vectors
 float PerlinNoise::dotGridGradient(int ix, int iy, float x, float y) {
-
-	//Precomputed (or otherwise) gradient vectors at each grid node
 
 	//Compute the distance vector
 	float dx = x - (float)ix;
@@ -85,9 +69,6 @@ float PerlinNoise::noise(float x, float y) {
 	float sxRemapSmoothStep = sx * sx * (3 - 2 * sx);
 	float syRemapSmoothStep = sy * sy * (3 - 2 * sy);
 
-	/*int xMin = x0 % MAX_VERTICES_MASK;
-	int xMax = (xMin + 1) % MAX_VERTICES_MASK;*/
-
 	float n0, n1, ix0, ix1, value;
 
 	n0 = dotGridGradient(x0, y0, x, y);
@@ -100,34 +81,5 @@ float PerlinNoise::noise(float x, float y) {
 	value = lerp(ix0, ix1, syRemapSmoothStep);
 
 	return value;
-
-	//float y = lerp(r[xMin], r[xMax], sxRemapSmoothStep);
-
-	//return y;
-
-	////Determine grid cell coordinates
-	//int x0 = (int)x;
-	//int x1 = x0 + 1;
-	//int y0 = (int)y;
-	//int y1 = y0 + 1;
-
-	////Determine interpolation weights
-	////Could also use higher order polynomial/s-curve here
-	//float sx = x - (float)x0;
-	//float sy = y - (float)y0;
-
-	////Interpolate between grid point gradients
-	//float n0, n1, ix0, ix1, value;
-
-	//n0 = dotGridGradient(x0, y0, x, y);
-	//n1 = dotGridGradient(x1, y0, x, y);
-	//ix0 = lerp(n0, n1, sx);
-	//n0 = dotGridGradient(x0, y1, x, y);
-	//n1 = dotGridGradient(x1, y1, x, y);
-	//ix1 = lerp(n0, n1, sx);
-
-	//value = lerp(ix0, ix1, sy);
-
-	//return value;
 
 }

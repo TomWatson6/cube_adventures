@@ -16,7 +16,6 @@ Cube CubeInput::initialiseCube(string path, string name) {
 	for (int i = 0; i < Cube::CUBE_SIDES; i++) {
 
 		vector<Tile> tiles;
-		//Map map = Map();
 
 		vector<char> tileNumbers;
 
@@ -32,8 +31,6 @@ Cube CubeInput::initialiseCube(string path, string name) {
 			for (int k = 0; k < dimensions; k++) {
 
 				char tileNo = tileNumbers.at(j * dimensions + k);
-
-				cout << tileNo;
 
 				switch (tileNo) {
 				case '0':
@@ -70,19 +67,9 @@ Cube CubeInput::initialiseCube(string path, string name) {
 					tiles.push_back(Tile(TileType::TELEPORT)); // Teleport
 				}
 
-				cout << tileNo;
-
 			}
 
-			cout << endl;
-
 		}
-
-		cout << endl;
-
-		/*map.setIndex(i);
-		map.setDimensions(dimensions);
-		map.setTiles(tiles);*/
 
 		Map map = Map(i, dimensions, tiles);
 		maps.push_back(map);

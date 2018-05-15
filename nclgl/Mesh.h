@@ -24,8 +24,6 @@ public:
 	void setAlpha(float alpha);
 	float getAlpha();
 
-	GLuint cobblestoneTexture;
-
 		
 protected:
 	void BufferData();

@@ -20,29 +20,11 @@ static const float PROGRESS_MULT = 60;
 
 Player initialisePlayer(Map m, float groundLevel, float sideLength, int startTile) {
 
-	//Calculate appropriate position of the starting tile
-
-	//Initialise Player
-	//Player player = Player(
-	//xPos of starting tile + half tileLength - half map side length
-	//yPos of starting tile + half tileLength - half map side length
-	//ground level + half tileLength
-	//tileLength
-	//cubes.at(currentCube).getMap(currentMap).getStartingTile() -- going to have to adapt IO for this to happen - make manual for testing
-	//);
-
 	float cubeLength = (RAW_WIDTH - 1) * HEIGHTMAP_X * 10;
 
 	float xPos = ((startTile % m.getDimensions()) * sideLength) - (0.5 * cubeLength) + (0.5 * sideLength);
 	float yPos = 0.5 * cubeLength - 0.5 * sideLength - (startTile / m.getDimensions()) * sideLength;
-	//float xPos = (m.getStartTile() % m.getDimensions()) * sideLength + 0.5 * sideLength - (5 * RAW_WIDTH * HEIGHTMAP_X - 5 * HEIGHTMAP_X);
-	//float yPos = (5 * RAW_HEIGHT * HEIGHTMAP_Z - 5 * HEIGHTMAP_Z) - ((m.getStartTile() / m.getDimensions()) * sideLength - 0.5 * sideLength);
-	float zPos = 0.5 * cubeLength;
-
-	cout << xPos << endl;
-	cout << m.getStartTile() << endl;
-	cout << m.getDimensions() << endl;
-	cout << sideLength << endl;
+	float zPos = 0.5 * cubeLength + 0.5 * sideLength;
 
 	return Player(xPos, yPos, zPos, sideLength, startTile);
 
@@ -55,6 +37,8 @@ int main() {
 	bool fadingOut = false;
 	bool fadingIn = false;
 	bool isTeleporting = false;
+
+	bool newCubeJustLoaded = false;
 
 	float progress = 0;
 
@@ -71,41 +55,13 @@ int main() {
 		return -1;
 	}
 
-	int frameCount = 0;
-	int secondsPassed = 1;
 	float currentTime = w.GetTimer()->GetTimedMS();
 
 	CubeInput cubeInput = CubeInput();
 
-	vector<Cube> cubes = cubeInput.getCubes();
+	vector<Cube> cubes = cubeInput.getCubes();	
 
-	/*for (Cube cube : cubes) {
-		for (Map map : cube.getMaps()) {
-			for (int i = 0; i < map.getDimensions(); i++) {
-				for (int j = 0; j < map.getDimensions(); j++) {
-					if (map.getTile(i + j * map.getDimensions()).getType() == TileType::LAND) {
-						cout << "0 ";
-					}
-					else if (map.getTile(i + j * map.getDimensions()).getType() == TileType::WATER) {
-						cout << "1 ";
-					}
-					else if (map.getTile(i + j * map.getDimensions()).getType() == TileType::INTERACTIVE) {
-						cout << "2 ";
-					}
-					else if (map.getTile(i + j * map.getDimensions()).getType() == TileType::START) {
-						cout << "3 ";
-					}
-					else {
-						cout << "4 ";
-					}
-				}
-			}
-		}
-	}*/
-
-	
-
-	Renderer renderer(w);
+	Renderer renderer(w, currentCube);
 	if (!renderer.HasInitialised()) {
 		return -1;
 	}
@@ -123,16 +79,6 @@ int main() {
 	Sound sound = Sound();
 
 	while (w.UpdateWindow() && !Window::GetKeyboard()->KeyDown(KEYBOARD_ESCAPE)) {
-
-		//Game Stuff goes here
-
-		//ORDERING MAY NEED TO BE CHANGED
-
-		//Is player at the end square? - if so update level
-		//Has player touched interactive tile? - if so update colour of tile
-
-		//Is player/cube map moving? - if not check for input
-		//KeyboardInput::CheckForInput();
 
 		if (!player.getIsMoving() && player.getActive()) {
 			if (Window::GetKeyboard()->KeyDown(KEYBOARD_W)) {
@@ -158,11 +104,7 @@ int main() {
 		}
 
 		player.update(sound, currentTime);
-		renderer.updatePlayer(player.getPosx(), player.getPosy(), player.getPosz(), sideLength, player.getProgress(), player.getDirection());
-
-		//cout << !renderer.getMap(currentMap).isComplete() << endl;
-
-		
+		renderer.updatePlayer(player.getPosx(), player.getPosy(), player.getPosz(), sideLength, player.getProgress(), player.getDirection());		
 
 		if (player.getTriggerPulse() && !complete) {
 			player.setTriggerPulse(false);
@@ -175,7 +117,6 @@ int main() {
 					renderer.getRenderMap(currentMap)->pulse(player.getCurrentTile(), PULSE_MAGNITUDE);
 				}
 				else if (type == TileType::ACTIVE) {
-					//renderMap->negateTile(player.getCurrentTile());
 					//Reset all tiles
 					for (int i = 0; i < dimensions * dimensions; i++) {
 						if (renderMap->getTile(i).getType() == TileType::ACTIVE) {
@@ -260,7 +201,7 @@ int main() {
 
 		if (renderer.getMap(currentMap).getTile(player.getCurrentTile()).getType() == TileType::FINISH && complete) {
 
-			complete = false;
+			complete = currentMap == Cube::CUBE_SIDES - 1;
 			mapTransition = true;
 			fadingOut = true;
 			player.setIsActive(false);
@@ -269,14 +210,14 @@ int main() {
 
 		if (fadingOut) {
 
-			if (currentMap == Cube::CUBE_SIDES - 1 && !isTeleporting) {
+			if (currentMap == Cube::CUBE_SIDES - 1 && !isTeleporting && complete) {
 				for (int i = 0; i < Cube::CUBE_SIDES; i++) {
 					renderer.getRenderMap(i)->updateAlpha(-ALPHA_STEP * currentTime / 1000.0);
 				}
 			}
 
 			renderer.getPlayer()->GetMesh()->updateAlpha(-ALPHA_STEP * currentTime / 1000.0);
-			//cout << renderer.getPlayer()->GetMesh()->getAlpha() << endl;
+			
 		}
 		if (renderer.getPlayer()->GetMesh()->getAlpha() <= 0 && fadingOut) {
 			renderer.getPlayer()->GetMesh()->setAlpha(0);
@@ -303,11 +244,10 @@ int main() {
 				fadingIn = true;
 			}
 
-			renderMap = renderer.getRenderMap(currentMap);
-
 			if (cubeTransition) {
 
-				renderer.updateCubeSides(currentCube);
+				renderer.updateCubeSides(currentCube); //This takes a long time hence the following line
+				newCubeJustLoaded = true;
 
 				for (int i = 0; i < Cube::CUBE_SIDES; i++) {
 					renderer.getRenderMap(i)->setAlpha(0);
@@ -316,6 +256,8 @@ int main() {
 				fadingIn = true;
 
 			}
+
+			renderMap = renderer.getRenderMap(currentMap);
 
 			if (isTeleporting) {
 				isTeleporting = false;
@@ -330,17 +272,16 @@ int main() {
 				}
 
 				player = initialisePlayer(cubes.at(currentCube).getMap(currentMap), renderer.getGroundLevel(), sideLength, destination);
+				player.setIsActive(false);
 				renderer.updatePlayer(player.getPosx(), player.getPosy(), player.getPosz(), sideLength, player.getProgress(), player.getDirection());
 			}
 			else {
 				player = initialisePlayer(cubes.at(currentCube).getMap(currentMap), renderer.getGroundLevel(), sideLength, cubes.at(currentCube).getMap(currentMap).getStartTile());
+				player.setIsActive(false);
 				renderer.updatePlayer(player.getPosx(), player.getPosy(), player.getPosz(), sideLength, player.getProgress(), player.getDirection());
 			}
 			
 		}
-
-		//Todo -- Set Cube transform to needed one before the rotation is carried out (currentMap - 1) if mapTransition
-		// (currentMap) if cubeTransition
 
 		if ((mapTransition || cubeTransition) && !fadingOut) {
 
@@ -372,24 +313,31 @@ int main() {
 					progress = 0;
 					mapTransition = false;
 					fadingIn = true;
-					//renderer.getRoot().setTransform() -- Set to correct rotation for current map
 				}
 			}
 
 		}
 		else {
 			renderer.setPlayerRootRotation(currentMap);
-			cout << currentMap << endl;
 		}
 		if (fadingIn) {
-
 			if (cubeTransition) {
-				for (int i = 0; i < Cube::CUBE_SIDES; i++) {
-					renderer.getRenderMap(i)->updateAlpha(ALPHA_STEP * currentTime / 1000.0);
+				if (!newCubeJustLoaded) {
+					complete = false;
+					for (int i = 0; i < Cube::CUBE_SIDES; i++) {
+						renderer.getRenderMap(i)->updateAlpha(ALPHA_STEP * currentTime / 1000.0);
+					}
 				}
 			}
 
-			renderer.getPlayer()->GetMesh()->updateAlpha(ALPHA_STEP * currentTime / 1000.0);
+			if (!newCubeJustLoaded) {
+				renderer.getPlayer()->GetMesh()->updateAlpha(ALPHA_STEP * currentTime / 1000.0);
+			}
+
+			if (newCubeJustLoaded) {
+				newCubeJustLoaded = false;
+			}
+	
 		}
 		if (renderer.getPlayer()->GetMesh()->getAlpha() >= 1) {
 			renderer.getPlayer()->GetMesh()->setAlpha(1);
@@ -403,31 +351,13 @@ int main() {
 			player.setIsActive(true);
 		}
 
-		//Update player in the renderer
-		//renderer.updatePlayerPos(); -- To be implemented
-
-		//if(!player.getIsMoving() && player.getCurrentTile() == cubes.at(currentCube).getMap(currentMap).getEndtile()) {
-		//nextLevel(); -- To be implemented
-		//}
-
-		//Note -- nextLevel() or isMoving being true will make a bool inputAllowed = false, and true when they are false
-
-		//Note -- positive y is up and tile array goes across and down, change logic accordingly (validMove() is one to change)
-
 		renderer.UpdateScene(currentTime);
 		renderer.RenderScene();
 		
 		currentTime = w.GetTimer()->GetTimedMS();
 
-		/*if (currentTime < secondsPassed * 1000.0f) {
-			frameCount++;
-			cout << 1000.0f / currentTime << endl;
-		}
-		else {
-			cout << "Frames Per Second: " << frameCount << endl;
-			frameCount = 0;
-			secondsPassed++;
-		}*/
+		cout << "Frames Per Second: " << 1000.0f / currentTime << endl;
+	
 
 	}
 

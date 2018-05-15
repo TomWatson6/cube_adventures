@@ -24,12 +24,6 @@ public:
 		this->tiles = tiles;
 		this->complete = false;
 
-		/*for (int i = 0; i < dimensions; i++) {
-			for (int j = 0; j < dimensions; j++) {
-				if (this->tiles.at(i * dimensions + j).getType() == TileType::START)
-					startTile = i * dimensions + j;
-			}
-		}*/
 
 		for (int i = 0; i < dimensions * dimensions; i++) {
 			if (this->tiles.at(i).getType() == TileType::START)
@@ -45,7 +39,7 @@ public:
 	Tile getTile(int index) { return tiles.at(index); }
 	int getStartTile() { return startTile; }
 
-	void setComplete(bool complete) { this->complete = complete; cout << "WOOOOOHOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO" << endl; }
+	void setComplete(bool complete) { this->complete = complete; }
 	void setIndex(int index) { this->index = index; }
 	void setDimensions(int dimensions) { this->dimensions = dimensions; }
 	void setTiles(vector<Tile> tiles) {	this->tiles = tiles; }

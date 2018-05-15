@@ -10,7 +10,7 @@
 
 class Renderer : public OGLRenderer {
 public:
-	Renderer(Window & parent);
+	Renderer(Window & parent, int currentCube);
 	virtual ~Renderer(void);
 
 	virtual void RenderScene();

@@ -106,6 +106,9 @@ public:
 				else if (map.getTile(currentTile).getType() == TileType::ILLEGAL) {
 					colours[offset] = Vector4(0.1, 0.1, 0.1, 1);
 				}
+				else if (map.getTile(currentTile).getType() == TileType::WATER) {
+					colours[offset] = Vector4(0, 0, 1, 1);
+				}
 				else {
 					colours[offset] = Vector4(0.3, 0.3, 0.3, 1);
 				}

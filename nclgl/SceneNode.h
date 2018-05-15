@@ -22,7 +22,7 @@ public:
 	void SetModelScale(Vector3 s) { modelScale = s; }
 
 	RenderMap * GetRenderMap() const { return renderMap; }
-	void setRenderMap(RenderMap * r) { renderMap = r; hasRenderMap = true; }
+	void setRenderMap(RenderMap * r) { renderMap = r; hasRenderMap = true; hasMesh = false; }
 
 	Mesh * GetMesh() const { return mesh; }
 	void SetMesh(Mesh * m) { mesh = m; }
