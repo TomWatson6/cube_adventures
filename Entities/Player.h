@@ -43,7 +43,7 @@ public:
 		this->posx = posx;
 		this->posy = posy;
 		this->posz = posz;
-		this->pivotz = posz;
+		this->pivotz = posz - sideLength / 2;
 		this->sideLength = sideLength;
 		this->currentTile = currentTile;
 		this->tileFrom = currentTile;

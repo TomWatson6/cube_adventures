@@ -199,7 +199,8 @@ int main() {
 
 		}
 
-		if (renderer.getMap(currentMap).getTile(player.getCurrentTile()).getType() == TileType::FINISH && complete) {
+		if (renderer.getMap(currentMap).getTile(player.getCurrentTile()).getType() == TileType::FINISH && complete &&
+			player.getTriggerPulse()) {
 
 			complete = currentMap == Cube::CUBE_SIDES - 1;
 			mapTransition = true;

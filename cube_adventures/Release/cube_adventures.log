@@ -30,19 +30,19 @@ main.cpp(27): warning C4244: 'initializing': conversion from 'double' to 'float'
 main.cpp(69): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
 main.cpp(70): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
 main.cpp(107): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-main.cpp(215): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-main.cpp(219): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-main.cpp(276): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-main.cpp(281): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-main.cpp(293): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-main.cpp(297): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-main.cpp(301): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-main.cpp(305): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-main.cpp(309): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-main.cpp(311): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-main.cpp(328): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-main.cpp(334): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+main.cpp(216): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+main.cpp(220): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+main.cpp(277): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+main.cpp(282): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+main.cpp(294): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+main.cpp(298): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+main.cpp(302): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+main.cpp(306): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+main.cpp(310): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+main.cpp(312): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+main.cpp(329): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+main.cpp(335): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
 MSVCRT.lib(initializers.obj) : warning LNK4098: defaultlib 'libcmt.lib' conflicts with use of other libs; use /NODEFAULTLIB:library
   LINK : /LTCG specified but no code generation required; remove /LTCG from the link command line to improve linker performance
-glew32.lib(glew.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'glew32.lib(glew.obj)' or at 'C:\Users\tomwa\source\repos\cube_adventures\Release\vc120.pdb'; linking object as if no debug info
-  cube_adventures.vcxproj -> C:\Users\tomwa\source\repos\cube_adventures\Release\cube_adventures.exe
+glew32.lib(glew.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'glew32.lib(glew.obj)' or at 'C:\Users\tomwa\source\repos\Cube_Adventures\Release\vc120.pdb'; linking object as if no debug info
+  cube_adventures.vcxproj -> C:\Users\tomwa\source\repos\Cube_Adventures\Release\cube_adventures.exe

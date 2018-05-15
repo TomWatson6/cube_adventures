@@ -1,4 +1,4 @@
 ﻿  Physics.cpp
 c:\users\tomwa\source\repos\cube_adventures\physics\../Entities/Player.h(50): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 c:\users\tomwa\source\repos\cube_adventures\physics\../Entities/Player.h(72): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-  Physics.vcxproj -> C:\Users\tomwa\source\repos\cube_adventures\Release\Physics.lib
+  Physics.vcxproj -> C:\Users\tomwa\source\repos\Cube_Adventures\Release\Physics.lib
