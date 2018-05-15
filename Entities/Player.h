@@ -4,7 +4,7 @@
 
 enum class Direction { LEFT, RIGHT, UP, DOWN };
 
-static const float ROTARY_STEP = 4.0f;
+static const float ROTARY_STEP = 300.0f;
 
 class Player {
 
@@ -28,6 +28,8 @@ private:
 	//Sound sound = Sound();
 
 	int tileFrom;
+
+	bool isActive = true;
 
 	bool isMoving = false;
 	Direction dirMoving = Direction::RIGHT;
@@ -63,11 +65,14 @@ public:
 	float getPosz() { return posz; }
 
 	bool getTriggerPulse() { return triggerPulse; }
+	bool getActive() { return isActive; }
 	bool getIsMoving() { return isMoving; }
 	int getCurrentTile() { return currentTile; }
 	Direction getDirection() { return dirMoving; }
 	int getProgress() { return progress; }
 	int getTileFrom() { return tileFrom; }
+
+	void setIsActive(bool isActive) { this->isActive = isActive; }
 
 	void setTriggerPulse(bool triggerPulse) { this->triggerPulse = triggerPulse; }
 
@@ -76,6 +81,6 @@ public:
 
 	void move(Direction dir, int dimensions);
 
-	void update(Sound sound);
+	void update(Sound sound, float msec);
 
 };

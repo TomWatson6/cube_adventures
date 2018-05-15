@@ -1,37 +1,45 @@
 ﻿  main.cpp
-h:\visual studio 2017\projects\cube_adventures\nclgl\heightmap.h(30): warning C4305: 'initializing': truncation from 'double' to 'const float'
-h:\visual studio 2017\projects\cube_adventures\nclgl\rendermap.h(8): warning C4305: 'initializing': truncation from 'double' to 'float'
-h:\visual studio 2017\projects\cube_adventures\nclgl\rendermap.h(9): warning C4305: 'initializing': truncation from 'double' to 'float'
-h:\visual studio 2017\projects\cube_adventures\nclgl\rendermap.h(50): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-h:\visual studio 2017\projects\cube_adventures\nclgl\rendermap.h(78): warning C4305: 'argument': truncation from 'double' to 'const float'
-h:\visual studio 2017\projects\cube_adventures\nclgl\rendermap.h(79): warning C4305: 'argument': truncation from 'double' to 'const float'
-h:\visual studio 2017\projects\cube_adventures\nclgl\rendermap.h(83): warning C4305: 'argument': truncation from 'double' to 'const float'
-h:\visual studio 2017\projects\cube_adventures\nclgl\rendermap.h(84): warning C4305: 'argument': truncation from 'double' to 'const float'
-h:\visual studio 2017\projects\cube_adventures\nclgl\rendermap.h(88): warning C4305: 'argument': truncation from 'double' to 'const float'
-h:\visual studio 2017\projects\cube_adventures\nclgl\rendermap.h(89): warning C4305: 'argument': truncation from 'double' to 'const float'
-h:\visual studio 2017\projects\cube_adventures\nclgl\rendermap.h(93): warning C4305: 'argument': truncation from 'double' to 'const float'
-h:\visual studio 2017\projects\cube_adventures\nclgl\rendermap.h(94): warning C4305: 'argument': truncation from 'double' to 'const float'
-h:\visual studio 2017\projects\cube_adventures\nclgl\rendermap.h(98): warning C4305: 'argument': truncation from 'double' to 'const float'
-h:\visual studio 2017\projects\cube_adventures\nclgl\rendermap.h(99): warning C4305: 'argument': truncation from 'double' to 'const float'
-h:\visual studio 2017\projects\cube_adventures\nclgl\rendermap.h(102): warning C4305: 'argument': truncation from 'double' to 'float'
-h:\visual studio 2017\projects\cube_adventures\nclgl\rendermap.h(105): warning C4305: 'argument': truncation from 'double' to 'float'
-h:\visual studio 2017\projects\cube_adventures\nclgl\rendermap.h(112): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-h:\visual studio 2017\projects\cube_adventures\nclgl\rendermap.h(112): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-h:\visual studio 2017\projects\cube_adventures\entities\player.h(48): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-h:\visual studio 2017\projects\cube_adventures\entities\player.h(69): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-h:\visual studio 2017\projects\cube_adventures\nclgl\renderer.h(34): warning C4244: 'argument': conversion from 'double' to 'const float', possible loss of data
-h:\visual studio 2017\projects\cube_adventures\nclgl\renderer.h(35): warning C4244: 'argument': conversion from 'double' to 'const float', possible loss of data
-h:\visual studio 2017\projects\cube_adventures\cube_adventures\main.cpp(16): warning C4305: 'initializing': truncation from 'double' to 'float'
-h:\visual studio 2017\projects\cube_adventures\cube_adventures\main.cpp(36): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-h:\visual studio 2017\projects\cube_adventures\cube_adventures\main.cpp(37): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-h:\visual studio 2017\projects\cube_adventures\cube_adventures\main.cpp(40): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-h:\visual studio 2017\projects\cube_adventures\cube_adventures\main.cpp(112): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-h:\visual studio 2017\projects\cube_adventures\cube_adventures\main.cpp(113): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-h:\visual studio 2017\projects\cube_adventures\cube_adventures\main.cpp(160): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-h:\visual studio 2017\projects\cube_adventures\cube_adventures\main.cpp(262): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-h:\visual studio 2017\projects\cube_adventures\cube_adventures\main.cpp(269): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-h:\visual studio 2017\projects\cube_adventures\cube_adventures\main.cpp(299): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-h:\visual studio 2017\projects\cube_adventures\cube_adventures\main.cpp(325): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-h:\visual studio 2017\projects\cube_adventures\cube_adventures\main.cpp(339): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-  cube_adventures.vcxproj -> H:\Visual Studio 2017\Projects\cube_adventures\Debug\cube_adventures.exe
-  cube_adventures.vcxproj -> H:\Visual Studio 2017\Projects\cube_adventures\Debug\cube_adventures.pdb (Partial PDB)
+c:\users\tomwa\source\repos\cube_adventures\nclgl\heightmap.h(30): warning C4305: 'initializing': truncation from 'double' to 'const float'
+c:\users\tomwa\source\repos\cube_adventures\nclgl\rendermap.h(8): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\tomwa\source\repos\cube_adventures\nclgl\rendermap.h(9): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\tomwa\source\repos\cube_adventures\nclgl\rendermap.h(50): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\tomwa\source\repos\cube_adventures\nclgl\rendermap.h(78): warning C4305: 'argument': truncation from 'double' to 'const float'
+c:\users\tomwa\source\repos\cube_adventures\nclgl\rendermap.h(79): warning C4305: 'argument': truncation from 'double' to 'const float'
+c:\users\tomwa\source\repos\cube_adventures\nclgl\rendermap.h(83): warning C4305: 'argument': truncation from 'double' to 'const float'
+c:\users\tomwa\source\repos\cube_adventures\nclgl\rendermap.h(84): warning C4305: 'argument': truncation from 'double' to 'const float'
+c:\users\tomwa\source\repos\cube_adventures\nclgl\rendermap.h(88): warning C4305: 'argument': truncation from 'double' to 'const float'
+c:\users\tomwa\source\repos\cube_adventures\nclgl\rendermap.h(89): warning C4305: 'argument': truncation from 'double' to 'const float'
+c:\users\tomwa\source\repos\cube_adventures\nclgl\rendermap.h(93): warning C4305: 'argument': truncation from 'double' to 'const float'
+c:\users\tomwa\source\repos\cube_adventures\nclgl\rendermap.h(94): warning C4305: 'argument': truncation from 'double' to 'const float'
+c:\users\tomwa\source\repos\cube_adventures\nclgl\rendermap.h(98): warning C4305: 'argument': truncation from 'double' to 'const float'
+c:\users\tomwa\source\repos\cube_adventures\nclgl\rendermap.h(99): warning C4305: 'argument': truncation from 'double' to 'const float'
+c:\users\tomwa\source\repos\cube_adventures\nclgl\rendermap.h(103): warning C4305: 'argument': truncation from 'double' to 'const float'
+c:\users\tomwa\source\repos\cube_adventures\nclgl\rendermap.h(104): warning C4305: 'argument': truncation from 'double' to 'const float'
+c:\users\tomwa\source\repos\cube_adventures\nclgl\rendermap.h(107): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\tomwa\source\repos\cube_adventures\nclgl\rendermap.h(110): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\tomwa\source\repos\cube_adventures\nclgl\rendermap.h(117): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\tomwa\source\repos\cube_adventures\nclgl\rendermap.h(117): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\tomwa\source\repos\cube_adventures\entities\player.h(50): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\tomwa\source\repos\cube_adventures\entities\player.h(72): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+c:\users\tomwa\source\repos\cube_adventures\nclgl\renderer.h(34): warning C4244: 'argument': conversion from 'double' to 'const float', possible loss of data
+c:\users\tomwa\source\repos\cube_adventures\nclgl\renderer.h(35): warning C4244: 'argument': conversion from 'double' to 'const float', possible loss of data
+c:\users\tomwa\source\repos\cube_adventures\cube_adventures\main.cpp(16): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\tomwa\source\repos\cube_adventures\cube_adventures\main.cpp(36): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\tomwa\source\repos\cube_adventures\cube_adventures\main.cpp(37): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\tomwa\source\repos\cube_adventures\cube_adventures\main.cpp(40): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\tomwa\source\repos\cube_adventures\cube_adventures\main.cpp(113): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+c:\users\tomwa\source\repos\cube_adventures\cube_adventures\main.cpp(114): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\tomwa\source\repos\cube_adventures\cube_adventures\main.cpp(161): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\tomwa\source\repos\cube_adventures\cube_adventures\main.cpp(271): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\tomwa\source\repos\cube_adventures\cube_adventures\main.cpp(314): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\tomwa\source\repos\cube_adventures\cube_adventures\main.cpp(318): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\tomwa\source\repos\cube_adventures\cube_adventures\main.cpp(334): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\tomwa\source\repos\cube_adventures\cube_adventures\main.cpp(342): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\tomwa\source\repos\cube_adventures\cube_adventures\main.cpp(346): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\tomwa\source\repos\cube_adventures\cube_adventures\main.cpp(350): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\tomwa\source\repos\cube_adventures\cube_adventures\main.cpp(354): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\tomwa\source\repos\cube_adventures\cube_adventures\main.cpp(358): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\tomwa\source\repos\cube_adventures\cube_adventures\main.cpp(360): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+c:\users\tomwa\source\repos\cube_adventures\cube_adventures\main.cpp(375): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  cube_adventures.vcxproj -> C:\Users\tomwa\source\repos\cube_adventures\Debug\cube_adventures.exe
+  cube_adventures.vcxproj -> C:\Users\tomwa\source\repos\cube_adventures\Debug\cube_adventures.pdb (Partial PDB)

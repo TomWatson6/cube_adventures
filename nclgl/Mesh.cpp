@@ -39,6 +39,8 @@ void Mesh::updateAlpha(float alpha) {
 		colours[i].w = colours[i].w + alpha;
 	}
 
+	RebufferData();
+
 }
 
 void Mesh::setAlpha(float alpha) {
@@ -46,6 +48,8 @@ void Mesh::setAlpha(float alpha) {
 	for (int i = 0; i < numVertices; i++) {
 		colours[i].w = alpha;
 	}
+
+	RebufferData();
 
 }
 

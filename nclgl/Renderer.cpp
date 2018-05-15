@@ -6,14 +6,12 @@ using namespace std;
 Renderer::Renderer(Window & parent) : OGLRenderer(parent) {
 
 	//Initialise map rotations
-	mapRotations[0] = Matrix4::Translation(cubePosition);
-	mapRotations[1] = mapRotations[0] * Matrix4::Rotation(90.0f, Vector3(1, 0, 0));
-	mapRotations[2] = mapRotations[1] * Matrix4::Rotation(90.0f, Vector3(0, 0, 1));
-	mapRotations[3] = mapRotations[2] * Matrix4::Rotation(-90.0f, Vector3(0, 1, 0));
-	mapRotations[4] = mapRotations[3] * Matrix4::Rotation(90.0f, Vector3(1, 0, 0));
-	mapRotations[5] = mapRotations[4] * Matrix4::Rotation(90.0f, Vector3(0, 0, 1));
-
-	
+	mapRotations[0] = Matrix4();
+	mapRotations[1] = mapRotations[0] * Matrix4::Rotation(-90.0f, Vector3(1, 0, 0));
+	mapRotations[2] = mapRotations[1] * Matrix4::Rotation(90.0f, Vector3(0, 1, 0));
+	mapRotations[3] = mapRotations[2] * Matrix4::Rotation(-90.0f, Vector3(1, 0, 0));
+	mapRotations[4] = mapRotations[3] * Matrix4::Rotation(90.0f, Vector3(0, 1, 0));
+	mapRotations[5] = mapRotations[4] * Matrix4::Rotation(-90.0f, Vector3(1, 0, 0));
 
 	camera = new Camera();
 	counter = 0;
@@ -107,6 +105,10 @@ Renderer::Renderer(Window & parent) : OGLRenderer(parent) {
 
 	root = new SceneNode();
 
+	playerRoot = new SceneNode();
+
+	root->AddChild(playerRoot);
+
 	for (int i = 0; i < Cube::CUBE_SIDES; i++) {
 		root->AddChild(&cubeSides[i]);
 	}
@@ -114,7 +116,7 @@ Renderer::Renderer(Window & parent) : OGLRenderer(parent) {
 	player = new SceneNode();
 	player->SetMesh(Mesh::LoadMeshFile("../Meshes/cube.asciimesh"));
 
-	root->AddChild(player);
+	playerRoot->AddChild(player);
 
 	Matrix4 transformation;
 
@@ -202,9 +204,9 @@ Renderer ::~Renderer(void) {
 
 }
 
-void Renderer::setRootRotation(int currentMap) {
+void Renderer::setPlayerRootRotation(int currentMap) {
 
-	root->SetTransform(mapRotations[currentMap]);
+	playerRoot->SetTransform(mapRotations[currentMap]);
 
 }
 

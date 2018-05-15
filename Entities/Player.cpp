@@ -37,11 +37,11 @@ void Player::move(Direction dir, int dimensions) {
 
 }
 
-void Player::update(Sound sound) {
+void Player::update(Sound sound, float msec) {
 
 	if (isMoving && progress < 90) {
 
-		progress += ROTARY_STEP;
+		progress += ROTARY_STEP * msec / 1000.0f;
 
 		float angle = (progress + 45) * M_PI / 180.0;
 		posz = pivotz + radius * sin(angle);

@@ -14,7 +14,7 @@
 #pragma comment(lib, "Sound.lib")
 
 static const float PULSE_MAGNITUDE = 120.0 / 255.0;
-static const float ALPHA_STEP = 0.5;
+static const float ALPHA_STEP = 3.0;
 static const float PROGRESS_MAX = 90;
 static const float PROGRESS_MULT = 60;
 
@@ -33,8 +33,8 @@ Player initialisePlayer(Map m, float groundLevel, float sideLength, int startTil
 
 	float cubeLength = (RAW_WIDTH - 1) * HEIGHTMAP_X * 10;
 
-	float xPos = ((m.getStartTile() % m.getDimensions()) * sideLength) - (0.5 * cubeLength) + (0.5 * sideLength);
-	float yPos = 0.5 * cubeLength - 0.5 * sideLength - (m.getStartTile() / m.getDimensions()) * sideLength;
+	float xPos = ((startTile % m.getDimensions()) * sideLength) - (0.5 * cubeLength) + (0.5 * sideLength);
+	float yPos = 0.5 * cubeLength - 0.5 * sideLength - (startTile / m.getDimensions()) * sideLength;
 	//float xPos = (m.getStartTile() % m.getDimensions()) * sideLength + 0.5 * sideLength - (5 * RAW_WIDTH * HEIGHTMAP_X - 5 * HEIGHTMAP_X);
 	//float yPos = (5 * RAW_HEIGHT * HEIGHTMAP_Z - 5 * HEIGHTMAP_Z) - ((m.getStartTile() / m.getDimensions()) * sideLength - 0.5 * sideLength);
 	float zPos = 0.5 * cubeLength;
@@ -54,6 +54,7 @@ int main() {
 
 	bool fadingOut = false;
 	bool fadingIn = false;
+	bool isTeleporting = false;
 
 	float progress = 0;
 
@@ -133,7 +134,7 @@ int main() {
 		//Is player/cube map moving? - if not check for input
 		//KeyboardInput::CheckForInput();
 
-		if (!player.getIsMoving()) {
+		if (!player.getIsMoving() && player.getActive()) {
 			if (Window::GetKeyboard()->KeyDown(KEYBOARD_W)) {
 				if (physics.validMove(player, cubes.at(currentCube).getMap(currentMap), Direction::UP)) { 
 					player.move(Direction::UP, cubes.at(currentCube).getMap(currentMap).getDimensions()); 
@@ -156,7 +157,7 @@ int main() {
 			}
 		}
 
-		player.update(sound);
+		player.update(sound, currentTime);
 		renderer.updatePlayer(player.getPosx(), player.getPosy(), player.getPosz(), sideLength, player.getProgress(), player.getDirection());
 
 		//cout << !renderer.getMap(currentMap).isComplete() << endl;
@@ -183,10 +184,11 @@ int main() {
 						}
 					}
 					fadingOut = true;
+					player.setIsActive(false);
 				}
 				
 			}
-			else if (type == TileType::SWAP || type == TileType::RESET || type == TileType::CONFIRM || type == TileType::FINISH) {
+			else if (type == TileType::SWAP || type == TileType::RESET || type == TileType::CONFIRM || type == TileType::TELEPORT) {
 
 				if (type == TileType::SWAP) {
 					sound.playSwapSound();
@@ -243,7 +245,14 @@ int main() {
 
 					}
 
-				}			
+				}
+				else if (type == TileType::TELEPORT) {
+
+					fadingOut = true;
+					player.setIsActive(false);
+					isTeleporting = true;
+
+				}
 
 			}
 
@@ -254,26 +263,29 @@ int main() {
 			complete = false;
 			mapTransition = true;
 			fadingOut = true;
-			//isMoving = true;
+			player.setIsActive(false);
 
 		}
 
 		if (fadingOut) {
 			renderer.getPlayer()->GetMesh()->updateAlpha(-ALPHA_STEP * currentTime / 1000.0);
-			cout << renderer.getPlayer()->GetMesh()->getAlpha() << endl;
+			//cout << renderer.getPlayer()->GetMesh()->getAlpha() << endl;
 		}
 		if (renderer.getPlayer()->GetMesh()->getAlpha() <= 0 && fadingOut) {
 			renderer.getPlayer()->GetMesh()->setAlpha(0);
 			fadingOut = false;
-			player = initialisePlayer(cubes.at(currentCube).getMap(currentMap), renderer.getGroundLevel(), sideLength, cubes.at(currentCube).getMap(currentMap).getStartTile());
-			renderer.updatePlayer(player.getPosx(), player.getPosy(), player.getPosz(), sideLength, player.getProgress(), player.getDirection());
 
 			if (mapTransition) {
 				if (currentMap == Cube::CUBE_SIDES - 1) {
-					cubeTransition = true;
-					mapTransition = false;
-					currentMap = 0;
-					currentCube++;
+					if (currentCube != NUM_OF_CUBES - 1) {
+						cubeTransition = true;
+						mapTransition = false;
+						currentMap = 0;
+						currentCube++;
+					}
+					else {
+						break;
+					}
 				}
 				else {
 					currentMap++;
@@ -283,12 +295,35 @@ int main() {
 			else {
 				fadingIn = true;
 			}
+
+			renderMap = renderer.getRenderMap(currentMap);
+
+			if (isTeleporting) {
+				isTeleporting = false;
+
+				int destination = 0;
+
+				for (int i = 0; i < dimensions * dimensions; i++) {
+					if (renderMap->getTile(i).getType() == TileType::TELEPORT && player.getCurrentTile() != i) {
+						destination = i;
+						break;
+					}
+				}
+
+				player = initialisePlayer(cubes.at(currentCube).getMap(currentMap), renderer.getGroundLevel(), sideLength, destination);
+				renderer.updatePlayer(player.getPosx(), player.getPosy(), player.getPosz(), sideLength, player.getProgress(), player.getDirection());
+			}
+			else {
+				player = initialisePlayer(cubes.at(currentCube).getMap(currentMap), renderer.getGroundLevel(), sideLength, cubes.at(currentCube).getMap(currentMap).getStartTile());
+				renderer.updatePlayer(player.getPosx(), player.getPosy(), player.getPosz(), sideLength, player.getProgress(), player.getDirection());
+			}
+			
 		}
 
 		//Todo -- Set Cube transform to needed one before the rotation is carried out (currentMap - 1) if mapTransition
 		// (currentMap) if cubeTransition
 
-		if (mapTransition || cubeTransition) {
+		if ((mapTransition || cubeTransition) && !fadingOut) {
 
 			if (cubeTransition) {
 				//work out some algorithm to make the cube transition look cool
@@ -304,23 +339,23 @@ int main() {
 				switch (currentMap) {
 				case 1:
 					renderer.getRoot()->SetTransform(renderer.getRoot()->GetWorldTransform() *
-						Matrix4::Rotation(progress, Vector3(1, 0, 0)));
+						Matrix4::Rotation(PROGRESS_MULT * currentTime / 1000.0, Vector3(1, 0, 0)));
 					break;
 				case 2:
 					renderer.getRoot()->SetTransform(renderer.getRoot()->GetWorldTransform() *
-						Matrix4::Rotation(progress, Vector3(0, 0, 1)));
+						Matrix4::Rotation(PROGRESS_MULT * currentTime / 1000.0, Vector3(0, 0, 1)));
 					break;
 				case 3:
 					renderer.getRoot()->SetTransform(renderer.getRoot()->GetWorldTransform() *
-						Matrix4::Rotation(-progress, Vector3(0, 1, 0)));
+						Matrix4::Rotation(-PROGRESS_MULT * currentTime / 1000.0, Vector3(0, 1, 0)));
 					break;
 				case 4:
 					renderer.getRoot()->SetTransform(renderer.getRoot()->GetWorldTransform() *
-						Matrix4::Rotation(progress, Vector3(1, 0, 0)));
+						Matrix4::Rotation(PROGRESS_MULT * currentTime / 1000.0, Vector3(1, 0, 0)));
 					break;
 				case 5:
 					renderer.getRoot()->SetTransform(renderer.getRoot()->GetWorldTransform() *
-						Matrix4::Rotation(progress, Vector3(0, 0, 1)));
+						Matrix4::Rotation(PROGRESS_MULT * currentTime / 1000.0, Vector3(0, 0, 1)));
 				}
 				progress += PROGRESS_MULT * currentTime / 1000.0;
 				if (progress >= PROGRESS_MAX) {
@@ -333,7 +368,8 @@ int main() {
 
 		}
 		else {
-			renderer.setRootRotation(currentMap);
+			renderer.setPlayerRootRotation(currentMap);
+			cout << currentMap << endl;
 		}
 		if (fadingIn) {
 			renderer.getPlayer()->GetMesh()->updateAlpha(ALPHA_STEP * currentTime / 1000.0);
@@ -341,6 +377,7 @@ int main() {
 		if (renderer.getPlayer()->GetMesh()->getAlpha() >= 1) {
 			renderer.getPlayer()->GetMesh()->setAlpha(1);
 			fadingIn = false;
+			player.setIsActive(true);
 		}
 
 		//Update player in the renderer

@@ -21,7 +21,7 @@ public:
 	RenderMap* getRenderMap(int index) { return cubeSides[index].GetRenderMap(); }
 	SceneNode* getPlayer() { return player; }
 	SceneNode* getRoot() { return root; }
-	void setRootRotation(int currentMap);
+	void setPlayerRootRotation(int currentMap);
 
 	void updatePlayer(float posx, float posy, float posz, float sideLength, float progress, Direction dir);
 
@@ -35,6 +35,7 @@ protected:
 	Vector3 groundLevel = Vector3(0, 0, -2.5 * halfSideLength);
 
 	SceneNode* root;
+	SceneNode* playerRoot;
 	SceneNode* cubeSides;
 	SceneNode* player;
 	Camera * camera;

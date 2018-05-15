@@ -98,6 +98,11 @@ public:
 						Vector3(1, 153.0 / 255.0, 0),
 						Vector3(204.0 / 255.0, 122.0 / 255.0, 0));
 				}
+				else if (map.getTile(currentTile).getType() == TileType::TELEPORT) {
+					colours[offset] = colourInteractiveTile(currentTile, offset,
+						Vector3(1, 233.0 / 255.0, 35.0 / 255.0),
+						Vector3(214.0 / 255.0, 193.0 / 255.0, 4.0 / 255.0));
+				}
 				else if (map.getTile(currentTile).getType() == TileType::ILLEGAL) {
 					colours[offset] = Vector4(0.1, 0.1, 0.1, 1);
 				}
