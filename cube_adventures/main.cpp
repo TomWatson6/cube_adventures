@@ -268,6 +268,13 @@ int main() {
 		}
 
 		if (fadingOut) {
+
+			if (currentMap == Cube::CUBE_SIDES - 1 && !isTeleporting) {
+				for (int i = 0; i < Cube::CUBE_SIDES; i++) {
+					renderer.getRenderMap(i)->updateAlpha(-ALPHA_STEP * currentTime / 1000.0);
+				}
+			}
+
 			renderer.getPlayer()->GetMesh()->updateAlpha(-ALPHA_STEP * currentTime / 1000.0);
 			//cout << renderer.getPlayer()->GetMesh()->getAlpha() << endl;
 		}
@@ -298,6 +305,18 @@ int main() {
 
 			renderMap = renderer.getRenderMap(currentMap);
 
+			if (cubeTransition) {
+
+				renderer.updateCubeSides(currentCube);
+
+				for (int i = 0; i < Cube::CUBE_SIDES; i++) {
+					renderer.getRenderMap(i)->setAlpha(0);
+				}
+
+				fadingIn = true;
+
+			}
+
 			if (isTeleporting) {
 				isTeleporting = false;
 
@@ -325,17 +344,8 @@ int main() {
 
 		if ((mapTransition || cubeTransition) && !fadingOut) {
 
-			if (cubeTransition) {
-				//work out some algorithm to make the cube transition look cool
-				if (progress == PROGRESS_MAX) {
-					cubeTransition = false;
-
-					player = initialisePlayer(cubes.at(currentCube).getMap(currentMap), renderer.getGroundLevel(), sideLength, cubes.at(currentCube).getMap(currentMap).getStartTile());
-					renderer.updatePlayer(player.getPosx(), player.getPosy(), player.getPosz(), sideLength, player.getProgress(), player.getDirection());
-					fadingIn = true;
-				}
-			}
-			else if (mapTransition) {
+			
+			if (mapTransition) {
 				switch (currentMap) {
 				case 1:
 					renderer.getRoot()->SetTransform(renderer.getRoot()->GetWorldTransform() *
@@ -372,11 +382,24 @@ int main() {
 			cout << currentMap << endl;
 		}
 		if (fadingIn) {
+
+			if (cubeTransition) {
+				for (int i = 0; i < Cube::CUBE_SIDES; i++) {
+					renderer.getRenderMap(i)->updateAlpha(ALPHA_STEP * currentTime / 1000.0);
+				}
+			}
+
 			renderer.getPlayer()->GetMesh()->updateAlpha(ALPHA_STEP * currentTime / 1000.0);
 		}
 		if (renderer.getPlayer()->GetMesh()->getAlpha() >= 1) {
 			renderer.getPlayer()->GetMesh()->setAlpha(1);
+
+			for (int i = 0; i < Cube::CUBE_SIDES; i++) {
+				renderer.getRenderMap(i)->setAlpha(1);
+			}
+
 			fadingIn = false;
+			cubeTransition = false;
 			player.setIsActive(true);
 		}
 

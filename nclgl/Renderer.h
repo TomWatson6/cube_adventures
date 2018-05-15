@@ -22,6 +22,7 @@ public:
 	SceneNode* getPlayer() { return player; }
 	SceneNode* getRoot() { return root; }
 	void setPlayerRootRotation(int currentMap);
+	void updateCubeSides(int currentCube);
 
 	void updatePlayer(float posx, float posy, float posz, float sideLength, float progress, Direction dir);
 
@@ -39,6 +40,8 @@ protected:
 	SceneNode* cubeSides;
 	SceneNode* player;
 	Camera * camera;
+
+	CubeInput cubeInput = CubeInput();
 
 	float dimensions;
 	float* tileInfo;

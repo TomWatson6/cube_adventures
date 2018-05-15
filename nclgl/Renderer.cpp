@@ -27,8 +27,6 @@ Renderer::Renderer(Window & parent) : OGLRenderer(parent) {
 	projMatrix = Matrix4::Perspective(1.0f, 1000000.0f,
 		(float)width / (float)height, 45.0f);
 
-	CubeInput cubeInput = CubeInput();
-
 	cubeSides = new SceneNode[Cube::CUBE_SIDES];
 
 	GLuint texture = SOIL_load_OGL_texture(
@@ -45,11 +43,11 @@ Renderer::Renderer(Window & parent) : OGLRenderer(parent) {
 
 		RenderMap* renderMap = new RenderMap(i, map, MapType::WALKABLE, "../Textures/terrain.raw");
 
-		renderMap->SetTexture(texture);
+		//renderMap->SetTexture(texture);
 
-		if (!renderMap->GetTexture()) {
+		/*if (!renderMap->GetTexture()) {
 			return;
-		}
+		}*/
 
 		//SetTextureRepeating(renderMap->GetTexture(), true);
 		//SetTextureRepeating(renderMap->cobblestoneTexture, true);
@@ -195,6 +193,7 @@ Renderer::Renderer(Window & parent) : OGLRenderer(parent) {
 	init = true;
 
 }
+
 Renderer ::~Renderer(void) {
 
 	delete camera;
@@ -207,6 +206,84 @@ Renderer ::~Renderer(void) {
 void Renderer::setPlayerRootRotation(int currentMap) {
 
 	playerRoot->SetTransform(mapRotations[currentMap]);
+
+}
+
+void Renderer::updateCubeSides(int currentCube) {
+
+	//Reset root position and rotation
+	root->SetTransform(Matrix4::Translation(cubePosition));
+	playerRoot->SetTransform(Matrix4());
+
+	cubeSides = new SceneNode[Cube::CUBE_SIDES];
+
+	for (int i = 0; i < Cube::CUBE_SIDES; i++) {
+
+		Map map = cubeInput.getCube(currentCube).getMap(i);
+
+		RenderMap* renderMap = new RenderMap(i, map, MapType::WALKABLE, "../Textures/terrain.raw");
+
+		//renderMap->SetTexture(texture);
+
+		/*if (!renderMap->GetTexture()) {
+			return;
+		}*/
+
+		//SetTextureRepeating(renderMap->GetTexture(), true);
+		//SetTextureRepeating(renderMap->cobblestoneTexture, true);
+
+		dimensions = renderMap->getDimensions();
+
+		/*tileInfo = new float[dimensions * dimensions];
+
+		for (int j = 0; j < dimensions * dimensions; j++) {
+
+		switch (renderMap->getTile(j).getType()) {
+		case TileType::LAND:
+		tileInfo[j] = 0;
+		break;
+		case TileType::WATER:
+		tileInfo[j] = 1;
+		break;
+		case TileType::START:
+		tileInfo[j] = 2;
+		break;
+		case TileType::FINISH:
+		tileInfo[j] = 3;
+		break;
+		case TileType::INACTIVE:
+		tileInfo[j] = 4;
+		break;
+		case TileType::ACTIVE:
+		tileInfo[j] = 5;
+		break;
+		case TileType::CONFIRM:
+		tileInfo[j] = 6;
+		break;
+		case TileType::SWAP:
+		tileInfo[j] = 7;
+		}
+
+		}*/
+
+		/*for (int i = 0; i < dimensions * dimensions * 2; i++) {
+		cout << tileInfo[i];
+		}
+		cout << endl;*/
+
+		Vector4 colour = Vector4(1, 1, 1, 1);
+
+		cubeSides[i] = SceneNode(renderMap, colour);
+
+		cout << cubeSides[i].GetRenderMap()->getIndex() << endl;
+
+		//cubeSides[i]->SetModelScale(Vector3(i / 6, i / 6, i / 6));
+
+	}
+
+	for (int i = 0; i < Cube::CUBE_SIDES; i++) {
+		root->AddChild(&cubeSides[i]);
+	}
 
 }
 

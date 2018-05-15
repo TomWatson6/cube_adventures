@@ -1,0 +1,4 @@
+﻿  Physics.cpp
+h:\visual studio 2017\projects\cube_adventures\entities\player.h(48): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+h:\visual studio 2017\projects\cube_adventures\entities\player.h(69): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+LINK : fatal error LNK1561: entry point must be defined

@@ -1,0 +1,4 @@
+﻿  CubeInput.cpp
+CubeInput.cpp(10): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  .NETFramework,Version=v4.5.2.AssemblyAttributes.cpp
+LINK : fatal error LNK1561: entry point must be defined

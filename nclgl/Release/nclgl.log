@@ -1,0 +1,175 @@
+﻿  Camera.cpp
+  Frustum.cpp
+h:\visual studio 2017\projects\cube_adventures\nclgl\HeightMap.h(30): warning C4305: 'initializing': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(8): warning C4305: 'initializing': truncation from 'double' to 'float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(9): warning C4305: 'initializing': truncation from 'double' to 'float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(50): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(78): warning C4305: 'argument': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(79): warning C4305: 'argument': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(83): warning C4305: 'argument': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(84): warning C4305: 'argument': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(88): warning C4305: 'argument': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(89): warning C4305: 'argument': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(93): warning C4305: 'argument': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(94): warning C4305: 'argument': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(98): warning C4305: 'argument': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(99): warning C4305: 'argument': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(103): warning C4305: 'argument': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(104): warning C4305: 'argument': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(107): warning C4305: 'argument': truncation from 'double' to 'float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(110): warning C4305: 'argument': truncation from 'double' to 'float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(117): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(117): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  GameTimer.cpp
+  HeightMap.cpp
+h:\visual studio 2017\projects\cube_adventures\nclgl\HeightMap.h(30): warning C4305: 'initializing': truncation from 'double' to 'const float'
+HeightMap.cpp(24): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+HeightMap.cpp(24): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+HeightMap.cpp(74): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+HeightMap.cpp(74): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  Keyboard.cpp
+  MapNode.cpp
+h:\visual studio 2017\projects\cube_adventures\nclgl\HeightMap.h(30): warning C4305: 'initializing': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(8): warning C4305: 'initializing': truncation from 'double' to 'float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(9): warning C4305: 'initializing': truncation from 'double' to 'float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(50): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(78): warning C4305: 'argument': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(79): warning C4305: 'argument': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(83): warning C4305: 'argument': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(84): warning C4305: 'argument': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(88): warning C4305: 'argument': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(89): warning C4305: 'argument': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(93): warning C4305: 'argument': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(94): warning C4305: 'argument': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(98): warning C4305: 'argument': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(99): warning C4305: 'argument': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(103): warning C4305: 'argument': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(104): warning C4305: 'argument': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(107): warning C4305: 'argument': truncation from 'double' to 'float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(110): warning C4305: 'argument': truncation from 'double' to 'float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(117): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(117): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  Matrix4.cpp
+  MD5Anim.cpp
+  MD5FileData.cpp
+  MD5Mesh.cpp
+  MD5Node.cpp
+  Mesh.cpp
+Mesh.cpp(38): warning C4018: '<': signed/unsigned mismatch
+Mesh.cpp(48): warning C4018: '<': signed/unsigned mismatch
+Mesh.cpp(88): warning C4018: '<': signed/unsigned mismatch
+  Mouse.cpp
+  OBJMesh.cpp
+  OGLRenderer.cpp
+  PerlinNoise.cpp
+PerlinNoise.cpp(8): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+PerlinNoise.cpp(14): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+PerlinNoise.cpp(15): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+PerlinNoise.cpp(17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+PerlinNoise.cpp(42): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+  Plane.cpp
+  Quaternion.cpp
+  Renderer.cpp
+h:\visual studio 2017\projects\cube_adventures\nclgl\HeightMap.h(30): warning C4305: 'initializing': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(8): warning C4305: 'initializing': truncation from 'double' to 'float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(9): warning C4305: 'initializing': truncation from 'double' to 'float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(50): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(78): warning C4305: 'argument': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(79): warning C4305: 'argument': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(83): warning C4305: 'argument': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(84): warning C4305: 'argument': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(88): warning C4305: 'argument': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(89): warning C4305: 'argument': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(93): warning C4305: 'argument': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(94): warning C4305: 'argument': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(98): warning C4305: 'argument': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(99): warning C4305: 'argument': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(103): warning C4305: 'argument': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(104): warning C4305: 'argument': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(107): warning C4305: 'argument': truncation from 'double' to 'float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(110): warning C4305: 'argument': truncation from 'double' to 'float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(117): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(117): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+h:\visual studio 2017\projects\cube_adventures\nclgl\../Entities/Player.h(50): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+h:\visual studio 2017\projects\cube_adventures\nclgl\../Entities/Player.h(72): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
+h:\visual studio 2017\projects\cube_adventures\nclgl\Renderer.h(35): warning C4244: 'argument': conversion from 'double' to 'const float', possible loss of data
+h:\visual studio 2017\projects\cube_adventures\nclgl\Renderer.h(36): warning C4244: 'argument': conversion from 'double' to 'const float', possible loss of data
+Renderer.cpp(55): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+Renderer.cpp(57): warning C4244: 'initializing': conversion from 'float' to 'unsigned int', possible loss of data
+Renderer.cpp(235): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+Renderer.cpp(354): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+Renderer.cpp(363): warning C4244: 'argument': conversion from 'float' to 'GLsizei', possible loss of data
+  RenderMap.cpp
+h:\visual studio 2017\projects\cube_adventures\nclgl\HeightMap.h(30): warning C4305: 'initializing': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(8): warning C4305: 'initializing': truncation from 'double' to 'float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(9): warning C4305: 'initializing': truncation from 'double' to 'float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(50): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(78): warning C4305: 'argument': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(79): warning C4305: 'argument': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(83): warning C4305: 'argument': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(84): warning C4305: 'argument': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(88): warning C4305: 'argument': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(89): warning C4305: 'argument': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(93): warning C4305: 'argument': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(94): warning C4305: 'argument': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(98): warning C4305: 'argument': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(99): warning C4305: 'argument': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(103): warning C4305: 'argument': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(104): warning C4305: 'argument': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(107): warning C4305: 'argument': truncation from 'double' to 'float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(110): warning C4305: 'argument': truncation from 'double' to 'float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(117): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(117): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+RenderMap.cpp(75): warning C4305: 'argument': truncation from 'double' to 'float'
+RenderMap.cpp(75): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+RenderMap.cpp(75): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+RenderMap.cpp(86): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+RenderMap.cpp(87): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+RenderMap.cpp(96): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+RenderMap.cpp(115): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+RenderMap.cpp(116): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+RenderMap.cpp(160): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+RenderMap.cpp(161): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+RenderMap.cpp(184): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+RenderMap.cpp(185): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+RenderMap.cpp(187): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+RenderMap.cpp(188): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+RenderMap.cpp(251): warning C4305: 'argument': truncation from 'double' to 'const float'
+RenderMap.cpp(252): warning C4305: 'argument': truncation from 'double' to 'const float'
+RenderMap.cpp(255): warning C4305: 'argument': truncation from 'double' to 'const float'
+RenderMap.cpp(256): warning C4305: 'argument': truncation from 'double' to 'const float'
+RenderMap.cpp(271): warning C4305: 'argument': truncation from 'double' to 'const float'
+RenderMap.cpp(272): warning C4305: 'argument': truncation from 'double' to 'const float'
+RenderMap.cpp(275): warning C4305: 'argument': truncation from 'double' to 'const float'
+RenderMap.cpp(276): warning C4305: 'argument': truncation from 'double' to 'const float'
+RenderMap.cpp(308): warning C4305: 'argument': truncation from 'double' to 'const float'
+RenderMap.cpp(309): warning C4305: 'argument': truncation from 'double' to 'const float'
+RenderMap.cpp(312): warning C4305: 'argument': truncation from 'double' to 'const float'
+RenderMap.cpp(313): warning C4305: 'argument': truncation from 'double' to 'const float'
+  Generating Code...
+  Compiling...
+  SceneNode.cpp
+h:\visual studio 2017\projects\cube_adventures\nclgl\HeightMap.h(30): warning C4305: 'initializing': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(8): warning C4305: 'initializing': truncation from 'double' to 'float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(9): warning C4305: 'initializing': truncation from 'double' to 'float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(50): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(78): warning C4305: 'argument': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(79): warning C4305: 'argument': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(83): warning C4305: 'argument': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(84): warning C4305: 'argument': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(88): warning C4305: 'argument': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(89): warning C4305: 'argument': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(93): warning C4305: 'argument': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(94): warning C4305: 'argument': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(98): warning C4305: 'argument': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(99): warning C4305: 'argument': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(103): warning C4305: 'argument': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(104): warning C4305: 'argument': truncation from 'double' to 'const float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(107): warning C4305: 'argument': truncation from 'double' to 'float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(110): warning C4305: 'argument': truncation from 'double' to 'float'
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(117): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+h:\visual studio 2017\projects\cube_adventures\nclgl\RenderMap.h(117): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  Shader.cpp
+  Window.cpp
+  Generating Code...
+  nclgl.vcxproj -> H:\Visual Studio 2017\Projects\cube_adventures\Release\nclgl.lib

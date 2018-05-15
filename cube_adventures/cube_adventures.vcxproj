@@ -73,6 +73,10 @@
     <IncludePath>$(SolutionDir)Sound;..\SOIL;..\GLEW\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Sound;$(SolutionDir)$(Configuration);..\GLEW\lib\$(Configuration);..\SOIL\$(Configuration)\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>$(SolutionDir)Sound;..\SOIL;..\GLEW\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Sound;$(SolutionDir)$(Configuration);..\GLEW\lib\$(Configuration);..\SOIL\$(Configuration)\;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -97,10 +101,12 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>Sound.lib;fmod_vc.lib;fmodL_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
