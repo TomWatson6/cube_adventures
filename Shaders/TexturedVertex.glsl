@@ -1,4 +1,4 @@
-# version 150 core
+# version 430 core
 
 uniform mat4 modelMatrix;
 uniform mat4 viewMatrix;
@@ -13,6 +13,7 @@ out Vertex{
 	vec4 colour;
 	vec2 texCoord;
 	vec3 position;
+	vec3 worldPos;
 } OUT;
 
 void main(void) {
@@ -22,4 +23,6 @@ void main(void) {
 	OUT.colour = colour;
 	OUT.texCoord = (textureMatrix * vec4(texCoord, 0.0, 1.0)).xy;
 	OUT.position = position;
+	OUT.worldPos = (modelMatrix * vec4(position, 1)).xyz;
+
 }

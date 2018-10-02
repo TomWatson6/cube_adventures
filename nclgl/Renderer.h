@@ -40,6 +40,7 @@ protected:
 	SceneNode* cubeSides;
 	SceneNode* player;
 	Camera * camera;
+	Light* light;
 
 	CubeInput cubeInput = CubeInput();
 

@@ -67,7 +67,7 @@ int main() {
 	}
 	
 	float dimensions = renderer.getMap(currentMap).getDimensions();
-	float sideLength = 10.0 * (RAW_WIDTH - dimensions / 4.0) * HEIGHTMAP_X / dimensions;
+	float sideLength = 10.0 * (RAW_WIDTH - 1) * HEIGHTMAP_X / dimensions;
 
 	Player player = initialisePlayer(cubes.at(currentCube).getMap(currentMap), renderer.getGroundLevel(), sideLength, cubes.at(currentCube).getMap(currentMap).getStartTile());
 

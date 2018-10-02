@@ -72,7 +72,7 @@ void RenderMap::updateHeights() {
 
 	//Add new row at the end of the array using perlin noise function (O(sqrt(N)) * O(noise))
 	for (int i = RAW_WIDTH * RAW_HEIGHT - RAW_WIDTH; i < RAW_WIDTH * RAW_HEIGHT; i++) {
-		heights[i] = -p.noise(i / 50.0 + current, RAW_HEIGHT - 1 / 50.0) * 1000.0 + 500;
+		heights[i] = -p.noise(i / 50.0 + current, RAW_HEIGHT - 1 / 50.0) * 3000.0 + 1000;
 		//n.noise(i / 50.0 + current, RAW_HEIGHT - 1 / 50.0) * 1000.0 - 333
 	}
 

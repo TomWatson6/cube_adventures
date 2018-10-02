@@ -168,6 +168,15 @@ OGLRenderer::~OGLRenderer(void)	{
 	wglDeleteContext(renderContext);
 }
 
+void OGLRenderer::SetShaderLight(const Light &l) {
+	glUniform3fv(glGetUniformLocation(currentShader->GetProgram(),
+		"lightPos"), 1, (float*)&l.GetPosition());
+	glUniform4fv(glGetUniformLocation(currentShader->GetProgram(),
+		"lightColour"), 1, (float*)&l.GetColour());
+	glUniform1f(glGetUniformLocation(currentShader->GetProgram(),
+		"lightRadius"), l.GetRadius());
+}
+
 /*
 Returns TRUE if everything in the constructor has gone to plan.
 Check this to end the application if necessary...

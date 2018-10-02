@@ -2,4 +2,5 @@
 c:\users\tomwa\source\repos\cube_adventures\nclgl\mesh.cpp(33): warning C4018: '<': signed/unsigned mismatch
 c:\users\tomwa\source\repos\cube_adventures\nclgl\mesh.cpp(43): warning C4018: '<': signed/unsigned mismatch
 c:\users\tomwa\source\repos\cube_adventures\nclgl\mesh.cpp(83): warning C4018: '<': signed/unsigned mismatch
-  nclgl.vcxproj -> C:\Users\tomwa\source\repos\cube_adventures\Debug\nclgl.lib
+c:\users\tomwa\source\repos\cube_adventures\nclgl\mesh.cpp(132): warning C4305: 'argument': truncation from 'double' to 'float'
+  nclgl.vcxproj -> C:\Users\tomwa\source\repos\Cube_Adventures\Debug\nclgl.lib

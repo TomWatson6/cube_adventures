@@ -109,10 +109,12 @@ Mesh* Mesh::LoadMeshFile(const string &filename) {
 		m->colours = new Vector4[m->numVertices];
 	}
 
-	for (unsigned int i = 0; i < m->numVertices; ++i) {
+	for (int i = m->numVertices - 1; i >= 0; i--) {
+
 		f >> m->vertices[i].x;
 		f >> m->vertices[i].y;
 		f >> m->vertices[i].z;
+		
 	}
 
 	if (hasColour) {
@@ -126,7 +128,8 @@ Mesh* Mesh::LoadMeshFile(const string &filename) {
 			//OpenGL can use floats for colours directly - this will take up 4x as
 			//much space, but could avoid any byte / float conversions happening
 			//behind the scenes in our shader executions
-			m->colours[i] = Vector4(r / 255.0f, g / 255.0f, b / 255.0f, a / 255.0f);
+			//m->colours[i] = Vector4(r / 255.0f, g / 255.0f, b / 255.0f, a / 255.0f);
+			m->colours[i] = Vector4(0.7, 0.7, 0.7, 1);
 		}
 	}
 

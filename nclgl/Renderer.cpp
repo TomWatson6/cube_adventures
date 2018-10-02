@@ -17,7 +17,12 @@ Renderer::Renderer(Window & parent, int currentCube) : OGLRenderer(parent) {
 	counter = 0;
 
 	currentShader = new Shader("../Shaders/TexturedVertex.glsl",
-		"../Shaders/TexturedFragment.glsl");
+		"../Shaders/TexturedFragment.glsl", 
+		"../Shaders/LightGeom.glsl");
+
+	light = new Light(Vector3((RAW_HEIGHT * HEIGHTMAP_X * -5.0f),
+		RAW_HEIGHT * HEIGHTMAP_Z * 5.0f, (RAW_HEIGHT * HEIGHTMAP_Z / 2.0f)),
+		Vector4(1, 1, 1, 1), (RAW_WIDTH * HEIGHTMAP_X) * 10.0f * 10.0f);
 
 	if (!currentShader->LinkProgram()) {
 		return;
@@ -199,6 +204,7 @@ Renderer ::~Renderer(void) {
 	delete camera;
 	delete[] tileInfo;
 	delete[] cubeSides;
+	delete light;
 	//delete root;
 
 }
@@ -265,7 +271,12 @@ void Renderer::RenderScene() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glUseProgram(currentShader->GetProgram());
+
+	glUniform3fv(glGetUniformLocation(currentShader->GetProgram(),
+		"cameraPos"), 1, (float*)&camera->GetPosition());
+
 	UpdateShaderMatrices();
+	SetShaderLight(*light);
 
 	for (int i = 0; i < Cube::CUBE_SIDES; i++) {
 

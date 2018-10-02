@@ -115,7 +115,7 @@ public:
 
 				baseColours[offset] = colours[offset];
 
-				//Only apply perlin noise if the surcace is swimmable
+				//Only apply perlin noise if the surface is swimmable
 				if (isWater[tileX * dimensions + tileZ]) {
 					heights[x * RAW_WIDTH + z] = n.noise(x / 50.0 + current, z / 50.0) * 1000.0;
 				}

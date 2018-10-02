@@ -27,7 +27,7 @@ public:
 	Vector2* Gradient = new Vector2[RAW_WIDTH * RAW_HEIGHT]();
 
 protected:
-	const float PERLIN_STEP = 0.005;
+	const float PERLIN_STEP = 0.0035;
 	PerlinNoise n = PerlinNoise();
 
 };
